@@ -477,13 +477,13 @@ struct aiMesh
 	* This is also the size of all of the per-vertex data arrays.
 	* The maximum value for this member is #AI_MAX_VERTICES.
 	*/
-	unsigned int mNumVertices;
+	size_t mNumVertices;
 
 	/** The number of primitives (triangles, polygons, lines) in this  mesh. 
 	* This is also the size of the mFaces array.
 	* The maximum value for this member is #AI_MAX_FACES.
 	*/
-	unsigned int mNumFaces;
+	size_t mNumFaces;
 
 	/** Vertex positions. 
 	* This array is always present in a mesh. The array is 
@@ -569,7 +569,7 @@ struct aiMesh
 	/** The number of bones this mesh contains. 
 	* Can be 0, in which case the mBones array is NULL. 
 	*/
-	unsigned int mNumBones;
+	size_t mNumBones;
 
 	/** The bones of this mesh. 
 	* A bone consists of a name by which it can be found in the
@@ -599,7 +599,7 @@ struct aiMesh
 
 
 	/** NOT CURRENTLY IN USE. The number of attachment meshes */
-	unsigned int mNumAnimMeshes;
+	size_t mNumAnimMeshes;
 
 	/** NOT CURRENTLY IN USE. Attachment meshes for this mesh, for vertex-based animation. 
 	 *  Attachment meshes carry replacement data for some of the
