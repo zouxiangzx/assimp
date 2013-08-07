@@ -297,7 +297,7 @@ struct aiScene
 
 
 	/** The number of meshes in the scene. */
-	unsigned int mNumMeshes;
+	size_t mNumMeshes;
 
 	/** The array of meshes. 
 	*
@@ -311,7 +311,7 @@ struct aiScene
 
 
 	/** The number of materials in the scene. */
-	unsigned int mNumMaterials;
+	size_t mNumMaterials;
 
 	/** The array of materials. 
 	* 
@@ -325,7 +325,7 @@ struct aiScene
 
 
 	/** The number of animations in the scene. */
-	unsigned int mNumAnimations; 
+	size_t mNumAnimations;
 
 	/** The array of animations. 
 	*
@@ -337,7 +337,7 @@ struct aiScene
 
 
 	/** The number of textures embedded into the file */
-	unsigned int mNumTextures;
+	size_t mNumTextures;
 
 	/** The array of embedded textures.
 	* 
@@ -351,7 +351,7 @@ struct aiScene
 	/** The number of light sources in the scene. Light sources
 	* are fully optional, in most cases this attribute will be 0 
         */
-	unsigned int mNumLights;
+	size_t mNumLights;
 
 	/** The array of light sources.
 	* 
@@ -364,7 +364,7 @@ struct aiScene
 	/** The number of cameras in the scene. Cameras
 	* are fully optional, in most cases this attribute will be 0 
         */
-	unsigned int mNumCameras;
+	size_t mNumCameras;
 
 	/** The array of cameras.
 	* 
