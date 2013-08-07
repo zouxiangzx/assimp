@@ -101,13 +101,13 @@ struct aiNode
 	C_STRUCT aiNode* mParent;
 
 	/** The number of child nodes of this node. */
-	unsigned int mNumChildren;
+	size_t mNumChildren;
 
 	/** The child nodes of this node. NULL if mNumChildren is 0. */
 	C_STRUCT aiNode** mChildren;
 
 	/** The number of meshes of this node. */
-	unsigned int mNumMeshes;
+	size_t mNumMeshes;
 
 	/** The meshes of this node. Each entry is an index into the mesh */
 	unsigned int* mMeshes;
