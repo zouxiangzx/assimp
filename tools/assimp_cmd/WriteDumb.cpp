@@ -414,7 +414,7 @@ uint32_t WriteBinaryMesh(const aiMesh* mesh)
 	// using Assimp's standard hashing function.
 	if (shortened) {
 		unsigned int processed = 0;
-		for (unsigned int job;(job = std::min(mesh->mNumFaces-processed,512u));processed += job) {
+		for (unsigned int job;(job = std::min<size_t>(mesh->mNumFaces-processed,512u));processed += job) {
 
 			uint32_t hash = 0;
 			for (unsigned int a = 0; a < job;++a) {
