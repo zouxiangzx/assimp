@@ -51,8 +51,8 @@ using namespace Assimp;
 
 // ------------------------------------------------------------------------------------------------
 VertexTriangleAdjacency::VertexTriangleAdjacency(aiFace *pcFaces,
-	unsigned int iNumFaces,
-	unsigned int iNumVertices /*= 0*/,
+	size_t iNumFaces,
+	size_t iNumVertices /*= 0*/,
 	bool bComputeNumTriangles /*= false*/)
 {
 	// compute the number of referenced vertices if it wasn't specified by the caller
@@ -61,9 +61,9 @@ VertexTriangleAdjacency::VertexTriangleAdjacency(aiFace *pcFaces,
 
 		for (aiFace* pcFace = pcFaces; pcFace != pcFaceEnd; ++pcFace)	{
 			ai_assert(3 == pcFace->mNumIndices);
-			iNumVertices = std::max(iNumVertices,pcFace->mIndices[0]);
-			iNumVertices = std::max(iNumVertices,pcFace->mIndices[1]);
-			iNumVertices = std::max(iNumVertices,pcFace->mIndices[2]);
+			iNumVertices = std::max<size_t>(iNumVertices,pcFace->mIndices[0]);
+			iNumVertices = std::max<size_t>(iNumVertices,pcFace->mIndices[1]);
+			iNumVertices = std::max<size_t>(iNumVertices,pcFace->mIndices[2]);
 		}
 	}
 
