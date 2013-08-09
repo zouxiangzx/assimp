@@ -147,7 +147,7 @@ struct aiMeshKey
 	 *  mesh coresponding to the #aiMeshAnim hosting this
 	 *  key frame. The referenced anim mesh is evaluated
 	 *  according to the rules defined in the docs for #aiAnimMesh.*/
-	unsigned int mValue;
+	size_t mValue;
 
 #ifdef __cplusplus
 
@@ -155,7 +155,7 @@ struct aiMeshKey
 	}
 
 	/** Construction from a given time and key value */
-	aiMeshKey(double time, const unsigned int value)
+	aiMeshKey(double time, const size_t value)
 		:	mTime	(time)
 		,	mValue	(value)
 	{}
@@ -234,7 +234,7 @@ struct aiNodeAnim
 	C_STRUCT aiString mNodeName;
 
 	/** The number of position keys */
-	unsigned int mNumPositionKeys;
+	size_t mNumPositionKeys;
 
 	/** The position keys of this animation channel. Positions are 
 	 * specified as 3D vector. The array is mNumPositionKeys in size.
@@ -244,7 +244,7 @@ struct aiNodeAnim
 	C_STRUCT aiVectorKey* mPositionKeys;
 
 	/** The number of rotation keys */
-	unsigned int mNumRotationKeys;
+	size_t mNumRotationKeys;
 
 	/** The rotation keys of this animation channel. Rotations are 
 	 *  given as quaternions,  which are 4D vectors. The array is 
@@ -256,7 +256,7 @@ struct aiNodeAnim
 
 
 	/** The number of scaling keys */
-	unsigned int mNumScalingKeys;
+	size_t mNumScalingKeys;
 
 	/** The scaling keys of this animation channel. Scalings are 
 	 *  specified as 3D vector. The array is mNumScalingKeys in size.
@@ -314,7 +314,7 @@ struct aiMeshAnim
 	C_STRUCT aiString mName;
 
 	/** Size of the #mKeys array. Must be 1, at least. */
-	unsigned int mNumKeys;
+	size_t mNumKeys;
 
 	/** Key frames of the animation. May not be NULL. */
 	C_STRUCT aiMeshKey* mKeys;
@@ -352,7 +352,7 @@ struct aiAnimation
 
 	/** The number of bone animation channels. Each channel affects
 	 *  a single node. */
-	unsigned int mNumChannels;
+	size_t mNumChannels;
 
 	/** The node animation channels. Each channel affects a single node. 
 	 *  The array is mNumChannels in size. */
@@ -361,7 +361,7 @@ struct aiAnimation
 
 	/** The number of mesh animation channels. Each channel affects
 	 *  a single mesh and defines vertex-based animation. */
-	unsigned int mNumMeshChannels;
+	size_t mNumMeshChannels;
 
 	/** The mesh animation channels. Each channel affects a single mesh. 
 	 *  The array is mNumMeshChannels in size. */
@@ -382,14 +382,14 @@ struct aiAnimation
 	{
 		// DO NOT REMOVE THIS ADDITIONAL CHECK
 		if (mNumChannels && mChannels)	{
-			for( unsigned int a = 0; a < mNumChannels; a++) {
+			for( size_t a = 0; a < mNumChannels; a++) {
 				delete mChannels[a];
 			}
 
 		delete [] mChannels;
 		}
 		if (mNumMeshChannels && mMeshChannels)	{
-			for( unsigned int a = 0; a < mNumMeshChannels; a++) {
+			for( size_t a = 0; a < mNumMeshChannels; a++) {
 				delete mMeshChannels[a];
 			}
 
