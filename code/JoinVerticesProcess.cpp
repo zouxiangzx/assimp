@@ -163,7 +163,7 @@ int JoinVerticesProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 	static const float squareEpsilon = epsilon * epsilon;
 
 	// Again, better waste some bytes than a realloc ...
-	std::vector<unsigned int> verticesFound;
+	std::vector<size_t> verticesFound;
 	verticesFound.reserve(10);
 
 	// Run an optimized code path if we don't have multiple UVs or vertex colors.
