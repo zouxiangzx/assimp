@@ -368,31 +368,31 @@ void BlenderImporter::ConvertBlendFile(aiScene* out, const Scene& in,const FileD
 	BuildMaterials(conv);
 
 	if (conv.meshes->size()) {
-		out->mMeshes = new aiMesh*[out->mNumMeshes = static_cast<unsigned int>( conv.meshes->size() )];
+		out->mMeshes = new aiMesh*[out->mNumMeshes = conv.meshes->size()];
 		std::copy(conv.meshes->begin(),conv.meshes->end(),out->mMeshes);
 		conv.meshes.dismiss();
 	}
 
 	if (conv.lights->size()) {
-		out->mLights = new aiLight*[out->mNumLights = static_cast<unsigned int>( conv.lights->size() )];
+		out->mLights = new aiLight*[out->mNumLights = conv.lights->size()];
 		std::copy(conv.lights->begin(),conv.lights->end(),out->mLights);
 		conv.lights.dismiss();
 	}
 
 	if (conv.cameras->size()) {
-		out->mCameras = new aiCamera*[out->mNumCameras = static_cast<unsigned int>( conv.cameras->size() )];
+		out->mCameras = new aiCamera*[out->mNumCameras = conv.cameras->size()];
 		std::copy(conv.cameras->begin(),conv.cameras->end(),out->mCameras);
 		conv.cameras.dismiss();
 	}
 
 	if (conv.materials->size()) {
-		out->mMaterials = new aiMaterial*[out->mNumMaterials = static_cast<unsigned int>( conv.materials->size() )];
+		out->mMaterials = new aiMaterial*[out->mNumMaterials = conv.materials->size()];
 		std::copy(conv.materials->begin(),conv.materials->end(),out->mMaterials);
 		conv.materials.dismiss();
 	}
 
 	if (conv.textures->size()) {
-		out->mTextures = new aiTexture*[out->mNumTextures = static_cast<unsigned int>( conv.textures->size() )];
+		out->mTextures = new aiTexture*[out->mNumTextures = conv.textures->size()];
 		std::copy(conv.textures->begin(),conv.textures->end(),out->mTextures);
 		conv.textures.dismiss();
 	}
