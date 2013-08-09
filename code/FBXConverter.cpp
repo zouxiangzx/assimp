@@ -266,7 +266,7 @@ private:
 
 			if(nodes.size()) {
 				parent.mChildren = new aiNode*[nodes.size()]();
-				parent.mNumChildren = static_cast<unsigned int>(nodes.size());
+				parent.mNumChildren = nodes.size();
 
 				std::swap_ranges(nodes.begin(),nodes.end(),parent.mChildren);
 			}
@@ -745,7 +745,7 @@ private:
 
 		if(meshes.size()) {
 			nd.mMeshes = new unsigned int[meshes.size()]();
-			nd.mNumMeshes = static_cast<unsigned int>(meshes.size());
+			nd.mNumMeshes = meshes.size();
 
 			std::swap_ranges(meshes.begin(),meshes.end(),nd.mMeshes);
 		}
@@ -822,12 +822,12 @@ private:
 		const std::vector<unsigned int>& faces = mesh.GetFaceIndexCounts();
 
 		// copy vertices
-		out_mesh->mNumVertices = static_cast<unsigned int>(vertices.size());
+		out_mesh->mNumVertices = vertices.size();
 		out_mesh->mVertices = new aiVector3D[vertices.size()];
 		std::copy(vertices.begin(),vertices.end(),out_mesh->mVertices);
 
 		// generate dummy faces
-		out_mesh->mNumFaces = static_cast<unsigned int>(faces.size());
+		out_mesh->mNumFaces = faces.size();
 		aiFace* fac = out_mesh->mFaces = new aiFace[faces.size()]();
 
 		unsigned int cursor = 0;
@@ -1243,7 +1243,7 @@ private:
 		}
 
 		out->mBones = new aiBone*[bones.size()]();
-		out->mNumBones = static_cast<unsigned int>(bones.size());
+		out->mNumBones = bones.size();
 
 		std::swap_ranges(bones.begin(),bones.end(),out->mBones);
 	}
@@ -1268,7 +1268,7 @@ private:
 
 		bone->mOffsetMatrix = bone->mOffsetMatrix * node_global_transform;
 
-		bone->mNumWeights = static_cast<unsigned int>(out_indices.size());
+		bone->mNumWeights = out_indices.size();
 		aiVertexWeight* cursor = bone->mWeights = new aiVertexWeight[out_indices.size()];
 
 		const size_t no_index_sentinel = std::numeric_limits<size_t>::max();
@@ -1802,7 +1802,7 @@ private:
 
 		if(node_anims.size()) {
 			anim->mChannels = new aiNodeAnim*[node_anims.size()]();
-			anim->mNumChannels = static_cast<unsigned int>(node_anims.size());
+			anim->mNumChannels = node_anims.size();
 
 			std::swap_ranges(node_anims.begin(),node_anims.end(),anim->mChannels);
 		}
@@ -2258,7 +2258,7 @@ private:
 			// XXX remove duplicates / redundant keys which this operation did
 			// likely produce if not all three channels were equally dense.
 
-			na->mNumScalingKeys = static_cast<unsigned int>(times.size());
+			na->mNumScalingKeys = times.size();
 			na->mNumRotationKeys = na->mNumScalingKeys;
 			na->mNumPositionKeys = na->mNumScalingKeys;
 
@@ -2612,7 +2612,7 @@ private:
 		const KeyFrameListList& inputs = GetKeyframeList(nodes);
 		const KeyTimeList& keys = GetKeyTimeList(inputs);
 
-		na->mNumScalingKeys = static_cast<unsigned int>(keys.size());
+		na->mNumScalingKeys = keys.size();
 		na->mScalingKeys = new aiVectorKey[keys.size()];
 		InterpolateKeys(na->mScalingKeys, keys, inputs, true, maxTime, minTime);
 	}
@@ -2630,7 +2630,7 @@ private:
 		const KeyFrameListList& inputs = GetKeyframeList(nodes);
 		const KeyTimeList& keys = GetKeyTimeList(inputs);
 
-		na->mNumPositionKeys = static_cast<unsigned int>(keys.size());
+		na->mNumPositionKeys = keys.size();
 		na->mPositionKeys = new aiVectorKey[keys.size()];
 		InterpolateKeys(na->mPositionKeys, keys, inputs, false, maxTime, minTime);
 	}
@@ -2649,7 +2649,7 @@ private:
 		const std::vector< KeyFrameList >& inputs = GetKeyframeList(nodes);
 		const KeyTimeList& keys = GetKeyTimeList(inputs);
 
-		na->mNumRotationKeys = static_cast<unsigned int>(keys.size());
+		na->mNumRotationKeys = keys.size();
 		na->mRotationKeys = new aiQuatKey[keys.size()];
 		InterpolateKeys(na->mRotationKeys, keys, inputs, false, maxTime, minTime, order);
 	}
@@ -2667,35 +2667,35 @@ private:
 
 		if(meshes.size()) {
 			out->mMeshes = new aiMesh*[meshes.size()]();
-			out->mNumMeshes = static_cast<unsigned int>(meshes.size());
+			out->mNumMeshes = meshes.size();
 
 			std::swap_ranges(meshes.begin(),meshes.end(),out->mMeshes);
 		}
 
 		if(materials.size()) {
 			out->mMaterials = new aiMaterial*[materials.size()]();
-			out->mNumMaterials = static_cast<unsigned int>(materials.size());
+			out->mNumMaterials = materials.size();
 
 			std::swap_ranges(materials.begin(),materials.end(),out->mMaterials);
 		}
 
 		if(animations.size()) {
 			out->mAnimations = new aiAnimation*[animations.size()]();
-			out->mNumAnimations = static_cast<unsigned int>(animations.size());
+			out->mNumAnimations = animations.size();
 
 			std::swap_ranges(animations.begin(),animations.end(),out->mAnimations);
 		}
 
 		if(lights.size()) {
 			out->mLights = new aiLight*[lights.size()]();
-			out->mNumLights = static_cast<unsigned int>(lights.size());
+			out->mNumLights = lights.size();
 
 			std::swap_ranges(lights.begin(),lights.end(),out->mLights);
 		}
 
 		if(cameras.size()) {
 			out->mCameras = new aiCamera*[cameras.size()]();
-			out->mNumCameras = static_cast<unsigned int>(cameras.size());
+			out->mNumCameras = cameras.size();
 
 			std::swap_ranges(cameras.begin(),cameras.end(),out->mCameras);
 		}
