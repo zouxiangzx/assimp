@@ -700,11 +700,11 @@ void PretransformVertices::Execute( aiScene* pScene)
 			iOldNodes,iOldAnimationChannels,CountNodes(pScene->mRootNode));
 		DefaultLogger::get()->info(buffer);
 
-		sprintf(buffer,"Kept %i lights and %i cameras",
+		sprintf(buffer,"Kept "SIZE_T_FORMAT_SPECIFIER" lights and "SIZE_T_FORMAT_SPECIFIER" cameras",
 			pScene->mNumLights,pScene->mNumCameras);
 		DefaultLogger::get()->info(buffer);
 
-		sprintf(buffer,"Moved %i meshes to WCS (number of output meshes: %i)",
+		sprintf(buffer,"Moved %i meshes to WCS (number of output meshes: "SIZE_T_FORMAT_SPECIFIER")",
 			iOldMeshes,pScene->mNumMeshes);
 		DefaultLogger::get()->info(buffer);
 	}
