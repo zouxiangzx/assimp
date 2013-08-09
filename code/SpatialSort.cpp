@@ -79,9 +79,9 @@ SpatialSort::~SpatialSort()
 }
 
 // ------------------------------------------------------------------------------------------------
-void SpatialSort::Fill( const aiVector3D* pPositions, unsigned int pNumPositions, 
-	unsigned int pElementOffset,
-	bool pFinalize /*= true */)
+void SpatialSort::Fill( const aiVector3D* pPositions, const size_t pNumPositions,
+	const size_t pElementOffset,
+	const bool pFinalize /*= true */)
 {
 	mPositions.clear();
 	Append(pPositions,pNumPositions,pElementOffset,pFinalize);
@@ -94,9 +94,9 @@ void SpatialSort :: Finalize()
 }
 
 // ------------------------------------------------------------------------------------------------
-void SpatialSort::Append( const aiVector3D* pPositions, unsigned int pNumPositions, 
-	unsigned int pElementOffset,
-	bool pFinalize /*= true */)
+void SpatialSort::Append( const aiVector3D* pPositions, const size_t pNumPositions,
+	const size_t pElementOffset,
+	const bool pFinalize /*= true */)
 {
 	// store references to all given positions along with their distance to the reference plane
 	const size_t initial = mPositions.size();
@@ -120,7 +120,7 @@ void SpatialSort::Append( const aiVector3D* pPositions, unsigned int pNumPositio
 // ------------------------------------------------------------------------------------------------
 // Returns an iterator for all positions close to the given position.
 void SpatialSort::FindPositions( const aiVector3D& pPosition, 
-	float pRadius, std::vector<unsigned int>& poResults) const
+	float pRadius, std::vector<size_t>& poResults) const
 {
 	const float dist = pPosition * mPlaneNormal;
 	const float minDist = dist - pRadius, maxDist = dist + pRadius;
@@ -138,8 +138,8 @@ void SpatialSort::FindPositions( const aiVector3D& pPosition,
 		return;
 
 	// do a binary search for the minimal distance to start the iteration there
-	unsigned int index = (unsigned int)mPositions.size() / 2;
-	unsigned int binaryStepSize = (unsigned int)mPositions.size() / 4;
+	size_t index = mPositions.size() / 2;
+	size_t binaryStepSize = mPositions.size() / 4;
 	while( binaryStepSize > 1)
 	{
 		if( mPositions[index].mDistance < minDist)
@@ -237,7 +237,7 @@ namespace {
 // Fills an array with indices of all positions indentical to the given position. In opposite to
 // FindPositions(), not an epsilon is used but a (very low) tolerance of four floating-point units.
 void SpatialSort::FindIdenticalPositions( const aiVector3D& pPosition, 
-	std::vector<unsigned int>& poResults) const
+	std::vector<size_t>& poResults) const
 {
 	// Epsilons have a huge disadvantage: they are of constant precision, while floating-point
 	//	values are of log2 precision. If you apply e=0.01 to 100, the epsilon is rather small, but
@@ -272,8 +272,8 @@ void SpatialSort::FindIdenticalPositions( const aiVector3D& pPosition,
 	poResults.erase( poResults.begin(), poResults.end());
 
 	// do a binary search for the minimal distance to start the iteration there
-	unsigned int index = (unsigned int)mPositions.size() / 2;
-	unsigned int binaryStepSize = (unsigned int)mPositions.size() / 4;
+	size_t index = mPositions.size() / 2;
+	size_t binaryStepSize = mPositions.size() / 4;
 	while( binaryStepSize > 1)
 	{
 		// Ugly, but conditional jumps are faster with integers than with floats
@@ -308,12 +308,12 @@ void SpatialSort::FindIdenticalPositions( const aiVector3D& pPosition,
 }
 
 // ------------------------------------------------------------------------------------------------
-unsigned int SpatialSort::GenerateMappingTable(std::vector<unsigned int>& fill,float pRadius) const
+size_t SpatialSort::GenerateMappingTable(std::vector<size_t>& fill,float pRadius) const
 {
-	fill.resize(mPositions.size(),UINT_MAX);
+	fill.resize(mPositions.size(),SIZE_MAX);
 	float dist, maxDist;
 
-	unsigned int t=0;
+	size_t t=0;
 	const float pSquared = pRadius*pRadius;
 	for (size_t i = 0; i < mPositions.size();) {
 		dist = mPositions[i].mPosition * mPlaneNormal;

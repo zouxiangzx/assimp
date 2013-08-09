@@ -91,16 +91,16 @@ public:
 	 *   required in order to use #FindPosition() or #GenerateMappingTable().
 	 *   If you don't finalize yet, you can use #Append() to add data from
 	 *   other sources.*/
-	void Fill( const aiVector3D* pPositions, unsigned int pNumPositions, 
-		unsigned int pElementOffset,
-		bool pFinalize = true);
+	void Fill( const aiVector3D* pPositions, const size_t pNumPositions,
+		const size_t pElementOffset,
+		const bool pFinalize = true);
 
 
 	// ------------------------------------------------------------------------------------
 	/** Same as #Fill(), except the method appends to existing data in the #SpatialSort. */
-	void Append( const aiVector3D* pPositions, unsigned int pNumPositions, 
-		unsigned int pElementOffset,
-		bool pFinalize = true);
+	void Append( const aiVector3D* pPositions, const size_t pNumPositions,
+		const size_t pElementOffset,
+		const bool pFinalize = true);
 
 
 	// ------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ public:
 	 *   Will be emptied by the call so it may contain anything.
 	 * @return An iterator to iterate over all vertices in the given area.*/
 	void FindPositions( const aiVector3D& pPosition, float pRadius, 
-		std::vector<unsigned int>& poResults) const;
+		std::vector<size_t>& poResults) const;
 
 	// ------------------------------------------------------------------------------------
 	/** Fills an array with indices of all positions indentical to the given position. In
@@ -128,7 +128,7 @@ public:
 	 * @param poResults The container to store the indices of the found positions. 
 	 *   Will be emptied by the call so it may contain anything.*/
 	void FindIdenticalPositions( const aiVector3D& pPosition,
-		std::vector<unsigned int>& poResults) const;
+		std::vector<size_t>& poResults) const;
 
 	// ------------------------------------------------------------------------------------
 	/** Compute a table that maps each vertex ID referring to a spatially close
@@ -138,7 +138,7 @@ public:
 	 * @param pRadius Maximal distance from the position a vertex may have to
 	 *   be counted in.
 	 *  @return Number of unique vertices (n).  */
-	unsigned int GenerateMappingTable(std::vector<unsigned int>& fill,
+	size_t GenerateMappingTable(std::vector<size_t>& fill,
 		float pRadius) const;
 
 protected:
@@ -149,7 +149,7 @@ protected:
 	 * its position and its precalculated distance from the reference plane */
 	struct Entry
 	{
-		unsigned int mIndex; ///< The vertex referred by this entry
+		size_t mIndex; ///< The vertex referred by this entry
 		aiVector3D mPosition; ///< Position
 		float mDistance; ///< Distance of this vertex to the sorting plane
 
