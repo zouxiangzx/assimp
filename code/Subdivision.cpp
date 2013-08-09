@@ -264,7 +264,7 @@ void CatmullClarkSubdivider::InternSubdivide (
 	}
 
 	spatial.Finalize();
-	const unsigned int num_unique = spatial.GenerateMappingTable(maptbl,ComputePositionEpsilon(smesh,nmesh));
+	const size_t num_unique = spatial.GenerateMappingTable(maptbl,ComputePositionEpsilon(smesh,nmesh));
 
 
 #define FLATTEN_VERTEX_IDX(mesh_idx, vert_idx) (moffsets[mesh_idx].second+vert_idx)
@@ -309,7 +309,7 @@ void CatmullClarkSubdivider::InternSubdivide (
 					face.mIndices[p], 
 					face.mIndices[p==face.mNumIndices-1?0:p+1]
 				};
-				const unsigned int mp[] = { 
+				const size_t mp[] = {
 					maptbl[FLATTEN_VERTEX_IDX(t,id[0])], 
 					maptbl[FLATTEN_VERTEX_IDX(t,id[1])]
 				};
