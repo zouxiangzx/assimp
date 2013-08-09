@@ -168,6 +168,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #	define AI_WONT_RETURN_SUFFIX
 #endif // (defined __clang__)
 
+//This section defined a format specifier string for size_t based on platform
+#if defined(_WIN32) && !defined(_WIN64)
+#	define SIZE_T_FORMAT_SPECIFIER "%ui"
+#endif
+
+#if defined(_WIN64)
+#	define SIZE_T_FORMAT_SPECIFIER "%ul"
+#endif
+
+#if defined(__clang__)
+#	define SIZE_T_FORMAT_SPECIFIER "%zd"
+#endif
+
 #ifdef __cplusplus
 	/* No explicit 'struct' and 'enum' tags for C++, this keeps showing up
 	 * in doxydocs.
