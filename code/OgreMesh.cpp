@@ -281,7 +281,7 @@ void OgreImporter::ProcessSubMesh(SubMesh &theSubMesh, SubMesh &theSharedGeometr
 {
 	//---------------Make all Vertexes unique: (this is required by assimp)-----------------------
 	vector<Face> UniqueFaceList(theSubMesh.FaceList.size());
-	unsigned int UniqueVertexCount=theSubMesh.FaceList.size()*3;//*3 because each face consists of 3 vertexes, because we only support triangles^^
+	size_t UniqueVertexCount=theSubMesh.FaceList.size()*3;//*3 because each face consists of 3 vertexes, because we only support triangles^^
 
 	vector<aiVector3D> UniquePositions(UniqueVertexCount);
 
