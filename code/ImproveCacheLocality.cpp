@@ -193,7 +193,7 @@ float ImproveCacheLocalityProcess::ProcessMesh( aiMesh* pMesh, unsigned int mesh
 	// allocate an empty output index buffer. We store the output indices in one large array.
 	// Since the number of triangles won't change the input faces can be reused. This is how 
 	// we save thousands of redundant mini allocations for aiFace::mIndices
-	const unsigned int iIdxCnt = pMesh->mNumFaces*3;
+	const size_t iIdxCnt = pMesh->mNumFaces*3;
 	unsigned int* const piIBOutput = new unsigned int[iIdxCnt];
 	unsigned int* piCSIter = piIBOutput;
 
