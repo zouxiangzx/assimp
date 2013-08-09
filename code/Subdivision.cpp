@@ -78,6 +78,7 @@ public:
 
 
 	typedef std::vector<unsigned int> UIntVector;
+    typedef std::vector<size_t> SizeTVector;
 	typedef std::map<uint64_t,Edge> EdgeMap;
 
 	// ---------------------------------------------------------------------------
@@ -166,7 +167,7 @@ void CatmullClarkSubdivider::Subdivide (
 
 	std::vector<aiMesh*> inmeshes;
 	std::vector<aiMesh*> outmeshes;
-	std::vector<unsigned int> maptbl;
+	std::vector<size_t> maptbl;
 
 	inmeshes.reserve(nmesh);
 	outmeshes.reserve(nmesh);
@@ -242,7 +243,7 @@ void CatmullClarkSubdivider::InternSubdivide (
 		return;
 	}
 
-	UIntVector maptbl;
+	SizeTVector maptbl;
 	SpatialSort spatial;
 
 	// ---------------------------------------------------------------------
