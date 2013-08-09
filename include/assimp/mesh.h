@@ -237,7 +237,7 @@ struct aiBone
 
 	//! The number of vertices affected by this bone
 	//! The maximum value for this member is #AI_MAX_BONE_WEIGHTS.
-	unsigned int mNumWeights;
+	size_t mNumWeights;
 
 	//! The vertices affected by this bone
 	C_STRUCT aiVertexWeight* mWeights;
@@ -374,7 +374,7 @@ struct aiAnimMesh
 	 * of the member arrays accessible even if the aiMesh is not known, e.g.
 	 * from language bindings.
 	 */
-	unsigned int mNumVertices;
+	size_t mNumVertices;
 
 #ifdef __cplusplus
 
@@ -386,10 +386,10 @@ struct aiAnimMesh
 		, mNumVertices( 0 )
 	{
 		// fixme consider moving this to the ctor initializer list as well
-		for( unsigned int a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; a++){
+		for( size_t a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; a++){
 			mTextureCoords[a] = NULL;
 		}
-		for( unsigned int a = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; a++) {
+		for( size_t a = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; a++) {
 			mColors[a] = NULL;
 		}
 	}
@@ -400,10 +400,10 @@ struct aiAnimMesh
 		delete [] mNormals;
 		delete [] mTangents;
 		delete [] mBitangents;
-		for( unsigned int a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; a++) {
+		for( size_t a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; a++) {
 			delete [] mTextureCoords[a];
 		}
-		for( unsigned int a = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; a++) {
+		for( size_t a = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; a++) {
 			delete [] mColors[a];
 		}
 	}
@@ -582,7 +582,7 @@ struct aiMesh
 	 * multiple materials, the import splits up the mesh. Use this value 
 	 * as index into the scene's material list.
 	 */
-	unsigned int mMaterialIndex;
+	size_t mMaterialIndex;
 
 	/** Name of the mesh. Meshes can be named, but this is not a
 	 *  requirement and leaving this field empty is totally fine.
@@ -625,13 +625,13 @@ struct aiMesh
 		, mNumAnimMeshes( 0 )
 		, mAnimMeshes( NULL )
 	{
-		for( unsigned int a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; a++)
+		for( size_t a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; a++)
 		{
 			mNumUVComponents[a] = 0;
 			mTextureCoords[a] = NULL;
 		}
       
-		for( unsigned int a = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; a++)
+		for( size_t a = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; a++)
 			mColors[a] = NULL;
 	}
 
@@ -642,23 +642,23 @@ struct aiMesh
 		delete [] mNormals;
 		delete [] mTangents;
 		delete [] mBitangents;
-		for( unsigned int a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; a++) {
+		for( size_t a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; a++) {
 			delete [] mTextureCoords[a];
 		}
-		for( unsigned int a = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; a++) {
+		for( size_t a = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; a++) {
 			delete [] mColors[a];
 		}
 
 		// DO NOT REMOVE THIS ADDITIONAL CHECK
 		if (mNumBones && mBones)	{
-			for( unsigned int a = 0; a < mNumBones; a++) {
+			for( size_t a = 0; a < mNumBones; a++) {
 				delete mBones[a];
 			}
 			delete [] mBones;
 		}
 
 		if (mNumAnimMeshes && mAnimMeshes)	{
-			for( unsigned int a = 0; a < mNumAnimMeshes; a++) {
+			for( size_t a = 0; a < mNumAnimMeshes; a++) {
 				delete mAnimMeshes[a];
 			}
 			delete [] mAnimMeshes;
