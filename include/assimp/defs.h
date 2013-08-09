@@ -181,6 +181,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #	define SIZE_T_FORMAT_SPECIFIER "%zd"
 #endif
 
+#ifndef SIZE_T_FORMAT_SPECIFIER
+#define SIZE_T_FORMAT_SPECIFIER "%ul"
+#endif
+
 #ifdef __cplusplus
 	/* No explicit 'struct' and 'enum' tags for C++, this keeps showing up
 	 * in doxydocs.
