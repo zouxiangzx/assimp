@@ -169,7 +169,7 @@ bool GenVertexNormalsProcess::GenMeshVertexNormals (aiMesh* pMesh, unsigned int 
 		vertexFinder = &_vertexFinder;
 		posEpsilon = ComputePositionEpsilon(pMesh);
 	}
-	std::vector<unsigned int> verticesFound;
+	std::vector<size_t> verticesFound;
 	aiVector3D* pcNew = new aiVector3D[pMesh->mNumVertices];
 
 	if (configMaxAngle >= AI_DEG_TO_RAD( 175.f ))	{
@@ -195,7 +195,7 @@ bool GenVertexNormalsProcess::GenMeshVertexNormals (aiMesh* pMesh, unsigned int 
 			// Write the smoothed normal back to all affected normals
 			for (unsigned int a = 0; a < verticesFound.size(); ++a)
 			{
-				register unsigned int vidx = verticesFound[a];
+				register size_t vidx = verticesFound[a];
 				pcNew[vidx] = pcNor;
 				abHad[vidx] = true;
 			}
