@@ -229,7 +229,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 		vertexFinder = &_vertexFinder;
 		posEpsilon = ComputePositionEpsilon(pMesh);
 	}
-	std::vector<unsigned int> verticesFound;
+	std::vector<size_t> verticesFound;
 
 	const float fLimit = cosf(configMaxAngle); 
 	std::vector<unsigned int> closeVertices;
