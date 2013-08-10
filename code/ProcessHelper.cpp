@@ -277,10 +277,10 @@ aiMesh* MakeSubmesh(const aiMesh *pMesh, const std::vector<unsigned int> &subMes
 	size_t numSubVerts = 0; 
 	size_t numSubFaces = subMeshFaces.size();
 
-	for(unsigned int i=0;i<numSubFaces;i++)	{
+	for(size_t i=0;i<numSubFaces;i++)	{
 		const aiFace &f = pMesh->mFaces[subMeshFaces[i]];
 
-		for(unsigned int j=0;j<f.mNumIndices;j++)	{
+		for(size_t j=0;j<f.mNumIndices;j++)	{
 			if(vMap[f.mIndices[j]]==UINT_MAX)	{
 				vMap[f.mIndices[j]] = numSubVerts++;
 			}
@@ -318,7 +318,7 @@ aiMesh* MakeSubmesh(const aiMesh *pMesh, const std::vector<unsigned int> &subMes
 	// and copy over the data, generating faces with linear indices along the way
 	oMesh->mFaces = new aiFace[numSubFaces];
 	
-	for(unsigned int a = 0; a < numSubFaces; ++a )	{
+	for(size_t a = 0; a < numSubFaces; ++a )	{
 
 		const aiFace& srcFace = pMesh->mFaces[subMeshFaces[a]];
 		aiFace& dstFace = oMesh->mFaces[a];
@@ -331,7 +331,7 @@ aiMesh* MakeSubmesh(const aiMesh *pMesh, const std::vector<unsigned int> &subMes
 		}
 	}
 
-	for(unsigned int srcIndex = 0; srcIndex < pMesh->mNumVertices; ++srcIndex ) {
+	for(size_t srcIndex = 0; srcIndex < pMesh->mNumVertices; ++srcIndex ) {
 		unsigned int nvi = vMap[srcIndex]; 
 		if(nvi==UINT_MAX) {
 			continue;
