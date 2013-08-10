@@ -136,7 +136,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 	}
 
 	// Find out how many output faces we'll get
-	unsigned int numOut = 0, max_out = 0;
+	size_t numOut = 0, max_out = 0;
 	bool get_normals = true;
 	for( unsigned int a = 0; a < pMesh->mNumFaces; a++)	{
 		aiFace& face = pMesh->mFaces[a];
@@ -149,7 +149,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 		}	
 		else {
 			numOut += face.mNumIndices-2;
-			max_out = std::max(max_out,face.mNumIndices);
+			max_out = std::max<size_t>(max_out,face.mNumIndices);
 		}
 	}
 
