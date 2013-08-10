@@ -481,7 +481,7 @@ void ColladaLoader::BuildMeshesForNode( const ColladaParser& pParser, const Coll
 			// OK ... here the *real* fun starts ... we have the vertex-input-to-effect-semantic-table
 			// given. The only mapping stuff which we do actually support is the UV channel.
 			std::map<std::string, size_t>::const_iterator matIt = mMaterialIndexByName.find( meshMaterial);
-			unsigned int matIdx;
+			size_t matIdx;
 			if( matIt != mMaterialIndexByName.end())
 				matIdx = matIt->second;
 			else
