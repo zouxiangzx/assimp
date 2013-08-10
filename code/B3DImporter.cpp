@@ -322,7 +322,7 @@ void B3DImporter::ReadVRTS(){
 	int sz=12+(_vflags&1?12:0)+(_vflags&2?16:0)+(_tcsets*_tcsize*4);
 	int n_verts=ChunkSize()/sz;
 
-	int v0=_vertices.size();
+	size_t v0=_vertices.size();
 	_vertices.resize( v0+n_verts );
 
 	for( int i=0;i<n_verts;++i ){
@@ -395,7 +395,7 @@ void B3DImporter::ReadTRIS( int v0 ){
 void B3DImporter::ReadMESH(){
 	/*int matid=*/ReadInt();
 
-	int v0=_vertices.size();
+	size_t v0=_vertices.size();
 
 	while( ChunkSize() ){
 		string t=ReadChunk();
@@ -497,7 +497,7 @@ aiNode *B3DImporter::ReadNODE( aiNode *parent ){
 
 	aiMatrix4x4 tform=trans * rot * scale;
 
-	int nodeid=_nodes.size();
+	size_t nodeid=_nodes.size();
 
 	aiNode *node=new aiNode( name );
 	_nodes.push_back( node );
