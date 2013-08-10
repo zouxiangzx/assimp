@@ -125,14 +125,14 @@ struct aiTexture
 	 * like JPEG. In this case mWidth specifies the size of the
 	 * memory area pcData is pointing to, in bytes.
 	 */
-	unsigned int mWidth;
+	size_t mWidth;
 
 	/** Height of the texture, in pixels
 	 *
 	 * If this value is zero, pcData points to an compressed texture
 	 * in any format (e.g. JPEG).
 	 */
-	unsigned int mHeight;
+	size_t mHeight;
 
 	/** A hint from the loader to make it easier for applications
 	 *  to determine the type of embedded compressed textures.
