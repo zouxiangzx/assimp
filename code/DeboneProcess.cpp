@@ -129,10 +129,10 @@ void DeboneProcess::Execute( aiScene* pScene)
 
 			// mesh was split
 			if(!newMeshes.empty())	{				
-				unsigned int out = 0, in = srcMesh->mNumBones;				
+				size_t out = 0, in = srcMesh->mNumBones;
 
 				// store new meshes and indices of the new meshes
-				for(unsigned int b=0;b<newMeshes.size();b++)	{						
+				for(size_t b=0;b<newMeshes.size();b++)	{						
 					const aiString *find = newMeshes[b].second?&newMeshes[b].second->mName:0;
 
 					aiNode *theNode = find?pScene->mRootNode->FindNode(*find):0;
@@ -381,11 +381,11 @@ void DeboneProcess::UpdateNode(aiNode* pNode) const
 
 	// this will require two passes
 
-	unsigned int m = pNode->mNumMeshes, n = mSubMeshIndices.size();
+	size_t m = pNode->mNumMeshes, n = mSubMeshIndices.size();
 	
 	// first pass, look for meshes which have not moved
 
-	for(unsigned int a=0;a<m;a++)	{
+	for(size_t a=0;a<m;a++)	{
 
 		unsigned int srcIndex = pNode->mMeshes[a];
 		const std::vector< std::pair< unsigned int,aiNode* > > &subMeshes = mSubMeshIndices[srcIndex];
