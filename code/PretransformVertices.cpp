@@ -234,7 +234,7 @@ void PretransformVertices::CollectData( aiScene* pcScene, aiNode* pcNode, unsign
 				aiFace& f_src = pcMesh->mFaces[planck];
 				aiFace& f_dst = pcMeshOut->mFaces[aiCurrent[AI_PTVS_FACE]+planck];
 
-				const unsigned int num_idx = f_src.mNumIndices;
+				const size_t num_idx = f_src.mNumIndices;
 
 				f_dst.mNumIndices = num_idx; 
 
