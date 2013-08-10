@@ -74,12 +74,12 @@ AI_FORCE_INLINE const aiColor4t<TReal>& aiColor4t<TReal>::operator /= (TReal f) 
 }
 // ------------------------------------------------------------------------------------------------
 template <typename TReal>
-AI_FORCE_INLINE TReal aiColor4t<TReal>::operator[](unsigned int i) const {
+AI_FORCE_INLINE TReal aiColor4t<TReal>::operator[](size_t i) const {
 	return *(&r + i);
 }
 // ------------------------------------------------------------------------------------------------
 template <typename TReal>
-AI_FORCE_INLINE TReal& aiColor4t<TReal>::operator[](unsigned int i) {
+AI_FORCE_INLINE TReal& aiColor4t<TReal>::operator[](size_t i) {
 	return *(&r + i);
 }
 // ------------------------------------------------------------------------------------------------

@@ -76,8 +76,8 @@ public:
 	bool operator != (const aiColor4t& other) const;
 
 	// color tuple access, rgba order
-	inline TReal operator[](unsigned int i) const;
-	inline TReal& operator[](unsigned int i);
+	inline TReal operator[](size_t i) const;
+	inline TReal& operator[](size_t i);
 
 	/** check whether a color is (close to) black */
 	inline bool IsBlack() const;
