@@ -120,7 +120,7 @@ void RemoveUVSeams (aiMesh* mesh, aiVector3D* out)
 		const aiFace& face = mesh->mFaces[fidx];
 		if (face.mNumIndices < 3) continue; // triangles and polygons only, please
 
-		unsigned int small = face.mNumIndices, large = small;
+		size_t small = face.mNumIndices, large = small;
 		bool zero = false, one = false, round_to_zero = false;
 
 		// Check whether this face lies on a UV seam. We can just guess,
