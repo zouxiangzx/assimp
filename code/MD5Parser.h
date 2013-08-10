@@ -339,7 +339,7 @@ public:
 	float fFrameRate;
 
 	//! List of cuts
-	std::vector<unsigned int> cuts;
+	std::vector<size_t> cuts;
 
 	//! Frames
 	CameraFrameList frames;

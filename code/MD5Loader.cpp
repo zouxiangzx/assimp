@@ -215,8 +215,8 @@ void MD5Importer::MakeDataUnique (MD5::MeshDesc& meshSrc)
 	std::vector<bool> abHad(meshSrc.mVertices.size(),false);
 
 	// allocate enough storage to keep the output structures
-	const unsigned int iNewNum = meshSrc.mFaces.size()*3;
-	unsigned int iNewIndex = meshSrc.mVertices.size();
+	const size_t iNewNum = meshSrc.mFaces.size()*3;
+	size_t iNewIndex = meshSrc.mVertices.size();
 	meshSrc.mVertices.resize(iNewNum);
 
 	// try to guess how much storage we'll need for new weights
@@ -691,7 +691,7 @@ void MD5Importer::LoadMD5CameraFile ()
 		throw DeadlyImportError("MD5CAMERA: No frames parsed");
 	}
 
-	std::vector<unsigned int>& cuts = cameraParser.cuts;
+	std::vector<size_t>& cuts = cameraParser.cuts;
 	std::vector<MD5::CameraAnimFrameDesc>& frames = cameraParser.frames;
 
 	// Construct output graph - a simple root with a dummy child.
@@ -723,7 +723,7 @@ void MD5Importer::LoadMD5CameraFile ()
 
 	pScene->mNumAnimations = cuts.size()-1;
 	aiAnimation** tmp = pScene->mAnimations = new aiAnimation*[pScene->mNumAnimations];
-	for (std::vector<unsigned int>::const_iterator it = cuts.begin(); it != cuts.end()-1; ++it) {
+	for (std::vector<size_t>::const_iterator it = cuts.begin(); it != cuts.end()-1; ++it) {
 	
 		aiAnimation* anim = *tmp++ = new aiAnimation();
 		anim->mName.length = ::sprintf(anim->mName.data,"anim%u_from_%u_to_%u",(unsigned int)(it-cuts.begin()),(*it),*(it+1));
