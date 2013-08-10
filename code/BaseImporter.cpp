@@ -146,7 +146,7 @@ void BaseImporter::GetExtensionList(std::set<std::string>& extensions)
 		boost::scoped_array<char> _buffer (new char[searchBytes+1 /* for the '\0' */]);
 		char* buffer = _buffer.get();
 
-		const unsigned int read = pStream->Read(buffer,1,searchBytes);
+		const size_t read = pStream->Read(buffer,1,searchBytes);
 		if (!read)
 			return false;
 
