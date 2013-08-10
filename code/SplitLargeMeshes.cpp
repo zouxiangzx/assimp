@@ -156,13 +156,13 @@ void SplitLargeMeshesProcess_Triangle::SplitMesh(
 
 		// we need to split this mesh into sub meshes
 		// determine the size of a submesh
-		const unsigned int iSubMeshes = (pMesh->mNumFaces / LIMIT) + 1;
+		const size_t iSubMeshes = (pMesh->mNumFaces / LIMIT) + 1;
 
-		const unsigned int iOutFaceNum = pMesh->mNumFaces / iSubMeshes;
-		const unsigned int iOutVertexNum = iOutFaceNum * 3;
+		const size_t iOutFaceNum = pMesh->mNumFaces / iSubMeshes;
+		const size_t iOutVertexNum = iOutFaceNum * 3;
 
 		// now generate all submeshes
-		for (unsigned int i = 0; i < iSubMeshes;++i)
+		for (size_t i = 0; i < iSubMeshes;++i)
 		{
 			aiMesh* pcMesh			= new aiMesh;			
 			pcMesh->mNumFaces		= iOutFaceNum;
@@ -179,11 +179,11 @@ void SplitLargeMeshesProcess_Triangle::SplitMesh(
 			// copy the list of faces
 			pcMesh->mFaces = new aiFace[pcMesh->mNumFaces];
 
-			const unsigned int iBase = iOutFaceNum * i;
+			const size_t iBase = iOutFaceNum * i;
 
 			// get the total number of indices
-			unsigned int iCnt = 0;
-			for (unsigned int p = iBase; p < pcMesh->mNumFaces + iBase;++p)
+			size_t iCnt = 0;
+			for (size_t p = iBase; p < pcMesh->mNumFaces + iBase;++p)
 			{
 				iCnt += pMesh->mFaces[p].mNumIndices;
 			}
@@ -422,7 +422,7 @@ void SplitLargeMeshesProcess_Vertex::SplitMesh(
 		// we need to split this mesh into sub meshes
 		// determine the estimated size of a submesh
 		// (this could be too large. Max waste is a single digit percentage)
-		const unsigned int iSubMeshes = (pMesh->mNumVertices / SplitLargeMeshesProcess_Vertex::LIMIT) + 1;
+		const size_t iSubMeshes = (pMesh->mNumVertices / SplitLargeMeshesProcess_Vertex::LIMIT) + 1;
 		//const unsigned int iOutVertexNum2 = pMesh->mNumVertices /iSubMeshes;
 
 		// create a std::vector<unsigned int> to indicate which vertices
@@ -432,7 +432,7 @@ void SplitLargeMeshesProcess_Vertex::SplitMesh(
 
 		// try to find a good estimate for the number of output faces
 		// per mesh. Add 12.5% as buffer
-		unsigned int iEstimatedSize = pMesh->mNumFaces / iSubMeshes;
+		size_t iEstimatedSize = pMesh->mNumFaces / iSubMeshes;
 		iEstimatedSize += iEstimatedSize >> 3;
 
 		// now generate all submeshes
