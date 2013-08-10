@@ -101,7 +101,7 @@ void SpatialSort::Append( const aiVector3D* pPositions, const size_t pNumPositio
 	// store references to all given positions along with their distance to the reference plane
 	const size_t initial = mPositions.size();
 	mPositions.reserve(initial + (pFinalize?pNumPositions:pNumPositions*2));
-	for( unsigned int a = 0; a < pNumPositions; a++)
+	for( size_t a = 0; a < pNumPositions; a++)
 	{
 		const char* tempPointer = reinterpret_cast<const char*> (pPositions);
 		const aiVector3D* vec   = reinterpret_cast<const aiVector3D*> (tempPointer + a * pElementOffset);
