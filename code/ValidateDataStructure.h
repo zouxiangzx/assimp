@@ -158,18 +158,18 @@ private:
 
 	// template to validate one of the aiScene::mXXX arrays
 	template <typename T>
-	inline void DoValidation(T** array, unsigned int size, 
+	inline void DoValidation(T** array, const size_t size,
 		const char* firstName, const char* secondName);
 
 	// extended version: checks whethr T::mName occurs twice
 	template <typename T>
-	inline void DoValidationEx(T** array, unsigned int size, 
+	inline void DoValidationEx(T** array, const size_t size,
 		const char* firstName, const char* secondName);
 		
 	// extension to the first template which does also search
 	// the nodegraph for an item with the same name
 	template <typename T>
-	inline void DoValidationWithNameCheck(T** array, unsigned int size, 
+	inline void DoValidationWithNameCheck(T** array, const size_t size, 
 		const char* firstName, const char* secondName);
 
 	aiScene* mScene;
