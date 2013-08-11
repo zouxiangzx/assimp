@@ -172,7 +172,7 @@ inline int ASSIMP_stricmp(const std::string& a, const std::string& b)
  *  @param n Macimum number of characters to compare
  *  @return 0 if the given strings are identical
  */
-inline int ASSIMP_strincmp(const char *s1, const char *s2, unsigned int n)
+inline int ASSIMP_strincmp(const char *s1, const char *s2, const size_t n)
 {
 	ai_assert(NULL != s1 && NULL != s2);
 	if (!n)return 0;
@@ -187,7 +187,7 @@ inline int ASSIMP_strincmp(const char *s1, const char *s2, unsigned int n)
 
 #else
 	register char c1, c2;
-	unsigned int p = 0;
+	size_t p = 0;
 	do 
 	{
 		if (p++ >= n)return 0;
