@@ -86,10 +86,10 @@ void PretransformVertices::SetupProperties(const Importer* pImp)
 
 // ------------------------------------------------------------------------------------------------
 // Count the number of nodes
-unsigned int PretransformVertices::CountNodes( aiNode* pcNode )
+size_t PretransformVertices::CountNodes( aiNode* pcNode )
 {
-	unsigned int iRet = 1;
-	for (unsigned int i = 0;i < pcNode->mNumChildren;++i)
+	size_t iRet = 1;
+	for (size_t i = 0;i < pcNode->mNumChildren;++i)
 	{
 		iRet += CountNodes(pcNode->mChildren[i]);
 	}
@@ -238,7 +238,7 @@ void PretransformVertices::CollectData( aiScene* pcScene, aiNode* pcNode, unsign
 
 				f_dst.mNumIndices = num_idx; 
 
-				unsigned int* pi;
+				size_t* pi;
 				if (!num_ref) { /* if last time the mesh is referenced -> no reallocation */
 					pi = f_dst.mIndices = f_src.mIndices; 
 
@@ -248,7 +248,7 @@ void PretransformVertices::CollectData( aiScene* pcScene, aiNode* pcNode, unsign
 					}
 				}
 				else {
-					pi = f_dst.mIndices = new unsigned int[num_idx];
+					pi = f_dst.mIndices = new size_t[num_idx];
 					
 					// copy and offset all vertex indices
 					for (unsigned int hahn = 0; hahn < num_idx;++hahn){
@@ -433,9 +433,9 @@ void PretransformVertices::Execute( aiScene* pScene)
 	if (!pScene->mNumMeshes)
 		return;
 
-	const unsigned int iOldMeshes = pScene->mNumMeshes;
-	const unsigned int iOldAnimationChannels = pScene->mNumAnimations;
-	const unsigned int iOldNodes = CountNodes(pScene->mRootNode);
+	const size_t iOldMeshes = pScene->mNumMeshes;
+	const size_t iOldAnimationChannels = pScene->mNumAnimations;
+	const size_t iOldNodes = CountNodes(pScene->mRootNode);
 
 	// first compute absolute transformation matrices for all nodes
 	ComputeAbsoluteTransform(pScene->mRootNode);

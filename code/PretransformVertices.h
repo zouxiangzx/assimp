@@ -98,7 +98,7 @@ private:
 
 	// -------------------------------------------------------------------
 	// Count the number of nodes
-	unsigned int CountNodes( aiNode* pcNode );
+	size_t CountNodes( aiNode* pcNode );
 
 	// -------------------------------------------------------------------
 	// Get a bitwise combination identifying the vertex format of a mesh
