@@ -41,7 +41,7 @@ struct SubMesh
 	std::vector<std::vector<aiVector3D> > Uvs;//arbitrary number of texcoords, they are nearly always 2d, but assimp has always 3d texcoords, n vectors(outer) with texcoords for each vertex(inner)
 
 	std::vector< std::vector<Weight> > Weights;//a list(inner) of bones for each vertex(outer)
-	int MaterialIndex;///< The Index in the Assimp Materialarray from the material witch is attached to this submesh
+	size_t MaterialIndex;///< The Index in the Assimp Materialarray from the material witch is attached to this submesh
 	unsigned int BonesUsed;//the highest index of a bone from a bone weight, this is needed to create the assimp bone structur (converting from Vertex-Bones to Bone-Vertices)
 
 	SubMesh(): SharedData(false), HasPositions(false), HasNormals(false), HasTangents(false),

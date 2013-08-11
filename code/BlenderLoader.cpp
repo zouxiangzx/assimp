@@ -714,7 +714,7 @@ void BlenderImporter::ConvertMesh(const Scene& /*in*/, const Object* /*obj*/, co
 		aiMesh* const out = temp[ mat_num_to_mesh_idx[ mf.mat_nr ] ];
 		aiFace& f = out->mFaces[out->mNumFaces++];
 
-		f.mIndices = new unsigned int[ f.mNumIndices = mf.v4?4:3 ];
+		f.mIndices = new size_t[ f.mNumIndices = mf.v4?4:3 ];
 		aiVector3D* vo = out->mVertices + out->mNumVertices;
 		aiVector3D* vn = out->mNormals + out->mNumVertices;
 
@@ -800,7 +800,7 @@ void BlenderImporter::ConvertMesh(const Scene& /*in*/, const Object* /*obj*/, co
 		aiMesh* const out = temp[ mat_num_to_mesh_idx[ mf.mat_nr ] ];
 		aiFace& f = out->mFaces[out->mNumFaces++];
 		
-		f.mIndices = new unsigned int[ f.mNumIndices = mf.totloop ];
+		f.mIndices = new size_t[ f.mNumIndices = mf.totloop ];
 		aiVector3D* vo = out->mVertices + out->mNumVertices;
 		aiVector3D* vn = out->mNormals + out->mNumVertices;
 		
@@ -933,7 +933,7 @@ void BlenderImporter::ConvertMesh(const Scene& /*in*/, const Object* /*obj*/, co
 				vo->b = col->b;
 				vo->a = col->a;
 			}
-			for (unsigned int n = f.mNumIndices; n < 4; ++n);
+			for (size_t n = f.mNumIndices; n < 4; ++n);
 		}
 		
 		for (int i = 0; i < mesh->totpoly; ++i) {

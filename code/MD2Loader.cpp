@@ -368,7 +368,7 @@ void MD2Importer::InternReadFile( const std::string& pFile,
 
 	for (unsigned int i = 0; i < (unsigned int)m_pcHeader->numTriangles;++i)	{
 		// Allocate the face
-		pScene->mMeshes[0]->mFaces[i].mIndices = new unsigned int[3];
+		pScene->mMeshes[0]->mFaces[i].mIndices = new size_t[3];
 		pScene->mMeshes[0]->mFaces[i].mNumIndices = 3;
 
 		// copy texture coordinates

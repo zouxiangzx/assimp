@@ -273,17 +273,17 @@ void SplitLargeMeshesProcess_Triangle::SplitMesh(
 
 			// (we will also need to copy the array of indices)
 			unsigned int iCurrent = 0;
-			for (unsigned int p = 0; p < pcMesh->mNumFaces;++p)
+			for (size_t p = 0; p < pcMesh->mNumFaces;++p)
 			{
 				pcMesh->mFaces[p].mNumIndices = 3;
 				// allocate a new array
-				const unsigned int iTemp = p + iBase;
-				const unsigned int iNumIndices = pMesh->mFaces[iTemp].mNumIndices;
+				const size_t iTemp = p + iBase;
+				const size_t iNumIndices = pMesh->mFaces[iTemp].mNumIndices;
 
 				// setup face type and number of indices
 				pcMesh->mFaces[p].mNumIndices = iNumIndices;
-				unsigned int* pi = pMesh->mFaces[iTemp].mIndices;
-				unsigned int* piOut = pcMesh->mFaces[p].mIndices = new unsigned int[iNumIndices];
+				size_t* pi = pMesh->mFaces[iTemp].mIndices;
+				size_t* piOut = pcMesh->mFaces[p].mIndices = new size_t[iNumIndices];
 
 				// need to update the output primitive types
 				switch (iNumIndices)
@@ -499,15 +499,16 @@ void SplitLargeMeshesProcess_Vertex::SplitMesh(
 			while (iBase < pMesh->mNumFaces)
 			{
 				// allocate a new array
-				const unsigned int iNumIndices = pMesh->mFaces[iBase].mNumIndices;
+				const size_t iNumIndices = pMesh->mFaces[iBase].mNumIndices;
 
 				// doesn't catch degenerates but is quite fast
-				unsigned int iNeed = 0;
-				for (unsigned int v = 0; v < iNumIndices;++v)
+				size_t iNeed = 0;
+				for (size_t v = 0; v < iNumIndices;++v)
 				{
-					unsigned int iIndex = pMesh->mFaces[iBase].mIndices[v];
+					size_t iIndex = pMesh->mFaces[iBase].mIndices[v];
 
 					// check whether we do already have this vertex
+                    //TODO: (sherief) Check whether this constant needs updating with the move to size_t, to ~0 maybe.
 					if (0xFFFFFFFF == avWasCopied[iIndex])
 					{
 						iNeed++; 
@@ -524,7 +525,7 @@ void SplitLargeMeshesProcess_Vertex::SplitMesh(
 
 				// setup face type and number of indices
 				rFace.mNumIndices = iNumIndices;
-				rFace.mIndices = new unsigned int[iNumIndices];
+				rFace.mIndices = new size_t[iNumIndices];
 
 				// need to update the output primitive types
 				switch (rFace.mNumIndices)
@@ -543,11 +544,12 @@ void SplitLargeMeshesProcess_Vertex::SplitMesh(
 				}
 
 				// and copy the contents of the old array, offset by current base
-				for (unsigned int v = 0; v < iNumIndices;++v)
+				for (size_t v = 0; v < iNumIndices;++v)
 				{
-					unsigned int iIndex = pMesh->mFaces[iBase].mIndices[v];
+					size_t iIndex = pMesh->mFaces[iBase].mIndices[v];
 
 					// check whether we do already have this vertex
+                    //TODO: (sherief) Check whethet this constant needs an updatw with the move to size_t
 					if (0xFFFFFFFF != avWasCopied[iIndex])
 					{
 						rFace.mIndices[v] = avWasCopied[iIndex];

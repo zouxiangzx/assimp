@@ -104,9 +104,9 @@ protected:
 	/** faces */
 	struct Face 
 	{ 
-		unsigned int mIndices[3]; 
+		size_t mIndices[3];
 		Face();
-		Face( unsigned int p0, unsigned int p1, unsigned int p2)
+		Face( size_t p0, size_t p1, size_t p2)
 		{ mIndices[0] = p0; mIndices[1] = p1; mIndices[2] = p2; } 
 	};
 	std::vector<Face> mFaces;

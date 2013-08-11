@@ -313,7 +313,7 @@ void SMDImporter::CreateOutputMeshes()
 		iNum = 0;
 		for (unsigned int iFace = 0; iFace < pcMesh->mNumFaces;++iFace)
 		{
-			pcMesh->mFaces[iFace].mIndices = new unsigned int[3];
+			pcMesh->mFaces[iFace].mIndices = new size_t[3];
 			pcMesh->mFaces[iFace].mNumIndices = 3;
 
 			// fill the vertices 

@@ -148,7 +148,7 @@ void STLImporter::InternReadFile( const std::string& pFile,
 	for (unsigned int i = 0, p = 0; i < pMesh->mNumFaces;++i)	{
 
 		aiFace& face = pMesh->mFaces[i];
-		face.mIndices = new unsigned int[face.mNumIndices = 3];
+		face.mIndices = new size_t[face.mNumIndices = 3];
 		for (unsigned int o = 0; o < 3;++o,++p) {
 			face.mIndices[o] = p;
 		}

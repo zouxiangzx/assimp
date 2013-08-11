@@ -495,7 +495,7 @@ aiMesh* OgreImporter::CreateAssimpSubMesh(const SubMesh& theSubMesh, const vecto
 	for(unsigned int i=0; i<theSubMesh.FaceList.size(); ++i)
 	{
 		NewAiMesh->mFaces[i].mNumIndices=3;
-		NewAiMesh->mFaces[i].mIndices=new unsigned int[3];
+		NewAiMesh->mFaces[i].mIndices=new size_t[3];
 
 		NewAiMesh->mFaces[i].mIndices[0]=theSubMesh.FaceList[i].VertexIndices[0];
 		NewAiMesh->mFaces[i].mIndices[1]=theSubMesh.FaceList[i].VertexIndices[1];

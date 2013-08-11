@@ -94,7 +94,7 @@ void OptimizeMeshesProcess::SetupProperties(const Importer* pImp)
 // Execute step
 void OptimizeMeshesProcess::Execute( aiScene* pScene)
 {
-	const unsigned int num_old = pScene->mNumMeshes;
+	const size_t num_old = pScene->mNumMeshes;
 	if (num_old <= 1) {
 		DefaultLogger::get()->debug("Skipping OptimizeMeshesProcess");
 		return;

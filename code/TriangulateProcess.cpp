@@ -195,7 +195,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 	for( unsigned int a = 0; a < pMesh->mNumFaces; a++)	{
 		aiFace& face = pMesh->mFaces[a];
 
-		unsigned int* idx = face.mIndices;
+		size_t* idx = face.mIndices;
 		int num = (int)face.mNumIndices, ear = 0, tmp, prev = num-1, next = 0, max = num;
 
 		// Apply vertex colors to represent the face winding?
@@ -261,7 +261,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 
 			aiFace& sface = *curOut++;
 			sface.mNumIndices = 3;
-			sface.mIndices = new unsigned int[3];
+			sface.mIndices = new size_t[3];
 
 			sface.mIndices[0] = temp[start_vertex];
 			sface.mIndices[1] = temp[(start_vertex + 2) % 4];
@@ -423,7 +423,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 
 						nface.mNumIndices = 3;
 						if (!nface.mIndices)
-							nface.mIndices = new unsigned int[3];
+							nface.mIndices = new size_t[3];
 
 						nface.mIndices[0] = 0;
 						nface.mIndices[1] = tmp+1;
@@ -438,7 +438,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 				nface.mNumIndices = 3;
 
 				if (!nface.mIndices) {
-					nface.mIndices = new unsigned int[3];
+					nface.mIndices = new size_t[3];
 				}
 
 				// setup indices for the new triangle ...
@@ -455,7 +455,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 				aiFace& nface = *curOut++;
 				nface.mNumIndices = 3;
 				if (!nface.mIndices) {
-					nface.mIndices = new unsigned int[3];
+					nface.mIndices = new size_t[3];
 				}
 
 				for (tmp = 0; done[tmp]; ++tmp);
@@ -483,7 +483,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 #endif
 
 		for(aiFace* f = last_face; f != curOut; ) {
-			unsigned int* i = f->mIndices;
+			size_t* i = f->mIndices;
 
 			//  drop dumb 0-area triangles
 			if (fabs(GetArea2D(temp_verts[i[0]],temp_verts[i[1]],temp_verts[i[2]])) < 1e-5f) {

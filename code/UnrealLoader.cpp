@@ -418,7 +418,7 @@ void UnrealImporter::InternReadFile( const std::string& pFile,
 
 		aiMesh* mesh = pScene->mMeshes[nt-materials.begin()];
 		aiFace& f    = mesh->mFaces[mesh->mNumFaces++];
-		f.mIndices   = new unsigned int[f.mNumIndices = 3];
+		f.mIndices   = new size_t[f.mNumIndices = 3];
 		
 		for (unsigned int i = 0; i < 3;++i,mesh->mNumVertices++) {
 			f.mIndices[i] = mesh->mNumVertices;

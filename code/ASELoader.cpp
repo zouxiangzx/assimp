@@ -1001,7 +1001,7 @@ void ASEImporter::ConvertMeshes(ASE::Mesh& mesh, std::vector<aiMesh*>& avOutMesh
 
 						iIndex = aiSplit[p][q];
 
-						p_pcOut->mFaces[q].mIndices = new unsigned int[3];
+						p_pcOut->mFaces[q].mIndices = new size_t[3];
 						p_pcOut->mFaces[q].mNumIndices = 3;
 
 						for (unsigned int t = 0; t < 3;++t, ++iBase)	{
@@ -1160,7 +1160,7 @@ void ASEImporter::ConvertMeshes(ASE::Mesh& mesh, std::vector<aiMesh*>& avOutMesh
 		// copy faces
 		for (unsigned int iFace = 0; iFace < p_pcOut->mNumFaces;++iFace)	{
 			p_pcOut->mFaces[iFace].mNumIndices = 3;
-			p_pcOut->mFaces[iFace].mIndices = new unsigned int[3];
+			p_pcOut->mFaces[iFace].mIndices = new size_t[3];
 
 			// copy indices 
 			p_pcOut->mFaces[iFace].mIndices[0] = mesh.mFaces[iFace].mIndices[0];

@@ -187,7 +187,7 @@ void OFFImporter::InternReadFile( const std::string& pFile,
 		if(!(idx = strtoul10(sz,&sz)) || idx > 9)
 			continue;
 
-		faces->mIndices = new unsigned int [faces->mNumIndices];
+		faces->mIndices = new size_t [faces->mNumIndices];
 		for (unsigned int m = 0; m < faces->mNumIndices;++m)
 		{
 			SkipSpaces(&sz);

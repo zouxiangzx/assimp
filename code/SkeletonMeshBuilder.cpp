@@ -107,7 +107,7 @@ void SkeletonMeshBuilder::CreateGeometry( const aiNode* pNode)
 			aiVector3D front = (up ^ orth).Normalize();
 			aiVector3D side = (front ^ up).Normalize();
 
-			unsigned int localVertexStart = mVertices.size();
+			size_t localVertexStart = mVertices.size();
 			mVertices.push_back( -front * distanceToChild * 0.1f);
 			mVertices.push_back( childpos);
 			mVertices.push_back( -side * distanceToChild * 0.1f);
@@ -221,7 +221,7 @@ aiMesh* SkeletonMeshBuilder::CreateMesh()
 		const Face& inface = mFaces[a];
 		aiFace& outface = mesh->mFaces[a];
 		outface.mNumIndices = 3;
-		outface.mIndices = new unsigned int[3];
+		outface.mIndices = new size_t[3];
 		outface.mIndices[0] = inface.mIndices[0];
 		outface.mIndices[1] = inface.mIndices[1];
 		outface.mIndices[2] = inface.mIndices[2];

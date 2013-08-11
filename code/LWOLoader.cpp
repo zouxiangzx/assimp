@@ -343,8 +343,8 @@ void LWOImporter::InternReadFile( const std::string& pFile,
 					*outIt = face.smoothGroup;
 
 					// copy all vertices
-					for (unsigned int q = 0; q  < face.mNumIndices;++q,++vert)	{
-						register unsigned int idx = face.mIndices[q];
+					for (size_t q = 0; q  < face.mNumIndices;++q,++vert)	{
+						register size_t idx = face.mIndices[q];
 						*pv++ = layer.mTempPoints[idx] /*- layer.mPivot*/;
 
 						// process UV coordinates
@@ -507,10 +507,10 @@ void LWOImporter::ComputeNormals(aiMesh* mesh, const std::vector<unsigned int>& 
 
 		for( begin =  mesh->mFaces, it = smoothingGroups.begin(); begin != end; ++begin, ++it)	{
 			const aiFace& face = *begin;
-			unsigned int* beginIdx = face.mIndices, *const endIdx = face.mIndices+face.mNumIndices;
+			size_t* beginIdx = face.mIndices, *const endIdx = face.mIndices+face.mNumIndices;
 			for (; beginIdx != endIdx; ++beginIdx)
 			{
-				register unsigned int idx = *beginIdx;
+				register size_t idx = *beginIdx;
 				sSort.FindPositions(mesh->mVertices[idx],*it,posEpsilon,poResult,true);
 				std::vector<unsigned int>::const_iterator a, end = poResult.end();
 
@@ -530,7 +530,7 @@ void LWOImporter::ComputeNormals(aiMesh* mesh, const std::vector<unsigned int>& 
 		std::vector<bool> vertexDone(mesh->mNumVertices,false);
 		for( begin =  mesh->mFaces, it = smoothingGroups.begin(); begin != end; ++begin, ++it)	{
 			const aiFace& face = *begin;
-			unsigned int* beginIdx = face.mIndices, *const endIdx = face.mIndices+face.mNumIndices;
+			size_t* beginIdx = face.mIndices, *const endIdx = face.mIndices+face.mNumIndices;
 			for (; beginIdx != endIdx; ++beginIdx)
 			{
 				register unsigned int idx = *beginIdx;
@@ -821,7 +821,7 @@ void LWOImporter::CopyFaceIndicesLWO2(FaceList::iterator& it,
 
 		LWO::Face& face = *it++;;
 		if((face.mNumIndices = (*cursor++) & 0x03FF)) /* byte swapping has already been done */ {
-			face.mIndices = new unsigned int[face.mNumIndices];
+			face.mIndices = new size_t[face.mNumIndices];
 			for(unsigned int i = 0; i < face.mNumIndices; i++)
 			{
 				face.mIndices[i] = ReadVSizedIntLWO2((uint8_t*&)cursor) + mCurLayer->mPointIDXOfs;

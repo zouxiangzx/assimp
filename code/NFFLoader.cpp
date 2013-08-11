@@ -1201,8 +1201,8 @@ void NFFImporter::InternReadFile( const std::string& pFile,
 			end2 = src.faces.end();
 			it2 != end2;++it2,++pFace)
 		{
-			pFace->mIndices = new unsigned int [ pFace->mNumIndices = *it2 ];
-			for (unsigned int o = 0; o < pFace->mNumIndices;++o)
+			pFace->mIndices = new size_t [ pFace->mNumIndices = *it2 ];
+			for (size_t o = 0; o < pFace->mNumIndices;++o)
 				pFace->mIndices[o] = p++;
 		}
 

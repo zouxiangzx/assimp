@@ -382,7 +382,7 @@ void B3DImporter::ReadTRIS( int v0 ){
 			continue;
 		}
 		face->mNumIndices=3;
-		face->mIndices=new unsigned[3];
+		face->mIndices=new size_t[3];
 		face->mIndices[0]=i0;
 		face->mIndices[1]=i1;
 		face->mIndices[2]=i2;
@@ -592,8 +592,8 @@ void B3DImporter::ReadBB3D( aiScene *scene ){
 		for( size_t j=0;j<node->mNumMeshes;++j ){
 			aiMesh *mesh=_meshes[node->mMeshes[j]];
 
-			int n_tris=mesh->mNumFaces;
-			int n_verts=mesh->mNumVertices=n_tris * 3;
+			size_t n_tris=mesh->mNumFaces;
+			size_t n_verts=mesh->mNumVertices=n_tris * 3;
 
 			aiVector3D *mv=mesh->mVertices=new aiVector3D[ n_verts ],*mn=0,*mc=0;
 			if( _vflags & 1 ) mn=mesh->mNormals=new aiVector3D[ n_verts ];

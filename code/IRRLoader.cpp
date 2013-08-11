@@ -149,7 +149,7 @@ aiMesh* IRRImporter::BuildSingleQuadMesh(const SkyboxVertex& v1,
 	aiFace& face   = out->mFaces[0];
 	
 	face.mNumIndices = 4;
-	face.mIndices    = new unsigned int[4];
+	face.mIndices    = new size_t[4];
 	for (unsigned int i = 0; i < 4;++i)
 		face.mIndices[i] = i;
 

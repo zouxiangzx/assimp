@@ -93,7 +93,7 @@ aiMesh* TempMesh::ToMesh()
 		}
 
 		f.mNumIndices = vertcnt[n];
-		f.mIndices = new unsigned int[f.mNumIndices];
+		f.mIndices = new size_t[f.mNumIndices];
 		for(unsigned int a = 0; a < f.mNumIndices; ++a) {
 			f.mIndices[a] = acc++;
 		}

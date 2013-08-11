@@ -465,7 +465,7 @@ void CatmullClarkSubdivider::InternSubdivide (
 
 				// Get a clean new face.
 				aiFace& faceOut = mout->mFaces[n++];
-				faceOut.mIndices = new unsigned int [faceOut.mNumIndices = 4];
+				faceOut.mIndices = new size_t [faceOut.mNumIndices = 4];
 
 				// Spawn a new quadrilateral (ccw winding) for this original point between:
 				// a) face centroid

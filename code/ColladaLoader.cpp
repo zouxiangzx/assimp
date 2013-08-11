@@ -613,7 +613,7 @@ aiMesh* ColladaLoader::CreateMesh( const ColladaParser& pParser, const Collada::
 		size_t s = pSrcMesh->mFaceSize[ pStartFace + a];
 		aiFace& face = dstMesh->mFaces[a];
 		face.mNumIndices = s;
-		face.mIndices = new unsigned int[s];
+		face.mIndices = new size_t[s];
 		for( size_t b = 0; b < s; ++b)
 			face.mIndices[b] = vertex++;
 	}

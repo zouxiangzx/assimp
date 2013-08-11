@@ -427,7 +427,7 @@ void Q3BSPFileImporter::createTriangleTopology( const Q3BSP::Q3BSPModel *pModel,
 	}
 
 	m_pCurrentFace->mNumIndices = 3;
-	m_pCurrentFace->mIndices = new unsigned int[ m_pCurrentFace->mNumIndices ];
+	m_pCurrentFace->mIndices = new size_t[ m_pCurrentFace->mNumIndices ];
 	
 	size_t idx = 0;
 	for ( size_t i = 0; i < (size_t) pQ3BSPFace->iNumOfFaceVerts; i++ )
@@ -463,7 +463,7 @@ void Q3BSPFileImporter::createTriangleTopology( const Q3BSP::Q3BSPModel *pModel,
 			if ( NULL != m_pCurrentFace )
 			{
 				m_pCurrentFace->mNumIndices = 3;
-				m_pCurrentFace->mIndices = new unsigned int[ 3 ];
+				m_pCurrentFace->mIndices = new size_t[ 3 ];
 			}
 		}
 	}

@@ -306,7 +306,7 @@ void ObjFileImporter::createTopology(const ObjFile::Model* pModel,
 				for(size_t i = 0; i < inp->m_pVertices->size() - 1; ++i) {
 					aiFace& f = pMesh->mFaces[ outIndex++ ];
 					uiIdxCount += f.mNumIndices = 2;
-					f.mIndices = new unsigned int[2];
+					f.mIndices = new size_t[2];
 				}
 				continue;
 			}
@@ -314,16 +314,16 @@ void ObjFileImporter::createTopology(const ObjFile::Model* pModel,
 				for(size_t i = 0; i < inp->m_pVertices->size(); ++i) {
 					aiFace& f = pMesh->mFaces[ outIndex++ ];
 					uiIdxCount += f.mNumIndices = 1;
-					f.mIndices = new unsigned int[1];
+					f.mIndices = new size_t[1];
 				}
 				continue;
 			}
 
 			aiFace *pFace = &pMesh->mFaces[ outIndex++ ];
-			const unsigned int uiNumIndices = (unsigned int) pObjMesh->m_Faces[ index ]->m_pVertices->size();
-			uiIdxCount += pFace->mNumIndices = (unsigned int) uiNumIndices;
+			const size_t uiNumIndices =  pObjMesh->m_Faces[ index ]->m_pVertices->size();
+			uiIdxCount += pFace->mNumIndices = uiNumIndices;
 			if (pFace->mNumIndices > 0) {
-				pFace->mIndices = new unsigned int[ uiNumIndices ];			
+				pFace->mIndices = new size_t[ uiNumIndices ];
 			}
 		}
 	}

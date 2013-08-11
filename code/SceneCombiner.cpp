@@ -314,7 +314,7 @@ void SceneCombiner::MergeScenes(aiScene** _dest, aiScene* master,
 				// the material names should be caught by doing this.
 				AddNodeHashes(src[i]->mRootNode,src[i].hashes);
 
-				for (unsigned int a = 0; a < src[i]->mNumAnimations;++a) {
+				for (size_t a = 0; a < src[i]->mNumAnimations;++a) {
 					aiAnimation* anim = src[i]->mAnimations[a];
 					src[i].hashes.insert(SuperFastHash(anim->mName.data,anim->mName.length));
 				}
@@ -478,7 +478,7 @@ void SceneCombiner::MergeScenes(aiScene** _dest, aiScene* master,
 	aiAnimation** ppAnims = dest->mAnimations = (dest->mNumAnimations 
 		? new aiAnimation*[dest->mNumAnimations] : NULL);
 
-	for ( int n = src.size()-1; n >= 0 ;--n ) /* !!! important !!! */
+	for ( ssize_t n = src.size()-1; n >= 0 ;--n ) /* !!! important !!! */
 	{
 		SceneHelper* cur = &src[n];
 		aiNode* node;
@@ -513,11 +513,11 @@ void SceneCombiner::MergeScenes(aiScene** _dest, aiScene* master,
 			else AddNodePrefixes(node,(*cur).id,(*cur).idlen);
 
 			// meshes
-			for (unsigned int i = 0; i < (*cur)->mNumMeshes;++i)	{
+			for (size_t i = 0; i < (*cur)->mNumMeshes;++i)	{
 				aiMesh* mesh = (*cur)->mMeshes[i]; 
 
 				// rename all bones
-				for (unsigned int a = 0; a < mesh->mNumBones;++a)	{
+				for (size_t a = 0; a < mesh->mNumBones;++a)	{
 					if (flags & AI_INT_MERGE_SCENE_GEN_UNIQUE_NAMES_IF_NECESSARY) {
 						if (!FindNameMatch(mesh->mBones[a]->mName,src,n))
 							continue;
@@ -881,8 +881,8 @@ void SceneCombiner::MergeMeshes(aiMesh** _out,unsigned int /*flags*/,
 }
 
 // ------------------------------------------------------------------------------------------------
-template <typename Type>
-inline void CopyPtrArray (Type**& dest, const Type* const * src, unsigned int num)
+template <typename Type, typename SizeType>
+inline void CopyPtrArray (Type**& dest, const Type* const * src, const SizeType num)
 {
 	if (!num)
 	{
@@ -890,14 +890,14 @@ inline void CopyPtrArray (Type**& dest, const Type* const * src, unsigned int nu
 		return;
 	}
 	dest = new Type*[num];
-	for (unsigned int i = 0; i < num;++i) {
+	for (SizeType i = 0; i < num;++i) {
 		SceneCombiner::Copy(&dest[i],src[i]);
 	}
 }
 
 // ------------------------------------------------------------------------------------------------
-template <typename Type>
-inline void GetArrayCopy (Type*& dest, unsigned int num )
+template <typename Type, typename SizeType>
+inline void GetArrayCopy (Type*& dest, const SizeType num )
 {
 	if (!dest)return;
 	Type* old = dest;

@@ -162,10 +162,10 @@ void LWOImporter::CopyFaceIndicesLWOB(FaceList::iterator& it,
 		if((face.mNumIndices = *cursor++))
 		{
 			if (cursor + face.mNumIndices >= end)break;
-			face.mIndices = new unsigned int[face.mNumIndices];
-			for (unsigned int i = 0; i < face.mNumIndices;++i)
+			face.mIndices = new size_t[face.mNumIndices];
+			for (size_t i = 0; i < face.mNumIndices;++i)
 			{
-				unsigned int & mi = face.mIndices[i] = *cursor++;
+				size_t & mi = face.mIndices[i] = *cursor++;
 				if (mi > mCurLayer->mTempPoints.size())
 				{
 					DefaultLogger::get()->warn("LWOB: face index is out of range");

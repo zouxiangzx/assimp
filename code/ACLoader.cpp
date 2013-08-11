@@ -465,7 +465,7 @@ aiNode* AC3DImporter::ConvertObjectSection(Object& object,
 			{
 				*verts = object.vertices[i];
 				faces->mNumIndices = 1;
-				faces->mIndices = new unsigned int[1];
+				faces->mIndices = new size_t[1];
 				faces->mIndices[0] = i;
 			}
 
@@ -591,7 +591,7 @@ aiNode* AC3DImporter::ConvertObjectSection(Object& object,
 							aiFace& face = *faces++;
 							if((face.mNumIndices = (unsigned int)src.entries.size()))
 							{
-								face.mIndices = new unsigned int[face.mNumIndices];
+								face.mIndices = new size_t[face.mNumIndices];
 								for (unsigned int i = 0; i < face.mNumIndices;++i,++vertices)
 								{
 									const Surface::SurfaceEntry& entry = src.entries[i];
@@ -624,7 +624,7 @@ aiNode* AC3DImporter::ConvertObjectSection(Object& object,
 								aiFace& face = *faces++;
 
 								face.mNumIndices = 2;
-								face.mIndices = new unsigned int[2];
+								face.mIndices = new size_t[2];
 								face.mIndices[0] = cur++;
 								face.mIndices[1] = cur++;
 

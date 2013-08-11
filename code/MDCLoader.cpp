@@ -368,7 +368,7 @@ void MDCImporter::InternReadFile(
 		{
 			const unsigned int iOutIndex = iFace*3;
 			pcFaceCur->mNumIndices = 3;
-			pcFaceCur->mIndices = new unsigned int[3];
+			pcFaceCur->mIndices = new size_t[3];
 
 			for (unsigned int iIndex = 0; iIndex < 3;++iIndex,
 				++pcVertCur,++pcUVCur,++pcNorCur)

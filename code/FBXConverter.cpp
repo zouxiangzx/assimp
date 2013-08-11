@@ -838,7 +838,7 @@ private:
 		BOOST_FOREACH(unsigned int pcount, faces) {
 			aiFace& f = *fac++;
 			f.mNumIndices = pcount;
-			f.mIndices = new unsigned int[pcount];
+			f.mIndices = new size_t[pcount];
 			switch(pcount) 
 			{
 			case 1:
@@ -1086,7 +1086,7 @@ private:
 			aiFace& f = *fac++;
 
 			f.mNumIndices = pcount;
-			f.mIndices = new unsigned int[pcount];
+			f.mIndices = new size_t[pcount];
 			switch(pcount) 
 			{
 			case 1:

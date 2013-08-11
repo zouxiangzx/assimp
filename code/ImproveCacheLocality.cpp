@@ -267,8 +267,8 @@ float ImproveCacheLocalityProcess::ProcessMesh( aiMesh* pMesh, unsigned int mesh
 
 				// so iterate through all vertices of the current triangle
 				const aiFace* pcFace = &pMesh->mFaces[ fidx ];
-				for (unsigned int* p = pcFace->mIndices, *p2 = pcFace->mIndices+3;p != p2;++p)	{
-					const unsigned int dp = *p;
+				for (size_t* p = pcFace->mIndices, *p2 = pcFace->mIndices+3;p != p2;++p)	{
+					const size_t dp = *p;
 
 					// the current vertex won't have any free triangles after this step
 					if (ivdx != (int)dp) {

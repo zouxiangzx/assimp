@@ -399,7 +399,7 @@ void HMPImporter::CreateOutputFaceList(unsigned int width,unsigned int height)
 	for (unsigned int y = 0; y < height-1;++y)	{
 		for (unsigned int x = 0; x < width-1;++x,++pcFaceOut)	{
 			pcFaceOut->mNumIndices = 4;
-			pcFaceOut->mIndices = new unsigned int[4];
+			pcFaceOut->mIndices = new size_t[4];
 
 			*pcVertOut++ = pcMesh->mVertices[y*width+x];
 			*pcVertOut++ = pcMesh->mVertices[(y+1)*width+x];

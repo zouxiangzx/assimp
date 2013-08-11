@@ -298,7 +298,7 @@ void MDLImporter::ParseTextureColorData(const unsigned char* szData,
 		VALIDATE_FILE_SIZE(szData + pcNew->mWidth*pcNew->mHeight*3);
 
 		// copy texture data
-		unsigned int i;
+		size_t i;
 		if (do_read)
 		{
 			for (i = 0; i < pcNew->mWidth*pcNew->mHeight;++i)

@@ -304,8 +304,8 @@ void PLYImporter::ConvertMeshes(std::vector<PLY::Face>* avFaces,
 			for (std::vector<unsigned int>::const_iterator i =  aiSplit[p].begin();
 				i != aiSplit[p].end();++i,++iNum)
 			{
-				p_pcOut->mFaces[iNum].mNumIndices = (unsigned int)(*avFaces)[*i].mIndices.size(); 
-				p_pcOut->mFaces[iNum].mIndices = new unsigned int[p_pcOut->mFaces[iNum].mNumIndices];
+				p_pcOut->mFaces[iNum].mNumIndices = (*avFaces)[*i].mIndices.size(); 
+				p_pcOut->mFaces[iNum].mIndices = new size_t[p_pcOut->mFaces[iNum].mNumIndices];
 
 				// build an unique set of vertices/colors for this face
 				for (unsigned int q = 0; q <  p_pcOut->mFaces[iNum].mNumIndices;++q)

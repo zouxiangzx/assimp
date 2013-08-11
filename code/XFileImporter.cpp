@@ -313,11 +313,11 @@ void XFileImporter::CreateMeshes( aiScene* pScene, aiNode* pNode, const std::vec
 
 				// create face. either triangle or triangle fan depending on the index count
 				aiFace& df = mesh->mFaces[c]; // destination face
-				df.mNumIndices = (unsigned int)pf.mIndices.size();
-				df.mIndices = new unsigned int[ df.mNumIndices];
+				df.mNumIndices = pf.mIndices.size();
+				df.mIndices = new size_t[ df.mNumIndices];
 
 				// collect vertex data for indices of this face
-				for( unsigned int d = 0; d < df.mNumIndices; d++)
+				for( size_t d = 0; d < df.mNumIndices; d++)
 				{
 					df.mIndices[d] = newIndex; 
 					orgPoints[newIndex] = pf.mIndices[d];
@@ -407,11 +407,11 @@ void XFileImporter::CreateMeshes( aiScene* pScene, aiNode* pNode, const std::vec
 	}
 
 	// allocate mesh index array in the node
-	pNode->mNumMeshes = (unsigned int)meshes.size();
+	pNode->mNumMeshes = meshes.size();
 	pNode->mMeshes = new unsigned int[pNode->mNumMeshes];
 
 	// store all meshes in the mesh library of the scene and store their indices in the node
-	for( unsigned int a = 0; a < meshes.size(); a++)
+	for( size_t a = 0; a < meshes.size(); a++)
 	{
 		pScene->mMeshes[pScene->mNumMeshes] = meshes[a];		
 		pNode->mMeshes[a] = pScene->mNumMeshes;

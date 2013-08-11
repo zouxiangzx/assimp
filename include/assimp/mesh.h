@@ -129,7 +129,7 @@ struct aiFace
 	size_t mNumIndices;
 
 	//! Pointer to the indices array. Size of the array is given in numIndices.
-	unsigned int* mIndices;   
+	size_t* mIndices;
 
 #ifdef __cplusplus
 
@@ -162,8 +162,8 @@ struct aiFace
 		delete[] mIndices;
 		mNumIndices = o.mNumIndices;
 		if (mNumIndices) {
-			mIndices = new unsigned int[mNumIndices];
-			::memcpy( mIndices, o.mIndices, mNumIndices * sizeof( unsigned int));
+			mIndices = new size_t [mNumIndices];
+			::memcpy( mIndices, o.mIndices, mNumIndices * sizeof( size_t));
 		}
 		else {
 			mIndices = NULL;
@@ -691,7 +691,7 @@ struct aiMesh
 
 	//! Check whether the mesh contains a vertex color set
 	//! \param pIndex Index of the vertex color set
-	bool HasVertexColors( unsigned int pIndex) const
+	bool HasVertexColors( size_t pIndex) const
 	{ 
 		if( pIndex >= AI_MAX_NUMBER_OF_COLOR_SETS) 
 			return false; 
@@ -701,7 +701,7 @@ struct aiMesh
 
 	//! Check whether the mesh contains a texture coordinate set
 	//! \param pIndex Index of the texture coordinates set
-	bool HasTextureCoords( unsigned int pIndex) const
+	bool HasTextureCoords( size_t pIndex) const
 	{ 
 		if( pIndex >= AI_MAX_NUMBER_OF_TEXTURECOORDS) 
 			return false; 

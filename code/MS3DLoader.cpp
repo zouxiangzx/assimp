@@ -496,7 +496,7 @@ void MS3DImporter::InternReadFile( const std::string& pFile,
 			}
 
 			TempTriangle& t = triangles[g.triangles[i]];
-			f.mIndices = new unsigned int[f.mNumIndices=3];
+			f.mIndices = new size_t[f.mNumIndices=3];
 			
 			for (unsigned int i = 0; i < 3; ++i,++n) {
 				if (t.indices[i]>vertices.size()) {
