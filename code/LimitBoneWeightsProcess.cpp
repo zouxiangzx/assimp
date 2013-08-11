@@ -152,7 +152,7 @@ void LimitBoneWeightsProcess::ProcessMesh( aiMesh* pMesh)
 		std::vector<bool> abNoNeed(pMesh->mNumBones,false);
 		bChanged = false;
 
-		for( unsigned int a = 0; a < pMesh->mNumBones; a++)
+		for( size_t a = 0; a < pMesh->mNumBones; a++)
 		{
 			const std::vector<aiVertexWeight>& bw = boneWeights[a];
 			aiBone* bone = pMesh->mBones[a];
@@ -197,7 +197,7 @@ void LimitBoneWeightsProcess::ProcessMesh( aiMesh* pMesh)
 
 		if (!DefaultLogger::isNullLogger()) {
 			char buffer[1024];
-			::sprintf(buffer,"Removed %i weights. Input bones: %i. Output bones: "SIZE_T_FORMAT_SPECIFIER,removed,old_bones,pMesh->mNumBones);
+			::sprintf(buffer,"Removed "SIZE_T_FORMAT_SPECIFIER" weights. Input bones: "SIZE_T_FORMAT_SPECIFIER". Output bones: "SIZE_T_FORMAT_SPECIFIER,removed,old_bones,pMesh->mNumBones);
 			DefaultLogger::get()->info(buffer);
 		}
 	}

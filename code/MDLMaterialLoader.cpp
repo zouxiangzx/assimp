@@ -692,7 +692,7 @@ void MDLImporter::ParseSkinLump_3DGS_MDL7(
 
 		// place this as diffuse texture
 		char szCurrent[5];
-		::sprintf(szCurrent,"*%i",this->pScene->mNumTextures);
+		::sprintf(szCurrent,"*"SIZE_T_FORMAT_SPECIFIER"",this->pScene->mNumTextures);
 
 		aiString szFile;
 		const size_t iLen = strlen((const char*)szCurrent);

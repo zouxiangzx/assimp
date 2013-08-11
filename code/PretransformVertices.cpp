@@ -629,11 +629,11 @@ void PretransformVertices::Execute( aiScene* pScene)
 			aiNode** nodes = pScene->mRootNode->mChildren = new aiNode*[pScene->mRootNode->mNumChildren];
 
 			// generate mesh nodes
-			for (unsigned int i = 0; i < pScene->mNumMeshes;++i,++nodes)
+			for (size_t i = 0; i < pScene->mNumMeshes;++i,++nodes)
 			{
 				aiNode* pcNode = *nodes = new aiNode();
 				pcNode->mParent = pScene->mRootNode;
-				pcNode->mName.length = ::sprintf(pcNode->mName.data,"mesh_%i",i);
+				pcNode->mName.length = ::sprintf(pcNode->mName.data,"mesh_"SIZE_T_FORMAT_SPECIFIER"",i);
 
 				// setup mesh indices
 				pcNode->mNumMeshes = 1;
@@ -641,19 +641,19 @@ void PretransformVertices::Execute( aiScene* pScene)
 				pcNode->mMeshes[0] = i;
 			}
 			// generate light nodes
-			for (unsigned int i = 0; i < pScene->mNumLights;++i,++nodes)
+			for (size_t i = 0; i < pScene->mNumLights;++i,++nodes)
 			{
 				aiNode* pcNode = *nodes = new aiNode();
 				pcNode->mParent = pScene->mRootNode;
-				pcNode->mName.length = ::sprintf(pcNode->mName.data,"light_%i",i);
+				pcNode->mName.length = ::sprintf(pcNode->mName.data,"light_"SIZE_T_FORMAT_SPECIFIER"",i);
 				pScene->mLights[i]->mName = pcNode->mName;
 			}
 			// generate camera nodes
-			for (unsigned int i = 0; i < pScene->mNumCameras;++i,++nodes)
+			for (size_t i = 0; i < pScene->mNumCameras;++i,++nodes)
 			{
 				aiNode* pcNode = *nodes = new aiNode();
 				pcNode->mParent = pScene->mRootNode;
-				pcNode->mName.length = ::sprintf(pcNode->mName.data,"cam_%i",i);
+				pcNode->mName.length = ::sprintf(pcNode->mName.data,"cam_"SIZE_T_FORMAT_SPECIFIER"",i);
 				pScene->mCameras[i]->mName = pcNode->mName;
 			}
 		}
@@ -696,7 +696,7 @@ void PretransformVertices::Execute( aiScene* pScene)
 
 		DefaultLogger::get()->debug("PretransformVerticesProcess finished");
 
-		sprintf(buffer,"Removed %i nodes and %i animation channels (%i output nodes)",
+		sprintf(buffer,"Removed "SIZE_T_FORMAT_SPECIFIER" nodes and %i animation channels (%i output nodes)",
 			iOldNodes,iOldAnimationChannels,CountNodes(pScene->mRootNode));
 		DefaultLogger::get()->info(buffer);
 
@@ -704,7 +704,7 @@ void PretransformVertices::Execute( aiScene* pScene)
 			pScene->mNumLights,pScene->mNumCameras);
 		DefaultLogger::get()->info(buffer);
 
-		sprintf(buffer,"Moved %i meshes to WCS (number of output meshes: "SIZE_T_FORMAT_SPECIFIER")",
+		sprintf(buffer,"Moved "SIZE_T_FORMAT_SPECIFIER" meshes to WCS (number of output meshes: "SIZE_T_FORMAT_SPECIFIER")",
 			iOldMeshes,pScene->mNumMeshes);
 		DefaultLogger::get()->info(buffer);
 	}
