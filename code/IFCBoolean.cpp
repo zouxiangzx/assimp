@@ -110,7 +110,7 @@ void ProcessBooleanHalfSpaceDifference(const IfcHalfSpaceSolid* hs, TempMesh& re
 	const std::vector<IfcVector3>& in = first_operand.verts;
 	std::vector<IfcVector3>& outvert = result.verts;
 
-	std::vector<unsigned int>::const_iterator begin = first_operand.vertcnt.begin(), 
+	std::vector<size_t>::const_iterator begin = first_operand.vertcnt.begin(), 
 		end = first_operand.vertcnt.end(), iit;
 
 	outvert.reserve(in.size());
@@ -362,7 +362,7 @@ void ProcessPolygonalBoundedBooleanHalfSpaceDifference(const IfcPolygonalBounded
 	const std::vector<IfcVector3>& in = first_operand.verts;
 	std::vector<IfcVector3>& outvert = result.verts;
 
-	std::vector<unsigned int>::const_iterator begin = first_operand.vertcnt.begin(), 
+	std::vector<size_t>::const_iterator begin = first_operand.vertcnt.begin(), 
 		end = first_operand.vertcnt.end(), iit;
 
 	outvert.reserve(in.size());

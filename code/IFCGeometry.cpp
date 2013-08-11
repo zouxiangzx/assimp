@@ -97,10 +97,10 @@ void ProcessPolygonBoundaries(TempMesh& result, const TempMesh& inmesh, size_t m
 
 	ai_assert(std::count(inmesh.vertcnt.begin(), inmesh.vertcnt.end(), 0) == 0);
 
-	typedef std::vector<unsigned int>::const_iterator face_iter;
+	typedef std::vector<size_t>::const_iterator face_iter;
 
 	face_iter begin = inmesh.vertcnt.begin(), end = inmesh.vertcnt.end(), iit;
-	std::vector<unsigned int>::const_iterator outer_polygon_it = end;
+	std::vector<size_t>::const_iterator outer_polygon_it = end;
 
 	// major task here: given a list of nested polygon boundaries (one of which
 	// is the outer contour), reduce the triangulation task arising here to

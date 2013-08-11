@@ -503,7 +503,7 @@ void CleanupWindowContours(ContourVector& contours)
 void CleanupOuterContour(const std::vector<IfcVector2>& contour_flat, TempMesh& curmesh)
 {
 	std::vector<IfcVector3> vold;
-	std::vector<unsigned int> iold;
+	std::vector<size_t> iold;
 
 	vold.reserve(curmesh.verts.size());
 	iold.reserve(curmesh.vertcnt.size());
@@ -1207,7 +1207,7 @@ bool GenerateOpenings(std::vector<TempOpening>& openings,
 			}
 		}
 		std::vector<IfcVector3> profile_verts = profile_data->verts;
-		std::vector<unsigned int> profile_vertcnts = profile_data->vertcnt;
+		std::vector<size_t> profile_vertcnts = profile_data->vertcnt;
 		if(profile_verts.size() <= 2) {
 			continue;	
 		}	
@@ -1608,7 +1608,7 @@ bool TryAddOpenings_Poly2Tri(const std::vector<TempOpening>& openings,const std:
 	}
 
 	std::vector<IfcVector3> old_verts;
-	std::vector<unsigned int> old_vertcnt;
+	std::vector<size_t> old_vertcnt;
 
 	old_verts.swap(curmesh.verts);
 	old_vertcnt.swap(curmesh.vertcnt);

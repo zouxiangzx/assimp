@@ -80,7 +80,7 @@ struct delete_fun
 struct TempMesh
 {
 	std::vector<IfcVector3> verts;
-	std::vector<unsigned int> vertcnt;
+	std::vector<size_t> vertcnt;
 
 	// utilities
 	aiMesh* ToMesh();

@@ -146,7 +146,7 @@ void TempMesh::RemoveDegenerates()
 	size_t inor = 0;
 
 	std::vector<IfcVector3>::iterator vit = verts.begin();
-	for (std::vector<unsigned int>::iterator it = vertcnt.begin(); it != vertcnt.end(); ++inor) {
+	for (std::vector<size_t>::iterator it = vertcnt.begin(); it != vertcnt.end(); ++inor) {
 		const unsigned int pcount = *it;
 		
 		if (normals[inor].SquareLength() < 1e-5f) {
@@ -172,7 +172,7 @@ void TempMesh::ComputePolygonNormals(std::vector<IfcVector3>& normals,
 	size_t ofs) const
 {
 	size_t max_vcount = 0;
-	std::vector<unsigned int>::const_iterator begin = vertcnt.begin()+ofs, end = vertcnt.end(),  iit;
+	std::vector<size_t>::const_iterator begin = vertcnt.begin()+ofs, end = vertcnt.end(),  iit;
 	for(iit = begin; iit != end; ++iit) {
 		max_vcount = std::max(max_vcount,static_cast<size_t>(*iit));
 	}
@@ -254,7 +254,7 @@ void TempMesh::RemoveAdjacentDuplicates()
 
 	bool drop = false;
 	std::vector<IfcVector3>::iterator base = verts.begin();
-	BOOST_FOREACH(unsigned int& cnt, vertcnt) {
+	BOOST_FOREACH(size_t& cnt, vertcnt) {
 		if (cnt < 2){
 			base += cnt;
 			continue;
