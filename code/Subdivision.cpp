@@ -301,11 +301,11 @@ void CatmullClarkSubdivider::InternSubdivide (
 	for (size_t t = 0; t < nmesh; ++t) {
 		const aiMesh* mesh = smesh[t];
 
-		for (unsigned int i = 0; i < mesh->mNumFaces;++i)	{
+		for (size_t i = 0; i < mesh->mNumFaces;++i)	{
 			const aiFace& face = mesh->mFaces[i];
 
-			for (unsigned int p =0; p< face.mNumIndices; ++p) {
-				const unsigned int id[] = { 
+			for (size_t p =0; p< face.mNumIndices; ++p) {
+				const size_t id[] = { 
 					face.mIndices[p], 
 					face.mIndices[p==face.mNumIndices-1?0:p+1]
 				};
