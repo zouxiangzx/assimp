@@ -107,7 +107,7 @@ public:
 
 	// ----------------------------------------------------------------------------
 	/** Extract a particular vertex from a mesh and interleave all components */
-	explicit Vertex(const aiMesh* msh, unsigned int idx) {
+	explicit Vertex(const aiMesh* msh, const size_t idx) {
 		ai_assert(idx < msh->mNumVertices);
 		position = msh->mVertices[idx];
 

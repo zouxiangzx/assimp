@@ -274,15 +274,15 @@ void CatmullClarkSubdivider::InternSubdivide (
 	// 1. Compute the centroid point for all faces
 	// ---------------------------------------------------------------------
 	std::vector<Vertex> centroids(totfaces);
-	unsigned int nfacesout = 0;
+	size_t nfacesout = 0;
 	for (size_t t = 0, n = 0; t < nmesh; ++t) {
 		const aiMesh* mesh = smesh[t];
-		for (unsigned int i = 0; i < mesh->mNumFaces;++i,++n)
+		for (size_t i = 0; i < mesh->mNumFaces;++i,++n)
 		{
 			const aiFace& face = mesh->mFaces[i];
 			Vertex& c = centroids[n];
 
-			for (unsigned int a = 0; a < face.mNumIndices;++a) {
+			for (size_t a = 0; a < face.mNumIndices;++a) {
 				c += Vertex(mesh,face.mIndices[a]);
 			}
 

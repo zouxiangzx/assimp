@@ -158,7 +158,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 			// their tangent vectors are set to qnan.
 			for (unsigned int i = 0; i < face.mNumIndices;++i)
 			{
-				register unsigned int idx = face.mIndices[i];
+				register const size_t idx = face.mIndices[i];
 				vertexDone  [idx] = true;
 				meshTang    [idx] = aiVector3D(qnan);
 				meshBitang  [idx] = aiVector3D(qnan);
@@ -193,7 +193,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 		// store for every vertex of that face
 		for( unsigned int b = 0; b < face.mNumIndices; b++)
 		{
-			unsigned int p = face.mIndices[b];
+			const size_t p = face.mIndices[b];
 
 			// project tangent and bitangent into the plane formed by the vertex' normal
 			aiVector3D localTangent = tangent - meshNorm[p] * (tangent * meshNorm[p]);

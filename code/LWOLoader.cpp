@@ -489,9 +489,9 @@ void LWOImporter::ComputeNormals(aiMesh* mesh, const std::vector<unsigned int>& 
 	for( begin =  mesh->mFaces; begin != end; ++begin, ++it)
 	{
 		aiFace& face = *begin;
-		for (unsigned int i = 0; i < face.mNumIndices;++i)
+		for (size_t i = 0; i < face.mNumIndices;++i)
 		{
-			register unsigned int tt = face.mIndices[i];
+			register size_t tt = face.mIndices[i];
 			sSort.Add(mesh->mVertices[tt],tt,*it);
 		}
 	}
@@ -533,7 +533,7 @@ void LWOImporter::ComputeNormals(aiMesh* mesh, const std::vector<unsigned int>& 
 			size_t* beginIdx = face.mIndices, *const endIdx = face.mIndices+face.mNumIndices;
 			for (; beginIdx != endIdx; ++beginIdx)
 			{
-				register unsigned int idx = *beginIdx;
+				register const size_t idx = *beginIdx;
 				if (vertexDone[idx])
 					continue;
 				sSort.FindPositions(mesh->mVertices[idx],*it,posEpsilon,poResult,true);

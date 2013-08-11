@@ -109,7 +109,7 @@ void LimitBoneWeightsProcess::ProcessMesh( aiMesh* pMesh)
 		}
 	}
 
-	unsigned int removed = 0, old_bones = pMesh->mNumBones;
+	size_t removed = 0, old_bones = pMesh->mNumBones;
 
 	// now cut the weight count if it exceeds the maximum
 	bool bChanged = false;
@@ -125,7 +125,7 @@ void LimitBoneWeightsProcess::ProcessMesh( aiMesh* pMesh)
 		std::sort( vit->begin(), vit->end());
 
 		// now kill everything beyond the maximum count
-		unsigned int m = vit->size();
+		const size_t m = vit->size();
 		vit->erase( vit->begin() + mMaxWeights, vit->end());
 		removed += m-vit->size();
 

@@ -81,8 +81,8 @@ bool MakeVerboseFormatProcess::MakeVerboseFormat(aiMesh* pcMesh)
 {
 	ai_assert(NULL != pcMesh);
 
-	unsigned int iOldNumVertices = pcMesh->mNumVertices;
-	const unsigned int iNumVerts = pcMesh->mNumFaces*3;
+	size_t iOldNumVertices = pcMesh->mNumVertices;
+	const size_t iNumVerts = pcMesh->mNumFaces*3;
 
 	aiVector3D* pvPositions = new aiVector3D[ iNumVerts ];
 

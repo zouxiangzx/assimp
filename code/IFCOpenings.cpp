@@ -1253,7 +1253,7 @@ bool GenerateOpenings(std::vector<TempOpening>& openings,
 				side_flag = nor * face_nor > 0;
 			}
 
-			for (unsigned int vi = 0, vend = profile_vertcnts[f]; vi < vend; ++vi, ++vi_total) {
+			for (size_t vi = 0, vend = profile_vertcnts[f]; vi < vend; ++vi, ++vi_total) {
 				const IfcVector3& x = profile_verts[vi_total];
 
 				const IfcVector3& v = m * x;
