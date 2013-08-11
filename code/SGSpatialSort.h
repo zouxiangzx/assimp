@@ -73,7 +73,7 @@ public:
 	 * @param index Index of the vrtex
 	 * @param smoothingGroup SmoothingGroup for this vertex
 	 */
-	void Add(const aiVector3D& vPosition, unsigned int index,
+	void Add(const aiVector3D& vPosition, const size_t index,
 		unsigned int smoothingGroup);
 
 	// -------------------------------------------------------------------
@@ -113,13 +113,13 @@ protected:
 	// -------------------------------------------------------------------
 	struct Entry
 	{
-		unsigned int mIndex;	///< The vertex referred by this entry
+		size_t mIndex;	///< The vertex referred by this entry
 		aiVector3D mPosition;	///< Position
 		uint32_t mSmoothGroups;
 		float mDistance;		///< Distance of this vertex to the sorting plane
 
 		Entry() { /** intentionally not initialized.*/ }
-		Entry( unsigned int pIndex, const aiVector3D& pPosition, float pDistance,uint32_t pSG) 
+		Entry( const size_t pIndex, const aiVector3D& pPosition, float pDistance,uint32_t pSG)
 			: 
 			mIndex( pIndex),
 			mPosition( pPosition),

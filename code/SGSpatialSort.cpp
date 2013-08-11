@@ -64,7 +64,7 @@ SGSpatialSort::~SGSpatialSort()
 	// nothing to do here, everything destructs automatically
 }
 // ------------------------------------------------------------------------------------------------
-void SGSpatialSort::Add(const aiVector3D& vPosition, unsigned int index,
+void SGSpatialSort::Add(const aiVector3D& vPosition, const size_t index,
 	unsigned int smoothingGroup)
 {
 	// store position by index and distance
