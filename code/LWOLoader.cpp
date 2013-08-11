@@ -912,7 +912,7 @@ inline void CreateNewEntry(std::vector< T >& list, unsigned int srcIdx)
 }
 
 // ------------------------------------------------------------------------------------------------
-inline void LWOImporter::DoRecursiveVMAPAssignment(VMapEntry* base, unsigned int numRead, 
+inline void LWOImporter::DoRecursiveVMAPAssignment(VMapEntry* base, const size_t numRead,
 	unsigned int idx, float* data)
 {
 	ai_assert(NULL != data);
@@ -1028,7 +1028,7 @@ void LWOImporter::LoadLWO2VertexMap(unsigned int length, bool perPoly)
 
 	while (mFileBuffer < end)	{
 
-		unsigned int idx = ReadVSizedIntLWO2(mFileBuffer) + mCurLayer->mPointIDXOfs;
+		size_t idx = ReadVSizedIntLWO2(mFileBuffer) + mCurLayer->mPointIDXOfs;
 		if (idx >= numPoints)	{
 			DefaultLogger::get()->warn("LWO2: Failure evaluating VMAP/VMAD entry \'" + name + "\', vertex index is out of range");
 			mFileBuffer += base->dims<<2u;
@@ -1050,9 +1050,9 @@ void LWOImporter::LoadLWO2VertexMap(unsigned int length, bool perPoly)
 				// generate a new unique vertex for the corresponding index - but only
 				// if we can find the index in the face
 				bool had = false;
-				for (unsigned int i = 0; i < src.mNumIndices;++i)	{
+				for (size_t i = 0; i < src.mNumIndices;++i)	{
 
-					unsigned int srcIdx = src.mIndices[i], tmp = idx;
+					size_t srcIdx = src.mIndices[i], tmp = idx;
 					do {
 						if (tmp == srcIdx)
 							break;
@@ -1065,8 +1065,8 @@ void LWOImporter::LoadLWO2VertexMap(unsigned int length, bool perPoly)
 					had = true;
 					refList.resize(refList.size()+1, UINT_MAX);
 						
-					idx = (unsigned int)pointList.size();
-					src.mIndices[i] = (unsigned int)pointList.size();
+					idx = pointList.size();
+					src.mIndices[i] = pointList.size();
 
 					// store the index of the new vertex in the old vertex
 					// so we get a single linked list we can traverse in

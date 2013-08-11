@@ -323,7 +323,7 @@ private:
 	 *  @param data Value of the VMAP to be assigned - read numRead
 	 *    floats from this array.
 	*/
-	void DoRecursiveVMAPAssignment(VMapEntry* base, unsigned int numRead, 
+	void DoRecursiveVMAPAssignment(VMapEntry* base, const size_t numRead,
 		unsigned int idx, float* data);
 
 	// -------------------------------------------------------------------
