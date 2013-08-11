@@ -119,7 +119,7 @@ inline int HasNameMatch(const aiString& in, aiNode* node)
 
 // ------------------------------------------------------------------------------------------------
 template <typename T>
-inline void ValidateDSProcess::DoValidation(T** parray, unsigned int size, 
+inline void ValidateDSProcess::DoValidation(T** parray, const size_t size,
 	const char* firstName, const char* secondName)
 {
 	// validate all entries
@@ -127,14 +127,14 @@ inline void ValidateDSProcess::DoValidation(T** parray, unsigned int size,
 	{
 		if (!parray)
 		{
-			ReportError("aiScene::%s is NULL (aiScene::%s is %i)",
+			ReportError("aiScene::%s is NULL (aiScene::%s is "SIZE_T_FORMAT_SPECIFIER")",
 				firstName, secondName, size);
 		}
-		for (unsigned int i = 0; i < size;++i)
+		for (size_t i = 0; i < size;++i)
 		{
 			if (!parray[i])
 			{
-				ReportError("aiScene::%s[%i] is NULL (aiScene::%s is %i)",
+				ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"] is NULL (aiScene::%s is "SIZE_T_FORMAT_SPECIFIER")",
 					firstName,i,secondName,size);
 			}
 			Validate(parray[i]);
@@ -144,32 +144,32 @@ inline void ValidateDSProcess::DoValidation(T** parray, unsigned int size,
 
 // ------------------------------------------------------------------------------------------------
 template <typename T>
-inline void ValidateDSProcess::DoValidationEx(T** parray, unsigned int size, 
+inline void ValidateDSProcess::DoValidationEx(T** parray, const size_t size,
 	const char* firstName, const char* secondName)
 {
 	// validate all entries
 	if (size)
 	{
 		if (!parray)	{
-			ReportError("aiScene::%s is NULL (aiScene::%s is %i)",
+			ReportError("aiScene::%s is NULL (aiScene::%s is "SIZE_T_FORMAT_SPECIFIER")",
 				firstName, secondName, size);
 		}
-		for (unsigned int i = 0; i < size;++i)
+		for (size_t i = 0; i < size;++i)
 		{
 			if (!parray[i])
 			{
-				ReportError("aiScene::%s[%i] is NULL (aiScene::%s is %i)",
+				ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"] is NULL (aiScene::%s is "SIZE_T_FORMAT_SPECIFIER")",
 					firstName,i,secondName,size);
 			}
 			Validate(parray[i]);
 
 			// check whether there are duplicate names
-			for (unsigned int a = i+1; a < size;++a)
+			for (size_t a = i+1; a < size;++a)
 			{
 				if (parray[i]->mName == parray[a]->mName)
 				{
-					this->ReportError("aiScene::%s[%i] has the same name as "
-						"aiScene::%s[%i]",firstName, i,secondName, a);
+					this->ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"] has the same name as "
+						"aiScene::%s["SIZE_T_FORMAT_SPECIFIER"]",firstName, i,secondName, a);
 				}
 			}
 		}
@@ -179,21 +179,21 @@ inline void ValidateDSProcess::DoValidationEx(T** parray, unsigned int size,
 // ------------------------------------------------------------------------------------------------
 template <typename T>
 inline void ValidateDSProcess::DoValidationWithNameCheck(T** array, 
-	unsigned int size, const char* firstName, 
+	const size_t size, const char* firstName,
 	const char* secondName)
 {
 	// validate all entries
 	DoValidationEx(array,size,firstName,secondName);
 	
-	for (unsigned int i = 0; i < size;++i)
+	for (size_t i = 0; i < size;++i)
 	{
 		int res = HasNameMatch(array[i]->mName,mScene->mRootNode);
 		if (!res)	{
-			ReportError("aiScene::%s[%i] has no corresponding node in the scene graph (%s)",
+			ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"] has no corresponding node in the scene graph (%s)",
 				firstName,i,array[i]->mName.data);
 		}
 		else if (1 != res)	{
-			ReportError("aiScene::%s[%i]: there are more than one nodes with %s as name",
+			ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"]: there are more than one nodes with %s as name",
 				firstName,i,array[i]->mName.data);
 		}
 	}
