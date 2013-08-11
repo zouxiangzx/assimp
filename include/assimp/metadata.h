@@ -59,7 +59,7 @@ extern "C" {
 struct aiMetadata 
 {
 	/** Length of the mKeys and mValues arrays, respectively */
-	unsigned int mNumProperties;
+	size_t mNumProperties;
 
 	/** Arrays of keys, may not be NULL. Entries in this array may not be NULL as well. */
 	C_STRUCT aiString** mKeys;
