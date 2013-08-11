@@ -207,11 +207,11 @@ template <> struct MinMaxChooser<aiVertexWeight> {
  *  @param[out] min minimum value
  *  @param[out] max maximum value
  */
-template <typename T>
-inline void ArrayBounds(const T* in, unsigned int size, T& min, T& max) 
+template <typename T, typename SizeType>
+inline void ArrayBounds(const T* in, SizeType size, T& min, T& max)
 {
 	MinMaxChooser<T> ()(min,max);
-	for (unsigned int i = 0; i < size;++i) {
+	for (SizeType i = 0; i < size;++i) {
 		min = std::min(in[i],min);
 		max = std::max(in[i],max);
 	}
