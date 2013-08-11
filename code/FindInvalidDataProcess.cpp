@@ -244,15 +244,15 @@ bool EpsilonCompare<aiQuatKey>(const aiQuatKey& n, const aiQuatKey& s, float eps
 }
 
 // ------------------------------------------------------------------------------------------------
-template <typename T>
-inline bool AllIdentical(T* in, unsigned int num, float epsilon)
+template <typename T, typename SizeType>
+inline bool AllIdentical(T* in, SizeType num, float epsilon)
 {
 	if (num <= 1) {
 		return true;
 	}
 
 	if (epsilon > 0.f) {
-		for (unsigned int i = 0; i < num-1;++i) {
+		for (SizeType i = 0; i < num-1;++i) {
 
 			if (!EpsilonCompare(in[i],in[i+1],epsilon)) {
 				return false;
@@ -260,7 +260,7 @@ inline bool AllIdentical(T* in, unsigned int num, float epsilon)
 		}
 	}
 	else {
-		for (unsigned int i = 0; i < num-1;++i) {
+		for (SizeType i = 0; i < num-1;++i) {
 
 			if (in[i] != in[i+1]) {
 				return false;
