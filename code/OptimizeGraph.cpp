@@ -172,27 +172,27 @@ void OptimizeGraphProcess::CollectNewChildren(aiNode* nd, std::list<aiNode*>& no
 		if (join_master && join.size()) {
 			join_master->mName.length = sprintf(join_master->mName.data,"$MergedNode_%i",count_merged++);
 
-			unsigned int out_meshes = 0;
+			size_t out_meshes = 0;
 			for (std::list<aiNode*>::iterator it = join.begin(); it != join.end(); ++it) {
 				out_meshes += (*it)->mNumMeshes;
 			}
 			
 			// copy all mesh references in one array
 			if (out_meshes) {
-				unsigned int* meshes = new unsigned int[out_meshes+join_master->mNumMeshes], *tmp = meshes;
-				for (unsigned int n = 0; n < join_master->mNumMeshes;++n) {
+				size_t* meshes = new size_t[out_meshes+join_master->mNumMeshes], *tmp = meshes;
+				for (size_t n = 0; n < join_master->mNumMeshes;++n) {
 					*tmp++ = join_master->mMeshes[n];		
 				}
 
 				for (std::list<aiNode*>::iterator it = join.begin(); it != join.end(); ++it) {
-					for (unsigned int n = 0; n < (*it)->mNumMeshes; ++n) {
+					for (size_t n = 0; n < (*it)->mNumMeshes; ++n) {
 
 						*tmp = (*it)->mMeshes[n];
 						aiMesh* mesh = mScene->mMeshes[*tmp++];
 
 						// manually move the mesh into the right coordinate system
 						const aiMatrix3x3 IT = aiMatrix3x3( (*it)->mTransformation ).Inverse().Transpose(); 
-						for (unsigned int a = 0; a < mesh->mNumVertices; ++a) {
+						for (size_t a = 0; a < mesh->mNumVertices; ++a) {
 						
 							mesh->mVertices[a] *= (*it)->mTransformation;
 

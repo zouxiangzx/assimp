@@ -404,7 +404,7 @@ aiNode *Q3BSPFileImporter::CreateTopology( const Q3BSP::Q3BSPModel *pModel,
 
 	aiNode *pNode = new aiNode;
 	pNode->mNumMeshes = 1;
-	pNode->mMeshes = new unsigned int[ 1 ];
+	pNode->mMeshes = new size_t[ 1 ];
 
 	return pNode;
 }

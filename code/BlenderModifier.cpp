@@ -250,11 +250,11 @@ void  BlenderModifier_Mirror :: DoIt(aiNode& out, ConversionData& conv_data,  co
 
 		conv_data.meshes->push_back(mesh);
 	}
-	unsigned int* nind = new unsigned int[out.mNumMeshes*2];
+	size_t* nind = new size_t[out.mNumMeshes*2];
 
 	std::copy(out.mMeshes,out.mMeshes+out.mNumMeshes,nind);
 	std::transform(out.mMeshes,out.mMeshes+out.mNumMeshes,nind+out.mNumMeshes,
-		std::bind1st(std::plus< unsigned int >(),out.mNumMeshes));
+		std::bind1st(std::plus< size_t >(),out.mNumMeshes));
 
 	delete[] out.mMeshes;
 	out.mMeshes = nind;

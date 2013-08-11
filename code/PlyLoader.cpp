@@ -240,7 +240,7 @@ void PLYImporter::InternReadFile( const std::string& pFile,
 	// generate a simple node structure
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mNumMeshes = pScene->mNumMeshes;
-	pScene->mRootNode->mMeshes = new unsigned int[pScene->mNumMeshes];
+	pScene->mRootNode->mMeshes = new size_t[pScene->mNumMeshes];
 
 	for (unsigned int i = 0; i < pScene->mRootNode->mNumMeshes;++i)
 		pScene->mRootNode->mMeshes[i] = i;

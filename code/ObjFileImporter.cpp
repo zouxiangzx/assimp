@@ -231,19 +231,19 @@ aiNode *ObjFileImporter::createNodes(const ObjFile::Model* pModel, const ObjFile
 	// Create all nodes from the sub-objects stored in the current object
 	if ( !pObject->m_SubObjects.empty() )
 	{
-		size_t numChilds = pObject->m_SubObjects.size();
-		pNode->mNumChildren = static_cast<unsigned int>( numChilds );
+		const size_t numChilds = pObject->m_SubObjects.size();
+		pNode->mNumChildren = numChilds;
 		pNode->mChildren = new aiNode*[ numChilds ];
 		pNode->mNumMeshes = 1;
-		pNode->mMeshes = new unsigned int[ 1 ];
+		pNode->mMeshes = new size_t[ 1 ];
 	}
 
 	// Set mesh instances into scene- and node-instances
 	const size_t meshSizeDiff = MeshArray.size()- oldMeshSize;
 	if ( meshSizeDiff > 0 )
 	{
-		pNode->mMeshes = new unsigned int[ meshSizeDiff ];
-		pNode->mNumMeshes = static_cast<unsigned int>( meshSizeDiff );
+		pNode->mMeshes = new size_t[ meshSizeDiff ];
+		pNode->mNumMeshes = meshSizeDiff;
 		size_t index = 0;
 		for (size_t i = oldMeshSize; i < MeshArray.size(); i++)
 		{

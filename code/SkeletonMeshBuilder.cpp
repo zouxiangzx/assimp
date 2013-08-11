@@ -70,7 +70,7 @@ SkeletonMeshBuilder::SkeletonMeshBuilder( aiScene* pScene, aiNode* root, bool bK
 	pScene->mMeshes[0] = CreateMesh();
 	// and install it at the root node
 	root->mNumMeshes = 1;
-	root->mMeshes = new unsigned int[1];
+	root->mMeshes = new size_t[1];
 	root->mMeshes[0] = 0;
 
 	// create a dummy material for the mesh

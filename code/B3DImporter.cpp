@@ -506,7 +506,7 @@ aiNode *B3DImporter::ReadNODE( aiNode *parent ){
 	node->mTransformation=tform;
 
 	aiNodeAnim *nodeAnim=0;
-	vector<unsigned> meshes;
+	vector<size_t> meshes;
 	vector<aiNode*> children;
 
 	while( ChunkSize() ){

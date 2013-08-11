@@ -461,10 +461,10 @@ void Discreet3DSImporter::AddNodeToGraph(aiScene* pcSOut,aiNode* pcOut,
 		mInv.Inverse();mInvTransposed.Transpose();
 		aiVector3D pivot = pcIn->vPivot;
 
-		pcOut->mNumMeshes = (unsigned int)iArray.size();
-		pcOut->mMeshes = new unsigned int[iArray.size()];
-		for (unsigned int i = 0;i < iArray.size();++i)	{
-			const unsigned int iIndex = iArray[i];
+		pcOut->mNumMeshes = iArray.size();
+		pcOut->mMeshes = new size_t[iArray.size()];
+		for (size_t i = 0;i < iArray.size();++i)	{
+			const size_t iIndex = iArray[i];
 			aiMesh* const mesh = pcSOut->mMeshes[iIndex];
 
 			// Transform the vertices back into their local space
@@ -725,12 +725,12 @@ void Discreet3DSImporter::GenerateNodeGraph(aiScene* pcOut)
 		pcOut->mRootNode->mName.Set("<3DSDummyRoot>");
 
 		// Build dummy nodes for all meshes
-		unsigned int a = 0;
-		for (unsigned int i = 0; i < pcOut->mNumMeshes;++i,++a)
+		size_t a = 0;
+		for (size_t i = 0; i < pcOut->mNumMeshes;++i,++a)
 		{
 			aiNode* pcNode = pcOut->mRootNode->mChildren[a] = new aiNode();
 			pcNode->mParent = pcOut->mRootNode;
-			pcNode->mMeshes = new unsigned int[1];
+			pcNode->mMeshes = new size_t[1];
 			pcNode->mMeshes[0] = i;
 			pcNode->mNumMeshes = 1;
 
@@ -739,7 +739,7 @@ void Discreet3DSImporter::GenerateNodeGraph(aiScene* pcOut)
 		}
 
 		// Build dummy nodes for all cameras
-		for (unsigned int i = 0; i < (unsigned int )mScene->mCameras.size();++i,++a)
+		for (size_t i = 0; i < mScene->mCameras.size();++i,++a)
 		{
 			aiNode* pcNode = pcOut->mRootNode->mChildren[a] = new aiNode();
 			pcNode->mParent = pcOut->mRootNode;
@@ -749,7 +749,7 @@ void Discreet3DSImporter::GenerateNodeGraph(aiScene* pcOut)
 		}
 
 		// Build dummy nodes for all lights
-		for (unsigned int i = 0; i < (unsigned int )mScene->mLights.size();++i,++a)
+		for (size_t i = 0; i < mScene->mLights.size();++i,++a)
 		{
 			aiNode* pcNode = pcOut->mRootNode->mChildren[a] = new aiNode();
 			pcNode->mParent = pcOut->mRootNode;

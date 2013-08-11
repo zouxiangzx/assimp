@@ -834,10 +834,10 @@ void IRRImporter::GenerateGraph(Node* root,aiNode* rootOut ,aiScene* scene,
 	// we'll also need to attach it to the node
 	if (oldMeshSize != (unsigned int) meshes.size())	{
 
-		rootOut->mNumMeshes = (unsigned int)meshes.size() - oldMeshSize;
-		rootOut->mMeshes    = new unsigned int[rootOut->mNumMeshes];
+		rootOut->mNumMeshes = meshes.size() - oldMeshSize;
+		rootOut->mMeshes    = new size_t[rootOut->mNumMeshes];
 
-		for (unsigned int a = 0; a  < rootOut->mNumMeshes;++a)	{
+		for (size_t a = 0; a  < rootOut->mNumMeshes;++a)	{
 			rootOut->mMeshes[a] = oldMeshSize+a;
 		}
 	}

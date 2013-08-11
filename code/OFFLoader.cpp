@@ -206,7 +206,7 @@ void OFFImporter::InternReadFile( const std::string& pFile,
 	// generate the output node graph
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mName.Set("<OFFRoot>");
-	pScene->mRootNode->mMeshes = new unsigned int [pScene->mRootNode->mNumMeshes = 1];
+	pScene->mRootNode->mMeshes = new size_t [pScene->mRootNode->mNumMeshes = 1];
 	pScene->mRootNode->mMeshes[0] = 0;
 
 	// generate a default material

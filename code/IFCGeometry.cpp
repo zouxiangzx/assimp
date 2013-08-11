@@ -800,7 +800,7 @@ void AssignAddedMeshes(std::vector<unsigned int>& mesh_indices,aiNode* nd,
 		const size_t size = std::distance(mesh_indices.begin(),it_end);
 
 		nd->mNumMeshes = size;
-		nd->mMeshes = new unsigned int[nd->mNumMeshes];
+		nd->mMeshes = new size_t[nd->mNumMeshes];
 		for(unsigned int i = 0; i < nd->mNumMeshes; ++i) {
 			nd->mMeshes[i] = mesh_indices[i];
 		}

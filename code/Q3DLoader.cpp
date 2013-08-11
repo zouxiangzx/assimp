@@ -577,8 +577,8 @@ outer:
 
 	// Now we need to attach the meshes to the root node of the scene
 	pScene->mRootNode->mNumMeshes = pScene->mNumMeshes;
-	pScene->mRootNode->mMeshes = new unsigned int [pScene->mNumMeshes];
-	for (unsigned int i = 0; i < pScene->mNumMeshes;++i)
+	pScene->mRootNode->mMeshes = new size_t [pScene->mNumMeshes];
+	for (size_t i = 0; i < pScene->mNumMeshes;++i)
 		pScene->mRootNode->mMeshes[i] = i;
 
 	/*pScene->mRootNode->mTransformation *= aiMatrix4x4(

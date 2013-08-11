@@ -436,7 +436,7 @@ void MDLImporter::InternReadFile_Quake1( )
 	// there won't be more than one mesh inside the file
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mNumMeshes = 1;
-	pScene->mRootNode->mMeshes = new unsigned int[1];
+	pScene->mRootNode->mMeshes = new size_t[1];
 	pScene->mRootNode->mMeshes[0] = 0;
 	pScene->mNumMeshes = 1;
 	pScene->mMeshes = new aiMesh*[1];
@@ -624,7 +624,7 @@ void MDLImporter::InternReadFile_3DGS_MDL345( )
 	// there won't be more than one mesh inside the file
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mNumMeshes = 1;
-	pScene->mRootNode->mMeshes = new unsigned int[1];
+	pScene->mRootNode->mMeshes = new size_t[1];
 	pScene->mRootNode->mMeshes[0] = 0;
 	pScene->mNumMeshes = 1;
 	pScene->mMeshes = new aiMesh*[1];
@@ -1500,7 +1500,7 @@ void MDLImporter::InternReadFile_3DGS_MDL7( )
 
 	// now we need to build a final mesh list
 	for (uint32_t i = 0; i < pcHeader->groups_num;++i)
-		pScene->mNumMeshes += (unsigned int)avOutList[i].size();
+		pScene->mNumMeshes += avOutList[i].size();
 	
 	pScene->mMeshes = new aiMesh*[pScene->mNumMeshes];	{
 		unsigned int p = 0,q = 0;
@@ -1518,8 +1518,8 @@ void MDLImporter::InternReadFile_3DGS_MDL7( )
 			if (avOutList[i].empty())continue;
 
 			aiNode* const pcNode = pScene->mRootNode->mChildren[p] = new aiNode();
-			pcNode->mNumMeshes = (unsigned int)avOutList[i].size();
-			pcNode->mMeshes = new unsigned int[pcNode->mNumMeshes];
+			pcNode->mNumMeshes = avOutList[i].size();
+			pcNode->mMeshes = new size_t[pcNode->mNumMeshes];
 			pcNode->mParent = this->pScene->mRootNode;
 			for (unsigned int a = 0; a < pcNode->mNumMeshes;++a)
 				pcNode->mMeshes[a] = q + a;

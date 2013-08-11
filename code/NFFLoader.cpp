@@ -1067,9 +1067,9 @@ void NFFImporter::InternReadFile( const std::string& pFile,
 	root->mNumMeshes = pScene->mNumMeshes-numNamed;
 
 	aiNode** ppcChildren = NULL;
-	unsigned int* pMeshes = NULL;
+	size_t* pMeshes = NULL;
 	if (root->mNumMeshes)
-		pMeshes = root->mMeshes = new unsigned int[root->mNumMeshes];
+		pMeshes = root->mMeshes = new size_t[root->mNumMeshes];
 	if (root->mNumChildren)
 		ppcChildren = root->mChildren = new aiNode*[root->mNumChildren];
 
@@ -1138,7 +1138,7 @@ void NFFImporter::InternReadFile( const std::string& pFile,
 			aiNode* const node = *ppcChildren = new aiNode();
 			node->mParent = root;
 			node->mNumMeshes = 1;
-			node->mMeshes = new unsigned int[1];
+			node->mMeshes = new size_t[1];
 			node->mMeshes[0] = m;
 			node->mName.Set(src.name);
 

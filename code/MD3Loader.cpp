@@ -1014,14 +1014,14 @@ void MD3Importer::InternReadFile( const std::string& pFile,
 	// Now we need to generate an empty node graph
 	pScene->mRootNode = new aiNode("<MD3Root>");
 	pScene->mRootNode->mNumMeshes = pScene->mNumMeshes;
-	pScene->mRootNode->mMeshes = new unsigned int[pScene->mNumMeshes];
+	pScene->mRootNode->mMeshes = new size_t[pScene->mNumMeshes];
 
 	// Attach tiny children for all tags
 	if (pcHeader->NUM_TAGS) {
 		pScene->mRootNode->mNumChildren = pcHeader->NUM_TAGS;
 		pScene->mRootNode->mChildren = new aiNode*[pcHeader->NUM_TAGS];
 
-		for (unsigned int i = 0; i < pcHeader->NUM_TAGS; ++i, ++pcTags) {
+		for (size_t i = 0; i < pcHeader->NUM_TAGS; ++i, ++pcTags) {
 
 			aiNode* nd = pScene->mRootNode->mChildren[i] = new aiNode();
 			nd->mName.Set((const char*)pcTags->NAME);

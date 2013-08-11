@@ -569,7 +569,7 @@ void MS3DImporter::InternReadFile( const std::string& pFile,
 #ifdef ASSIMP_BUILD_MS3D_ONE_NODE_PER_MESH
 	rt->mChildren = new aiNode*[rt->mNumChildren=pScene->mNumMeshes+(joints.size()?1:0)]();
 
-	for (unsigned int i = 0; i < pScene->mNumMeshes; ++i) {
+	for (size_t i = 0; i < pScene->mNumMeshes; ++i) {
 		aiNode* nd = rt->mChildren[i] = new aiNode();
 
 		const TempGroup& g = groups[i];
@@ -581,11 +581,11 @@ void MS3DImporter::InternReadFile( const std::string& pFile,
 		nd->mName.Append(g.name);
 		nd->mParent = rt;
 
-		nd->mMeshes = new unsigned int[nd->mNumMeshes = 1];
+		nd->mMeshes = new size_t[nd->mNumMeshes = 1];
 		nd->mMeshes[0] = i;
 	}
 #else
-	rt->mMeshes = new unsigned int[pScene->mNumMeshes];
+	rt->mMeshes = new size_t[pScene->mNumMeshes];
 	for (unsigned int i = 0; i < pScene->mNumMeshes; ++i) {
 		rt->mMeshes[rt->mNumMeshes++] = i;
 	}

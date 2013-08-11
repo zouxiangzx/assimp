@@ -350,12 +350,12 @@ void UnrealImporter::InternReadFile( const std::string& pFile,
 	pScene->mMaterials = new aiMaterial*[pScene->mNumMaterials = pScene->mNumMeshes];
 
 	nd->mNumMeshes  = pScene->mNumMeshes;
-	nd->mMeshes = new unsigned int[nd->mNumMeshes];
-	for (unsigned int i = 0; i < pScene->mNumMeshes;++i) {
+	nd->mMeshes = new size_t[nd->mNumMeshes];
+	for (size_t i = 0; i < pScene->mNumMeshes;++i) {
 		aiMesh* m = pScene->mMeshes[i] =  new aiMesh();
 		m->mPrimitiveTypes = aiPrimitiveType_TRIANGLE;
 
-		const unsigned int num = materials[i].numFaces;
+		const size_t num = materials[i].numFaces;
 		m->mFaces            = new aiFace     [num];
 		m->mVertices         = new aiVector3D [num*3];
 		m->mTextureCoords[0] = new aiVector3D [num*3];

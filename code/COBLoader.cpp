@@ -378,8 +378,8 @@ aiNode* COBImporter::BuildNodes(const Node& root,const Scene& scin,aiScene* fill
 
 	// add meshes
 	if (nd->mNumMeshes) { // mMeshes must be NULL if count is 0
-		nd->mMeshes = new unsigned int[nd->mNumMeshes];
-		for(unsigned int i = 0; i < nd->mNumMeshes;++i) {
+		nd->mMeshes = new size_t[nd->mNumMeshes];
+		for(size_t i = 0; i < nd->mNumMeshes;++i) {
 			nd->mMeshes[i] = fill->mNumMeshes-i-1;
 		}
 	}

@@ -262,7 +262,7 @@ void RAWImporter::InternReadFile( const std::string& pFile,
 
 		// add all meshes
 		node->mNumMeshes = (unsigned int)(*it).meshes.size();
-		unsigned int* pi = node->mMeshes = new unsigned int[ node->mNumMeshes ];
+		size_t* pi = node->mMeshes = new size_t[ node->mNumMeshes ];
 		for (std::vector< MeshInformation >::iterator it2 = (*it).meshes.begin(),
 			end2 = (*it).meshes.end(); it2 != end2; ++it2)
 		{

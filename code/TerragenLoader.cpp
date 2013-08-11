@@ -247,7 +247,7 @@ void TerragenImporter::InternReadFile( const std::string& pFile,
 			}
 
 			// Add the mesh to the root node
-			root->mMeshes = new unsigned int[root->mNumMeshes = 1];
+			root->mMeshes = new size_t[root->mNumMeshes = 1];
 			root->mMeshes[0] = 0;
 		}
 

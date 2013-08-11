@@ -474,7 +474,7 @@ void SMDImporter::CreateOutputNodes()
 	{
 		// create one root node that renders all meshes
 		pScene->mRootNode->mNumMeshes = pScene->mNumMeshes;
-		pScene->mRootNode->mMeshes = new unsigned int[pScene->mNumMeshes];
+		pScene->mRootNode->mMeshes = new size_t[pScene->mNumMeshes];
 		for (unsigned int i = 0; i < pScene->mNumMeshes;++i)
 			pScene->mRootNode->mMeshes[i] = i;
 	}

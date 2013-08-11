@@ -150,8 +150,8 @@ void OptimizeMeshesProcess::Execute( aiScene* pScene)
 // Process meshes for a single node
 void OptimizeMeshesProcess::ProcessNode( aiNode* pNode)
 {
-	for (unsigned int i = 0; i < pNode->mNumMeshes;++i) {
-		unsigned int& im = pNode->mMeshes[i];
+	for (size_t i = 0; i < pNode->mNumMeshes;++i) {
+		size_t& im = pNode->mMeshes[i];
 
 		if (meshes[im].instance_cnt > 1) {
 			im = meshes[im].output_id;
@@ -161,8 +161,8 @@ void OptimizeMeshesProcess::ProcessNode( aiNode* pNode)
 			unsigned int verts = 0, faces = 0;
 
 			// Find meshes to merge with us
-			for (unsigned int a = i+1; a < pNode->mNumMeshes;++a) {
-				register unsigned int am = pNode->mMeshes[a];
+			for (size_t a = i+1; a < pNode->mNumMeshes;++a) {
+				register const size_t am = pNode->mMeshes[a];
 				if (meshes[am].instance_cnt == 1 && CanJoin(im,am,verts,faces)) {
 
 					merge_list.push_back(mScene->mMeshes[am]);

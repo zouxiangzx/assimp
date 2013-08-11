@@ -294,7 +294,7 @@ void NDOImporter::InternReadFile( const std::string& pFile,
 		if (mesh->mNumVertices) {
 			pScene->mMeshes[pScene->mNumMeshes] = mesh;
 
-			(nd->mMeshes = new unsigned int[nd->mNumMeshes=1])[0]=pScene->mNumMeshes++;
+			(nd->mMeshes = new size_t[nd->mNumMeshes=1])[0]=pScene->mNumMeshes++;
 		}
 	}
 }

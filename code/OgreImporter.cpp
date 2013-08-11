@@ -231,9 +231,9 @@ void OgreImporter::InternReadFile(const std::string &pFile, aiScene *pScene, Ass
 	m_CurrentScene->mRootNode=new aiNode("root");
 
 	//link the meshs with the root node:
-	m_CurrentScene->mRootNode->mMeshes=new unsigned int[SubMeshes.size()];
+	m_CurrentScene->mRootNode->mMeshes=new size_t[SubMeshes.size()];
 	m_CurrentScene->mRootNode->mNumMeshes=SubMeshes.size();
-	for(unsigned int i=0; i<SubMeshes.size(); ++i)
+	for(size_t i=0; i<SubMeshes.size(); ++i)
 		m_CurrentScene->mRootNode->mMeshes[i]=i;
 
 	

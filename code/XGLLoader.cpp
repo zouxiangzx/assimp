@@ -432,19 +432,19 @@ aiNode* XGLImporter::ReadObject(TempScope& scope, bool skipFirst, const char* cl
 	}
 
 	// link meshes to node
-	nd->mNumMeshes = static_cast<unsigned int>(meshes.size());
+	nd->mNumMeshes = meshes.size();
 	if (nd->mNumMeshes) {
-		nd->mMeshes = new unsigned int[nd->mNumMeshes]();
-		for(unsigned int i = 0; i < nd->mNumMeshes; ++i) {
+		nd->mMeshes = new size_t[nd->mNumMeshes]();
+		for(size_t i = 0; i < nd->mNumMeshes; ++i) {
 			nd->mMeshes[i] = meshes[i];
 		}
 	}
 
 	// link children to parent
-	nd->mNumChildren = static_cast<unsigned int>(children.size());
+	nd->mNumChildren = children.size();
 	if (nd->mNumChildren) {
 		nd->mChildren = new aiNode*[nd->mNumChildren]();
-		for(unsigned int i = 0; i < nd->mNumChildren; ++i) {
+		for(size_t i = 0; i < nd->mNumChildren; ++i) {
 			nd->mChildren[i] = children[i];
 			children[i]->mParent = nd;
 		}

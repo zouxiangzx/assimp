@@ -391,7 +391,7 @@ void MD5Importer::LoadMD5MeshFile ()
 
 	//  storage for node mesh indices
 	pcNode->mNumMeshes = pScene->mNumMeshes;
-	pcNode->mMeshes = new unsigned int[pcNode->mNumMeshes];
+	pcNode->mMeshes = new size_t[pcNode->mNumMeshes];
 	for (unsigned int m = 0; m < pcNode->mNumMeshes;++m)
 		pcNode->mMeshes[m] = m;
 

@@ -422,7 +422,7 @@ void MDCImporter::InternReadFile(
 		pScene->mRootNode = new aiNode();
 		pScene->mRootNode->mName.Set(std::string((const char*)pScene->mMeshes[0]->mTextureCoords[3]));
 		pScene->mRootNode->mNumMeshes = 1;
-		pScene->mRootNode->mMeshes = new unsigned int[1];
+		pScene->mRootNode->mMeshes = new size_t[1];
 		pScene->mRootNode->mMeshes[0] = 0;
 	}
 	else
@@ -437,7 +437,7 @@ void MDCImporter::InternReadFile(
 			pcNode->mParent = pScene->mRootNode;
 			pcNode->mName.Set(std::string((const char*)pScene->mMeshes[i]->mTextureCoords[3]));
 			pcNode->mNumMeshes = 1;
-			pcNode->mMeshes = new unsigned int[1];
+			pcNode->mMeshes = new size_t[1];
 			pcNode->mMeshes[0] = i;
 		}
 	}

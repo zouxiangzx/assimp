@@ -430,17 +430,17 @@ void DXFImporter::GenerateHierarchy(aiScene* pScene, DXF::FileData& /*output*/)
 	pScene->mRootNode->mName.Set("<DXF_ROOT>");
 
 	if (1 == pScene->mNumMeshes)	{
-		pScene->mRootNode->mMeshes = new unsigned int[ pScene->mRootNode->mNumMeshes = 1 ];
+		pScene->mRootNode->mMeshes = new size_t[ pScene->mRootNode->mNumMeshes = 1 ];
 		pScene->mRootNode->mMeshes[0] = 0;
 	}
 	else
 	{
 		pScene->mRootNode->mChildren = new aiNode*[ pScene->mRootNode->mNumChildren = pScene->mNumMeshes ];
-		for (unsigned int m = 0; m < pScene->mRootNode->mNumChildren;++m)	{
+		for (size_t m = 0; m < pScene->mRootNode->mNumChildren;++m)	{
 			aiNode* p = pScene->mRootNode->mChildren[m] = new aiNode();
 			p->mName = pScene->mMeshes[m]->mName;
 
-			p->mMeshes = new unsigned int[p->mNumMeshes = 1];
+			p->mMeshes = new size_t[p->mNumMeshes = 1];
 			p->mMeshes[0] = m;
 			p->mParent = pScene->mRootNode;
 		}

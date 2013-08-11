@@ -1004,8 +1004,8 @@ aiNode* BlenderImporter::ConvertNode(const Scene& in, const Object* obj, Convers
 			ConvertMesh(in,obj,static_cast<const Mesh*>(obj->data.get()),conv_data,conv_data.meshes);
 
 			if (conv_data.meshes->size() > old) {
-				node->mMeshes = new unsigned int[node->mNumMeshes = static_cast<unsigned int>(conv_data.meshes->size()-old)];
-				for (unsigned int i = 0; i < node->mNumMeshes; ++i) {
+				node->mMeshes = new size_t[node->mNumMeshes = static_cast<unsigned int>(conv_data.meshes->size()-old)];
+				for (size_t i = 0; i < node->mNumMeshes; ++i) {
 					node->mMeshes[i] = i + old;
 				}
 			}}

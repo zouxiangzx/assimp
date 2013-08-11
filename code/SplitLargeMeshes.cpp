@@ -129,8 +129,8 @@ void SplitLargeMeshesProcess_Triangle::UpdateNode(aiNode* pcNode,
 
 	// now build the new list
 	delete pcNode->mMeshes;
-	pcNode->mNumMeshes = (unsigned int)aiEntries.size();
-	pcNode->mMeshes = new unsigned int[pcNode->mNumMeshes];
+	pcNode->mNumMeshes = aiEntries.size();
+	pcNode->mMeshes = new size_t [pcNode->mNumMeshes];
 
 	for (unsigned int b = 0; b < pcNode->mNumMeshes;++b)
 		pcNode->mMeshes[b] = aiEntries[b];

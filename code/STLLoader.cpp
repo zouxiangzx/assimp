@@ -131,7 +131,7 @@ void STLImporter::InternReadFile( const std::string& pFile,
 	// allocate a single node
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mNumMeshes = 1;
-	pScene->mRootNode->mMeshes = new unsigned int[1];
+	pScene->mRootNode->mMeshes = new size_t[1];
 	pScene->mRootNode->mMeshes[0] = 0;
 
 	bool bMatClr = false;

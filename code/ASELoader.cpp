@@ -498,8 +498,8 @@ void ASEImporter::AddMeshes(const ASE::BaseNode* snode,aiNode* node)
 	}
 
 	if(node->mNumMeshes)	{
-		node->mMeshes = new unsigned int[node->mNumMeshes];
-		for (unsigned int i = 0, p = 0; i < pcScene->mNumMeshes;++i)	{
+		node->mMeshes = new size_t[node->mNumMeshes];
+		for (size_t i = 0, p = 0; i < pcScene->mNumMeshes;++i)	{
 
 			const aiMesh* pcMesh  = pcScene->mMeshes[i];
 			const ASE::Mesh* mesh = (const ASE::Mesh*)pcMesh->mColors[2];

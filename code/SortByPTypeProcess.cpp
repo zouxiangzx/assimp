@@ -104,12 +104,12 @@ void UpdateNodes(const std::vector<unsigned int>& replaceMeshIndex, aiNode* node
 		else
 		{
 			// Try to reuse the old array if possible
-			unsigned int* newMeshes = (newSize > node->mNumMeshes 
-				? new unsigned int[newSize] : node->mMeshes);
+			size_t* newMeshes = (newSize > node->mNumMeshes
+				? new size_t[newSize] : node->mMeshes);
 
-			for (unsigned int m = 0; m< node->mNumMeshes; ++m)
+			for (size_t m = 0; m< node->mNumMeshes; ++m)
 			{
-				unsigned int add = node->mMeshes[m]<<2;
+				size_t add = node->mMeshes[m]<<2;
 				for (unsigned int i = 0; i < 4;++i)
 				{
 					if (UINT_MAX != replaceMeshIndex[add+i])

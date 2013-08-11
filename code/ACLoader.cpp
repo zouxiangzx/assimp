@@ -544,7 +544,7 @@ aiNode* AC3DImporter::ConvertObjectSection(Object& object,
 					needMat[idx].second += (unsigned int)(*it).entries.size();
 				};
 			}
-			unsigned int* pip = node->mMeshes = new unsigned int[node->mNumMeshes];
+			size_t* pip = node->mMeshes = new size_t[node->mNumMeshes];
 			unsigned int mat = 0;
 			const size_t oldm = meshes.size();
 			for (MatTable::const_iterator cit = needMat.begin(), cend = needMat.end();
@@ -553,11 +553,11 @@ aiNode* AC3DImporter::ConvertObjectSection(Object& object,
 				if (!(*cit).first)continue;
 
 				// allocate a new aiMesh object
-				*pip++ = (unsigned int)meshes.size();
+				*pip++ = meshes.size();
 				aiMesh* mesh = new aiMesh();
 				meshes.push_back(mesh);
 
-				mesh->mMaterialIndex = (unsigned int)outMaterials.size();
+				mesh->mMaterialIndex = outMaterials.size();
 				outMaterials.push_back(new aiMaterial());
 				ConvertMaterial(object, materials[mat], *outMaterials.back());
 
@@ -589,7 +589,7 @@ aiNode* AC3DImporter::ConvertObjectSection(Object& object,
 						if (!type)
 						{
 							aiFace& face = *faces++;
-							if((face.mNumIndices = (unsigned int)src.entries.size()))
+							if((face.mNumIndices = src.entries.size()))
 							{
 								face.mIndices = new size_t[face.mNumIndices];
 								for (unsigned int i = 0; i < face.mNumIndices;++i,++vertices)

@@ -502,7 +502,7 @@ void IRRMeshImporter::InternReadFile( const std::string& pFile,
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mName.Set("<IRRMesh>");
 	pScene->mRootNode->mNumMeshes = pScene->mNumMeshes;
-	pScene->mRootNode->mMeshes = new unsigned int[pScene->mNumMeshes];
+	pScene->mRootNode->mMeshes = new size_t[pScene->mNumMeshes];
 
 	for (unsigned int i = 0; i < pScene->mNumMeshes;++i)
 		pScene->mRootNode->mMeshes[i] = i;

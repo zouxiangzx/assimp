@@ -419,7 +419,7 @@ void DeboneProcess::UpdateNode(aiNode* pNode) const
 	pNode->mNumMeshes = newMeshList.size();
 
 	if(pNode->mNumMeshes)	{
-		pNode->mMeshes = new unsigned int[pNode->mNumMeshes];
+		pNode->mMeshes = new size_t[pNode->mNumMeshes];
 		std::copy( newMeshList.begin(), newMeshList.end(), pNode->mMeshes);
 	}
 

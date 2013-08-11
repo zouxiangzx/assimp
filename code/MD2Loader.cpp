@@ -230,7 +230,7 @@ void MD2Importer::InternReadFile( const std::string& pFile,
 	pScene->mNumMaterials = 1;
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mNumMeshes = 1;
-	pScene->mRootNode->mMeshes = new unsigned int[1];
+	pScene->mRootNode->mMeshes = new size_t[1];
 	pScene->mRootNode->mMeshes[0] = 0;
 	pScene->mMaterials = new aiMaterial*[1];
 	pScene->mMaterials[0] = new aiMaterial();

@@ -110,7 +110,7 @@ struct aiNode
 	size_t mNumMeshes;
 
 	/** The meshes of this node. Each entry is an index into the mesh */
-	unsigned int* mMeshes;
+	size_t* mMeshes;
 
 	/** Metadata associated with this node or NULL if there is no metadata.
 	  *  Whether any metadata is generated depends on the source file format. See the

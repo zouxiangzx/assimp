@@ -620,7 +620,7 @@ void PretransformVertices::Execute( aiScene* pScene)
 		if (1 == pScene->mNumMeshes && !pScene->mNumLights && !pScene->mNumCameras)
 		{
 			pScene->mRootNode->mNumMeshes = 1;
-			pScene->mRootNode->mMeshes = new unsigned int[1];
+			pScene->mRootNode->mMeshes = new size_t[1];
 			pScene->mRootNode->mMeshes[0] = 0;
 		}
 		else
@@ -637,7 +637,7 @@ void PretransformVertices::Execute( aiScene* pScene)
 
 				// setup mesh indices
 				pcNode->mNumMeshes = 1;
-				pcNode->mMeshes = new unsigned int[1];
+				pcNode->mMeshes = new size_t[1];
 				pcNode->mMeshes[0] = i;
 			}
 			// generate light nodes

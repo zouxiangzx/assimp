@@ -418,7 +418,7 @@ void LWOImporter::InternReadFile( const std::string& pFile,
 			pcNode->mNumMeshes = num;
 
 			if (pcNode->mNumMeshes) {
-				pcNode->mMeshes = new unsigned int[pcNode->mNumMeshes];
+				pcNode->mMeshes = new size_t[pcNode->mNumMeshes];
 				for (unsigned int p = 0; p < pcNode->mNumMeshes;++p)
 					pcNode->mMeshes[p] = p + meshStart;
 			}

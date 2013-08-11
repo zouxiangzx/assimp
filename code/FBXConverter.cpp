@@ -732,7 +732,7 @@ private:
 	{
 		const std::vector<const Geometry*>& geos = model.GetGeometry();
 
-		std::vector<unsigned int> meshes;
+		std::vector<size_t> meshes;
 		meshes.reserve(geos.size());
 
 		BOOST_FOREACH(const Geometry* geo, geos) {
@@ -748,7 +748,7 @@ private:
 		}
 
 		if(meshes.size()) {
-			nd.mMeshes = new unsigned int[meshes.size()]();
+			nd.mMeshes = new size_t[meshes.size()]();
 			nd.mNumMeshes = meshes.size();
 
 			std::swap_ranges(meshes.begin(),meshes.end(),nd.mMeshes);

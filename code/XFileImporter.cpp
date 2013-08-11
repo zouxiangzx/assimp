@@ -408,7 +408,7 @@ void XFileImporter::CreateMeshes( aiScene* pScene, aiNode* pNode, const std::vec
 
 	// allocate mesh index array in the node
 	pNode->mNumMeshes = meshes.size();
-	pNode->mMeshes = new unsigned int[pNode->mNumMeshes];
+	pNode->mMeshes = new size_t[pNode->mNumMeshes];
 
 	// store all meshes in the mesh library of the scene and store their indices in the node
 	for( size_t a = 0; a < meshes.size(); a++)

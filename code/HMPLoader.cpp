@@ -257,7 +257,7 @@ void HMPImporter::InternReadFile_HMP5( )
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mName.Set("terrain_root");
 	pScene->mRootNode->mNumMeshes = 1;
-	pScene->mRootNode->mMeshes = new unsigned int[1];
+	pScene->mRootNode->mMeshes = new size_t[1];
 	pScene->mRootNode->mMeshes[0] = 0;
 }
 
@@ -326,7 +326,7 @@ void HMPImporter::InternReadFile_HMP7( )
 	pScene->mRootNode = new aiNode();
 	pScene->mRootNode->mName.Set("terrain_root");
 	pScene->mRootNode->mNumMeshes = 1;
-	pScene->mRootNode->mMeshes = new unsigned int[1];
+	pScene->mRootNode->mMeshes = new size_t[1];
 	pScene->mRootNode->mMeshes[0] = 0;
 }
 
