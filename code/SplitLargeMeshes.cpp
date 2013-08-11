@@ -302,10 +302,10 @@ void SplitLargeMeshesProcess_Triangle::SplitMesh(
 				}
 
 				// and copy the contents of the old array, offset by current base
-				for (unsigned int v = 0; v < iNumIndices;++v)
+				for (size_t v = 0; v < iNumIndices;++v)
 				{
-					unsigned int iIndex = pi[v];
-					unsigned int iIndexOut = iCurrent++;
+					size_t iIndex = pi[v];
+					size_t iIndexOut = iCurrent++;
 					piOut[v] = iIndexOut;
 
 					// copy positions
