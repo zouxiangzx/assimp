@@ -167,11 +167,11 @@ Importer::Importer()
 Importer::~Importer()
 {
 	// Delete all import plugins
-	for( unsigned int a = 0; a < pimpl->mImporter.size(); a++)
+	for( size_t a = 0; a < pimpl->mImporter.size(); a++)
 		delete pimpl->mImporter[a];
 
 	// Delete all post-processing plug-ins
-	for( unsigned int a = 0; a < pimpl->mPostProcessingSteps.size(); a++)
+	for( size_t a = 0; a < pimpl->mPostProcessingSteps.size(); a++)
 		delete pimpl->mPostProcessingSteps[a];
 
 	// Delete the assigned IO and progress handler
@@ -610,7 +610,7 @@ const aiScene* Importer::ReadFile( const char* _pFile, unsigned int pFlags)
 
 		// Find an worker class which can handle the file
 		BaseImporter* imp = NULL;
-		for( unsigned int a = 0; a < pimpl->mImporter.size(); a++)	{
+		for( size_t a = 0; a < pimpl->mImporter.size(); a++)	{
 
 			if( pimpl->mImporter[a]->CanRead( pFile, pimpl->mIOHandler, false)) {
 				imp = pimpl->mImporter[a];
@@ -623,7 +623,7 @@ const aiScene* Importer::ReadFile( const char* _pFile, unsigned int pFlags)
 			const std::string::size_type s = pFile.find_last_of('.');
 			if (s != std::string::npos) {
 				DefaultLogger::get()->info("File extension not known, trying signature-based detection");
-				for( unsigned int a = 0; a < pimpl->mImporter.size(); a++)	{
+				for( size_t a = 0; a < pimpl->mImporter.size(); a++)	{
 
 					if( pimpl->mImporter[a]->CanRead( pFile, pimpl->mIOHandler, true)) {
 						imp = pimpl->mImporter[a];
@@ -764,7 +764,7 @@ const aiScene* Importer::ApplyPostProcessing(unsigned int pFlags)
 #endif // ! DEBUG
 
 	boost::scoped_ptr<Profiler> profiler(GetPropertyInteger(AI_CONFIG_GLOB_MEASURE_TIME,0)?new Profiler():NULL);
-	for( unsigned int a = 0; a < pimpl->mPostProcessingSteps.size(); a++)	{
+	for( size_t a = 0; a < pimpl->mPostProcessingSteps.size(); a++)	{
 
 		BaseProcess* process = pimpl->mPostProcessingSteps[a];
 		if( process->IsActive( pFlags))	{
@@ -966,10 +966,10 @@ const std::string& Importer::GetPropertyString(const char* szName,
 inline void AddNodeWeight(unsigned int& iScene,const aiNode* pcNode)
 {
 	iScene += sizeof(aiNode);
-	iScene += sizeof(unsigned int) * pcNode->mNumMeshes;
+	iScene += sizeof(size_t) * pcNode->mNumMeshes;
 	iScene += sizeof(void*) * pcNode->mNumChildren;
 	
-	for (unsigned int i = 0; i < pcNode->mNumChildren;++i) {
+	for (size_t i = 0; i < pcNode->mNumChildren;++i) {
 		AddNodeWeight(iScene,pcNode->mChildren[i]);
 	}
 }
@@ -989,7 +989,7 @@ void Importer::GetMemoryRequirements(aiMemoryInfo& in) const
 	in.total = sizeof(aiScene);
 
 	// add all meshes
-	for (unsigned int i = 0; i < mScene->mNumMeshes;++i)
+	for (size_t i = 0; i < mScene->mNumMeshes;++i)
 	{
 		in.meshes += sizeof(aiMesh);
 		if (mScene->mMeshes[i]->HasPositions()) {
@@ -1018,17 +1018,17 @@ void Importer::GetMemoryRequirements(aiMemoryInfo& in) const
 		}
 		if (mScene->mMeshes[i]->HasBones()) {
 			in.meshes += sizeof(void*) * mScene->mMeshes[i]->mNumBones;
-			for (unsigned int p = 0; p < mScene->mMeshes[i]->mNumBones;++p) {
+			for (size_t p = 0; p < mScene->mMeshes[i]->mNumBones;++p) {
 				in.meshes += sizeof(aiBone);
 				in.meshes += mScene->mMeshes[i]->mBones[p]->mNumWeights * sizeof(aiVertexWeight);
 			}
 		}
-		in.meshes += (sizeof(aiFace) + 3 * sizeof(unsigned int))*mScene->mMeshes[i]->mNumFaces;
+		in.meshes += (sizeof(aiFace) + 3 * sizeof(size_t))*mScene->mMeshes[i]->mNumFaces;
 	}
     in.total += in.meshes;
 
 	// add all embedded textures
-	for (unsigned int i = 0; i < mScene->mNumTextures;++i) {
+	for (size_t i = 0; i < mScene->mNumTextures;++i) {
 		const aiTexture* pc = mScene->mTextures[i];
 		in.textures += sizeof(aiTexture);
 		if (pc->mHeight) {
@@ -1039,12 +1039,12 @@ void Importer::GetMemoryRequirements(aiMemoryInfo& in) const
 	in.total += in.textures;
 
 	// add all animations
-	for (unsigned int i = 0; i < mScene->mNumAnimations;++i) {
+	for (size_t i = 0; i < mScene->mNumAnimations;++i) {
 		const aiAnimation* pc = mScene->mAnimations[i];
 		in.animations += sizeof(aiAnimation);
 
 		// add all bone anims
-		for (unsigned int a = 0; a < pc->mNumChannels; ++a) {
+		for (size_t a = 0; a < pc->mNumChannels; ++a) {
 			const aiNodeAnim* pc2 = pc->mChannels[i];
 			in.animations += sizeof(aiNodeAnim);
 			in.animations += pc2->mNumPositionKeys * sizeof(aiVectorKey);
@@ -1063,12 +1063,12 @@ void Importer::GetMemoryRequirements(aiMemoryInfo& in) const
 	in.total += in.nodes;
 
 	// add all materials
-	for (unsigned int i = 0; i < mScene->mNumMaterials;++i) {
+	for (size_t i = 0; i < mScene->mNumMaterials;++i) {
 		const aiMaterial* pc = mScene->mMaterials[i];
 		in.materials += sizeof(aiMaterial);
 		in.materials += pc->mNumAllocated * sizeof(void*);
 
-		for (unsigned int a = 0; a < pc->mNumProperties;++a) {
+		for (size_t a = 0; a < pc->mNumProperties;++a) {
 			in.materials += pc->mProperties[a]->mDataLength;
 		}
 	}
