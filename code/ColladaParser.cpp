@@ -789,9 +789,9 @@ void ColladaParser::ReadImage( Collada::Image& pImage)
 					const char* cur = data;
 					while (!IsSpaceOrNewLine(*cur)) cur++;
 
-					const unsigned int size = (unsigned int)(cur-data) * 2;
+					const size_t size = (cur-data) * 2;
 					pImage.mImageData.resize(size);
-					for (unsigned int i = 0; i < size;++i) 
+					for (size_t i = 0; i < size;++i)
 						pImage.mImageData[i] = HexOctetToDecimal(data+(i<<1));
 
 					TestClosing( "hex");
