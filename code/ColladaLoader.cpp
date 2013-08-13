@@ -826,7 +826,7 @@ void ColladaLoader::StoreSceneMaterials( aiScene* pScene)
 
 	if (newMats.size() > 0) {
 		pScene->mMaterials = new aiMaterial*[newMats.size()];
-		for (unsigned int i = 0; i < newMats.size();++i)
+		for (size_t i = 0; i < newMats.size();++i)
 			pScene->mMaterials[i] = newMats[i].second;
 
 		newMats.clear();
@@ -1167,7 +1167,7 @@ void ColladaLoader::CreateAnimation( aiScene* pScene, const ColladaParser& pPars
 void ColladaLoader::AddTexture ( aiMaterial& mat, const ColladaParser& pParser,
 	const Collada::Effect& effect,
 	const Collada::Sampler& sampler,
-	aiTextureType type, unsigned int idx)
+	aiTextureType type, size_t idx)
 {
 	// first of all, basic file name
 	const aiString name = FindFilenameForEffectTexture( pParser, effect, sampler.mName );

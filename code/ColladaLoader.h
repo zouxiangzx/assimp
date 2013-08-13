@@ -168,7 +168,7 @@ protected:
 	void AddTexture ( aiMaterial& mat, const ColladaParser& pParser,
 		const Collada::Effect& effect,
 		const Collada::Sampler& sampler,
-		aiTextureType type, unsigned int idx = 0);
+		aiTextureType type, size_t idx = 0);
 
 	/** Resolves the texture name for the given effect texture entry */
 	aiString FindFilenameForEffectTexture( const ColladaParser& pParser, 
