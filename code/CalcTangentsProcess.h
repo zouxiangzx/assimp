@@ -95,7 +95,7 @@ protected:
 	* @param pMesh The mesh to process.
 	* @param meshIndex Index of the mesh
 	*/
-	bool ProcessMesh( aiMesh* pMesh, unsigned int meshIndex);
+	bool ProcessMesh( aiMesh* pMesh, size_t meshIndex);
 
 	// -------------------------------------------------------------------
 	/** Executes the post processing step on the given imported data.

@@ -92,7 +92,7 @@ void CalcTangentsProcess::Execute( aiScene* pScene)
 	DefaultLogger::get()->debug("CalcTangentsProcess begin");
 
 	bool bHas = false;
-	for( unsigned int a = 0; a < pScene->mNumMeshes; a++)
+	for( size_t a = 0; a < pScene->mNumMeshes; a++)
 		if(ProcessMesh( pScene->mMeshes[a],a))bHas = true;
 
 	if (bHas)DefaultLogger::get()->info("CalcTangentsProcess finished. Tangents have been calculated");
@@ -101,7 +101,7 @@ void CalcTangentsProcess::Execute( aiScene* pScene)
 
 // ------------------------------------------------------------------------------------------------
 // Calculates tangents and bitangents for the given mesh
-bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
+bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, size_t meshIndex)
 {
 	// we assume that the mesh is still in the verbose vertex format where each face has its own set
 	// of vertices and no vertices are shared between faces. Sadly I don't know any quick test to 
@@ -148,7 +148,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 	aiVector3D* meshBitang = pMesh->mBitangents;
 	
 	// calculate the tangent and bitangent for every face
-	for( unsigned int a = 0; a < pMesh->mNumFaces; a++)
+	for( size_t a = 0; a < pMesh->mNumFaces; a++)
 	{
 		const aiFace& face = pMesh->mFaces[a];
 		if (face.mNumIndices < 3)
@@ -156,7 +156,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 			// There are less than three indices, thus the tangent vector
 			// is not defined. We are finished with these vertices now,
 			// their tangent vectors are set to qnan.
-			for (unsigned int i = 0; i < face.mNumIndices;++i)
+			for (size_t i = 0; i < face.mNumIndices;++i)
 			{
 				register const size_t idx = face.mIndices[i];
 				vertexDone  [idx] = true;
@@ -170,7 +170,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 		// triangle or polygon... we always use only the first three indices. A polygon
 		// is supposed to be planar anyways....
 		// FIXME: (thom) create correct calculation for multi-vertex polygons maybe?
-		const unsigned int p0 = face.mIndices[0], p1 = face.mIndices[1], p2 = face.mIndices[2];
+		const size_t p0 = face.mIndices[0], p1 = face.mIndices[1], p2 = face.mIndices[2];
 
 		// position differences p1->p2 and p1->p3
 		aiVector3D v = meshPos[p1] - meshPos[p0], w = meshPos[p2] - meshPos[p0];
@@ -191,7 +191,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
         bitangent.z = (w.z * sx - v.z * tx) * dirCorrection;
 
 		// store for every vertex of that face
-		for( unsigned int b = 0; b < face.mNumIndices; b++)
+		for( size_t b = 0; b < face.mNumIndices; b++)
 		{
 			const size_t p = face.mIndices[b];
 
@@ -232,11 +232,11 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 	std::vector<size_t> verticesFound;
 
 	const float fLimit = cosf(configMaxAngle); 
-	std::vector<unsigned int> closeVertices;
+	std::vector<size_t> closeVertices;
 
 	// in the second pass we now smooth out all tangents and bitangents at the same local position 
 	// if they are not too far off.
-	for( unsigned int a = 0; a < pMesh->mNumVertices; a++)
+	for( size_t a = 0; a < pMesh->mNumVertices; a++)
 	{
 		if( vertexDone[a])
 			continue;
@@ -254,9 +254,9 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 		closeVertices.push_back( a);
 
 		// look among them for other vertices sharing the same normal and a close-enough tangent/bitangent
-		for( unsigned int b = 0; b < verticesFound.size(); b++)
+		for( size_t b = 0; b < verticesFound.size(); b++)
 		{
-			unsigned int idx = verticesFound[b];
+			size_t idx = verticesFound[b];
 			if( vertexDone[idx])
 				continue;
 			if( meshNorm[idx] * origNorm < angleEpsilon)
@@ -273,7 +273,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 
 		// smooth the tangents and bitangents of all vertices that were found to be close enough
 		aiVector3D smoothTangent( 0, 0, 0), smoothBitangent( 0, 0, 0);
-		for( unsigned int b = 0; b < closeVertices.size(); ++b)
+		for( size_t b = 0; b < closeVertices.size(); ++b)
 		{
 			smoothTangent += meshTang[ closeVertices[b] ];
 			smoothBitangent += meshBitang[ closeVertices[b] ];
@@ -282,7 +282,7 @@ bool CalcTangentsProcess::ProcessMesh( aiMesh* pMesh, unsigned int meshIndex)
 		smoothBitangent.Normalize();
 
 		// and write it back into all affected tangents
-		for( unsigned int b = 0; b < closeVertices.size(); ++b)
+		for( size_t b = 0; b < closeVertices.size(); ++b)
 		{
 			meshTang[ closeVertices[b] ] = smoothTangent;
 			meshBitang[ closeVertices[b] ] = smoothBitangent;
