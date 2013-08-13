@@ -154,7 +154,7 @@ struct aiNode
 		// to make sure we won't crash if the data is invalid ...
 		if (mChildren && mNumChildren)  
 		{
-			for( unsigned int a = 0; a < mNumChildren; a++)
+			for( size_t a = 0; a < mNumChildren; a++)
 				delete mChildren[a];
 		}
 		delete [] mChildren;
@@ -187,7 +187,7 @@ struct aiNode
 	inline const aiNode* FindNode(const char* name) const
 	{
 		if (!::strcmp( mName.data,name))return this;
-		for (unsigned int i = 0; i < mNumChildren;++i)
+		for (size_t i = 0; i < mNumChildren;++i)
 		{
 			const aiNode* const p = mChildren[i]->FindNode(name);
 			if (p) {
@@ -201,7 +201,7 @@ struct aiNode
 	inline aiNode* FindNode(const char* name) 
 	{
 		if (!::strcmp( mName.data,name))return this;
-		for (unsigned int i = 0; i < mNumChildren;++i)
+		for (size_t i = 0; i < mNumChildren;++i)
 		{
 			aiNode* const p = mChildren[i]->FindNode(name);
 			if (p) {
