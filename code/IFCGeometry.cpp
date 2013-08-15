@@ -701,7 +701,7 @@ void ProcessSweptAreaSolid(const IfcSweptAreaSolid& swept, TempMesh& meshout,
 }
 
 // ------------------------------------------------------------------------------------------------
-bool ProcessGeometricItem(const IfcRepresentationItem& geo, std::vector<unsigned int>& mesh_indices, 
+bool ProcessGeometricItem(const IfcRepresentationItem& geo, std::vector<size_t>& mesh_indices,
 	ConversionData& conv)
 {
 	bool fix_orientation = true;
@@ -788,20 +788,20 @@ bool ProcessGeometricItem(const IfcRepresentationItem& geo, std::vector<unsigned
 }
 
 // ------------------------------------------------------------------------------------------------
-void AssignAddedMeshes(std::vector<unsigned int>& mesh_indices,aiNode* nd,
+void AssignAddedMeshes(std::vector<size_t>& mesh_indices,aiNode* nd,
 	ConversionData& /*conv*/)
 {
 	if (!mesh_indices.empty()) {
 
 		// make unique
 		std::sort(mesh_indices.begin(),mesh_indices.end());
-		std::vector<unsigned int>::iterator it_end = std::unique(mesh_indices.begin(),mesh_indices.end());
+		std::vector<size_t>::iterator it_end = std::unique(mesh_indices.begin(),mesh_indices.end());
 
 		const size_t size = std::distance(mesh_indices.begin(),it_end);
 
 		nd->mNumMeshes = size;
 		nd->mMeshes = new size_t[nd->mNumMeshes];
-		for(unsigned int i = 0; i < nd->mNumMeshes; ++i) {
+		for(size_t i = 0; i < nd->mNumMeshes; ++i) {
 			nd->mMeshes[i] = mesh_indices[i];
 		}
 	}
@@ -809,7 +809,7 @@ void AssignAddedMeshes(std::vector<unsigned int>& mesh_indices,aiNode* nd,
 
 // ------------------------------------------------------------------------------------------------
 bool TryQueryMeshCache(const IfcRepresentationItem& item, 
-	std::vector<unsigned int>& mesh_indices, 
+	std::vector<size_t>& mesh_indices,
 	ConversionData& conv) 
 {
 	ConversionData::MeshCache::const_iterator it = conv.cached_meshes.find(&item);
@@ -822,7 +822,7 @@ bool TryQueryMeshCache(const IfcRepresentationItem& item,
 
 // ------------------------------------------------------------------------------------------------
 void PopulateMeshCache(const IfcRepresentationItem& item, 
-	const std::vector<unsigned int>& mesh_indices, 
+	const std::vector<size_t>& mesh_indices,
 	ConversionData& conv)
 {
 	conv.cached_meshes[&item] = mesh_indices;
@@ -830,7 +830,7 @@ void PopulateMeshCache(const IfcRepresentationItem& item,
 
 // ------------------------------------------------------------------------------------------------
 bool ProcessRepresentationItem(const IfcRepresentationItem& item, 
-	std::vector<unsigned int>& mesh_indices, 
+	std::vector<size_t>& mesh_indices,
 	ConversionData& conv)
 {
 	if (!TryQueryMeshCache(item,mesh_indices,conv)) {

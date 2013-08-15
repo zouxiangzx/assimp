@@ -195,7 +195,7 @@ struct ConversionData
 	std::vector<aiMesh*> meshes;
 	std::vector<aiMaterial*> materials;
 
-	typedef std::map<const IFC::IfcRepresentationItem*, std::vector<unsigned int> > MeshCache;
+	typedef std::map<const IFC::IfcRepresentationItem*, std::vector<size_t> > MeshCache;
 	MeshCache cached_meshes;
 
 	const IFCImporter::Settings& settings;
