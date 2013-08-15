@@ -160,6 +160,12 @@ template <> struct MinMaxChooser<unsigned int> {
 		max = 0;
 		min = (1u<<(sizeof(unsigned int)*8-1));
 }};
+    
+template <> struct MinMaxChooser<size_t> {
+    void operator ()(size_t& min,size_t& max) {
+        max = 0;
+        min = SIZE_T_MAX;
+    }};
 
 template <typename T> struct MinMaxChooser< aiVector3t<T> > {
 	void operator ()(aiVector3t<T>& min,aiVector3t<T>& max) {
@@ -196,7 +202,7 @@ template <> struct MinMaxChooser<aiQuatKey> {
 
 template <> struct MinMaxChooser<aiVertexWeight> {
 	void operator ()(aiVertexWeight& min,aiVertexWeight& max) {
-		MinMaxChooser<unsigned int>()(min.mVertexId,max.mVertexId);
+		MinMaxChooser<size_t>()(min.mVertexId,max.mVertexId);
 		MinMaxChooser<float>()(min.mWeight,max.mWeight);
 }};
 

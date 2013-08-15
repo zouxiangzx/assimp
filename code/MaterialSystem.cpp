@@ -297,7 +297,7 @@ ASSIMP_API unsigned int aiGetMaterialTextureCount(const C_STRUCT aiMaterial* pMa
 			&& 0 == strcmp( prop->mKey.data, _AI_MATKEY_TEXTURE_BASE )
 			&& prop->mSemantic == type) {
 	
-			max = std::max(max,prop->mIndex+1);
+			max = std::max<size_t>(max,prop->mIndex+1);
 		}
 	}
 	return max;
@@ -385,7 +385,7 @@ void aiMaterial::Clear()
 
 // ------------------------------------------------------------------------------------------------
 aiReturn aiMaterial::RemoveProperty (const char* pKey,unsigned int type,
-    unsigned int index
+    size_t index
 	)
 {
 	ai_assert(NULL != pKey);
@@ -413,10 +413,10 @@ aiReturn aiMaterial::RemoveProperty (const char* pKey,unsigned int type,
 
 // ------------------------------------------------------------------------------------------------
 aiReturn aiMaterial::AddBinaryProperty (const void* pInput,
-	unsigned int pSizeInBytes,
+	size_t pSizeInBytes,
 	const char* pKey,
 	unsigned int type,
-    unsigned int index,
+    size_t index,
 	aiPropertyTypeInfo pType
 	)
 {
@@ -485,7 +485,7 @@ aiReturn aiMaterial::AddBinaryProperty (const void* pInput,
 aiReturn aiMaterial::AddProperty (const aiString* pInput,
 	const char* pKey,
 	unsigned int type,
-    unsigned int index)
+    size_t index)
 {
 	// We don't want to add the whole buffer .. write a 32 bit length
 	// prefix followed by the zero-terminated UTF8 string.

@@ -603,17 +603,17 @@ struct aiMaterialProperty
 	 * For non-texture properties, this member is always 0 
 	 * (or, better-said, #aiTextureType_NONE).
 	 */
-	unsigned int mSemantic;
+	size_t mSemantic;
 
 	/** Textures: Specifies the index of the texture.
 	 *  For non-texture properties, this member is always 0.
 	 */
-	unsigned int mIndex;
+	size_t mIndex;
 
     /**	Size of the buffer mData is pointing to, in bytes.
 	 *  This value may not be 0.
      */
-    unsigned int mDataLength;
+    size_t mDataLength;
 
     /** Type information for the property.
      *
@@ -689,7 +689,7 @@ public:
      */
     template <typename Type>
     aiReturn Get(const char* pKey,unsigned int type,
-		unsigned int idx, Type* pOut, unsigned int* pMax) const;
+		size_t idx, Type* pOut, size_t* pMax) const;
 
     // -------------------------------------------------------------------
     /** @brief Retrieve a Type value with a specific key 
@@ -703,7 +703,7 @@ public:
 	 */
 	template <typename Type>
 	aiReturn Get(const char* pKey,unsigned int type,
-		unsigned int idx,Type& pOut) const;
+		size_t idx,Type& pOut) const;
 
 	// -------------------------------------------------------------------
 	/** Get the number of textures for a particular texture type.
@@ -764,10 +764,10 @@ public:
 	 *  @param index Set by the AI_MATKEY_XXX macro
 	 *  @param pType Type information hint */
 	aiReturn AddBinaryProperty (const void* pInput,
-		unsigned int pSizeInBytes,
+		size_t pSizeInBytes,
 		const char* pKey,
 		unsigned int type ,
-		unsigned int index ,
+		size_t index ,
 		aiPropertyTypeInfo pType);
 
 	// ------------------------------------------------------------------------------
@@ -781,7 +781,7 @@ public:
 	aiReturn AddProperty (const aiString* pInput,
 		const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	// ------------------------------------------------------------------------------
 	/** @brief Add a property with a given key to the material structure 
@@ -795,7 +795,7 @@ public:
 		unsigned int pNumValues,
 		const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	// ------------------------------------------------------------------------------
 	/** @brief Remove a given key from the list.
@@ -804,7 +804,7 @@ public:
 	 *  @param pKey Key to be deleted */
 	aiReturn RemoveProperty (const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	// ------------------------------------------------------------------------------
 	/** @brief Removes all properties from the material.
@@ -827,10 +827,10 @@ public:
     C_STRUCT aiMaterialProperty** mProperties;
 
     /** Number of properties in the data base */
-    unsigned int mNumProperties;
+    size_t mNumProperties;
 
 	 /** Storage allocated */
-    unsigned int mNumAllocated;
+    size_t mNumAllocated;
 };
 
 // Go back to extern "C" again
@@ -1284,7 +1284,7 @@ ASSIMP_API C_ENUM aiReturn aiGetMaterialProperty(
 	 const C_STRUCT aiMaterial* pMat, 
     const char* pKey,
 	 unsigned int type,
-    unsigned int  index,
+    size_t  index,
     const C_STRUCT aiMaterialProperty** pPropOut);
 
 // ---------------------------------------------------------------------------
@@ -1317,9 +1317,9 @@ ASSIMP_API C_ENUM aiReturn aiGetMaterialFloatArray(
 	 const C_STRUCT aiMaterial* pMat, 
     const char* pKey,
 	 unsigned int type,
-    unsigned int index,
+    size_t index,
     float* pOut,
-    unsigned int* pMax);
+    size_t* pMax);
 
 
 #ifdef __cplusplus
@@ -1346,10 +1346,10 @@ ASSIMP_API C_ENUM aiReturn aiGetMaterialFloatArray(
 inline aiReturn aiGetMaterialFloat(const aiMaterial* pMat, 
 	const char* pKey,
 	unsigned int type,
-   unsigned int index,
+   size_t index,
 	float* pOut)
 {
-	return aiGetMaterialFloatArray(pMat,pKey,type,index,pOut,(unsigned int*)0x0);
+	return aiGetMaterialFloatArray(pMat,pKey,type,index,pOut,(size_t*)0x0);
 }
 
 #else 
@@ -1369,9 +1369,9 @@ inline aiReturn aiGetMaterialFloat(const aiMaterial* pMat,
 ASSIMP_API C_ENUM aiReturn aiGetMaterialIntegerArray(const C_STRUCT aiMaterial* pMat, 
     const char* pKey,
 	 unsigned int  type,
-	 unsigned int  index,
+	 size_t  index,
     int* pOut,
-    unsigned int* pMax);
+    size_t* pMax);
 
 
 #ifdef __cplusplus
@@ -1384,10 +1384,10 @@ ASSIMP_API C_ENUM aiReturn aiGetMaterialIntegerArray(const C_STRUCT aiMaterial* 
 inline aiReturn aiGetMaterialInteger(const C_STRUCT aiMaterial* pMat, 
 	const char* pKey,
 	unsigned int type,
-   unsigned int index,
+   size_t index,
 	int* pOut)
 {
-	return aiGetMaterialIntegerArray(pMat,pKey,type,index,pOut,(unsigned int*)0x0);
+	return aiGetMaterialIntegerArray(pMat,pKey,type,index,pOut,(size_t*)0x0);
 }
 
 #else 
@@ -1408,7 +1408,7 @@ inline aiReturn aiGetMaterialInteger(const C_STRUCT aiMaterial* pMat,
 ASSIMP_API C_ENUM aiReturn aiGetMaterialColor(const C_STRUCT aiMaterial* pMat, 
     const char* pKey,
 	 unsigned int type,
-    unsigned int index,
+    size_t index,
 	 C_STRUCT aiColor4D* pOut);
 
 
@@ -1420,7 +1420,7 @@ ASSIMP_API C_ENUM aiReturn aiGetMaterialColor(const C_STRUCT aiMaterial* pMat,
 ASSIMP_API C_ENUM aiReturn aiGetMaterialString(const C_STRUCT aiMaterial* pMat, 
     const char* pKey,
 	 unsigned int type,
-    unsigned int index,
+    size_t index,
     C_STRUCT aiString* pOut);
 
 // ---------------------------------------------------------------------------
@@ -1469,7 +1469,7 @@ ASSIMP_API unsigned int aiGetMaterialTextureCount(const C_STRUCT aiMaterial* pMa
 #ifdef __cplusplus
 ASSIMP_API aiReturn aiGetMaterialTexture(const C_STRUCT aiMaterial* mat,
 	aiTextureType type,
-    unsigned int  index,
+    size_t  index,
     aiString* path,
 	aiTextureMapping* mapping	= NULL,
     unsigned int* uvindex		= NULL,
@@ -1480,7 +1480,7 @@ ASSIMP_API aiReturn aiGetMaterialTexture(const C_STRUCT aiMaterial* mat,
 #else
 C_ENUM aiReturn aiGetMaterialTexture(const C_STRUCT aiMaterial* mat,
     C_ENUM aiTextureType type,
-    unsigned int  index,
+    size_t  index,
     C_STRUCT aiString* path,
 	C_ENUM aiTextureMapping* mapping	/*= NULL*/,
     unsigned int* uvindex				/*= NULL*/,

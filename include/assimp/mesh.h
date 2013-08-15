@@ -178,7 +178,7 @@ struct aiFace
 		if (mIndices == o.mIndices)return true;
 		else if (mIndices && mNumIndices == o.mNumIndices)
 		{
-			for (unsigned int i = 0;i < this->mNumIndices;++i)
+			for (size_t i = 0;i < this->mNumIndices;++i)
 				if (mIndices[i] != o.mIndices[i])return false;
 			return true;
 		}
@@ -201,7 +201,7 @@ struct aiFace
 struct aiVertexWeight
 {
 	//! Index of the vertex which is influenced by the bone.
-	unsigned int mVertexId;
+	size_t mVertexId;
 
 	//! The strength of the influence in the range (0...1).
 	//! The influence from all bones at one vertex amounts to 1.
@@ -215,7 +215,7 @@ struct aiVertexWeight
 	//! Initialisation from a given index and vertex weight factor
 	//! \param pID ID
 	//! \param pWeight Vertex weight factor
-	aiVertexWeight( unsigned int pID, float pWeight) 
+	aiVertexWeight( size_t pID, float pWeight)
 		: mVertexId( pID), mWeight( pWeight) 
 	{ /* nothing to do here */ }
 
@@ -430,14 +430,14 @@ struct aiAnimMesh
 	/** Check whether the anim mesh overrides a particular
 	 * set of vertex colors on his host mesh. 
 	 *  @param pIndex 0<index<AI_MAX_NUMBER_OF_COLOR_SETS */ 
-	bool HasVertexColors( unsigned int pIndex) const	{ 
+	bool HasVertexColors( size_t pIndex) const	{
 		return pIndex >= AI_MAX_NUMBER_OF_COLOR_SETS ? false : mColors[pIndex] != NULL; 
 	}
 
 	/** Check whether the anim mesh overrides a particular
 	 * set of texture coordinates on his host mesh. 
 	 *  @param pIndex 0<index<AI_MAX_NUMBER_OF_TEXTURECOORDS */ 
-	bool HasTextureCoords( unsigned int pIndex) const	{ 
+	bool HasTextureCoords( size_t pIndex) const	{
 		return pIndex >= AI_MAX_NUMBER_OF_TEXTURECOORDS ? false : mTextureCoords[pIndex] != NULL; 
 	}
 
@@ -556,7 +556,7 @@ struct aiMesh
 	* If the value is 1 for a given channel, p.y is set to 0.0f, too.
 	* @note 4D coords are not supported 
 	*/
-	unsigned int mNumUVComponents[AI_MAX_NUMBER_OF_TEXTURECOORDS];
+	size_t mNumUVComponents[AI_MAX_NUMBER_OF_TEXTURECOORDS];
 
 	/** The faces the mesh is constructed from. 
 	* Each face refers to a number of vertices by their indices. 
@@ -710,17 +710,17 @@ struct aiMesh
 	}
 
 	//! Get the number of UV channels the mesh contains
-	unsigned int GetNumUVChannels() const 
+	size_t GetNumUVChannels() const
 	{
-		unsigned int n = 0;
+		size_t n = 0;
 		while (n < AI_MAX_NUMBER_OF_TEXTURECOORDS && mTextureCoords[n])++n;
 		return n;
 	}
 
 	//! Get the number of vertex color channels the mesh contains
-	unsigned int GetNumColorChannels() const 
+	size_t GetNumColorChannels() const
 	{
-		unsigned int n = 0;
+		size_t n = 0;
 		while (n < AI_MAX_NUMBER_OF_COLOR_SETS && mColors[n])++n;
 		return n;
 	}
