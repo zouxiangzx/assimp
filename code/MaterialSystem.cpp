@@ -252,7 +252,7 @@ aiReturn aiGetMaterialColor(const aiMaterial* pMat,
 aiReturn aiGetMaterialString(const aiMaterial* pMat, 
 	const char* pKey,
 	unsigned int type,
-	unsigned int index,
+	size_t index,
 	aiString* pOut)
 {
 	ai_assert (pOut != NULL);
