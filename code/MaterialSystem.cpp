@@ -306,7 +306,7 @@ ASSIMP_API unsigned int aiGetMaterialTextureCount(const C_STRUCT aiMaterial* pMa
 // ------------------------------------------------------------------------------------------------
 aiReturn aiGetMaterialTexture(const C_STRUCT aiMaterial* mat,
     aiTextureType type,
-    unsigned int  index,
+    size_t  index,
     C_STRUCT aiString* path,
 	aiTextureMapping* _mapping	/*= NULL*/,
     unsigned int* uvindex		/*= NULL*/,
