@@ -56,7 +56,7 @@ using namespace Assimp;
 aiReturn aiGetMaterialProperty(const aiMaterial* pMat, 
 	const char* pKey,
 	unsigned int type,
-    unsigned int index,
+    size_t index,
 	const aiMaterialProperty** pPropOut)
 {
 	ai_assert (pMat != NULL);
