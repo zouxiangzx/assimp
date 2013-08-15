@@ -312,12 +312,12 @@ struct VMapEntry
 	virtual ~VMapEntry() {}
 
 	//! allocates memory for the vertex map
-	virtual void Allocate(unsigned int num)
+	virtual void Allocate(size_t num)
 	{
 		if (!rawData.empty())
 			return; // return if already allocated
 
-		const unsigned int m = num*dims;
+		const size_t m = num*dims;
 		rawData.reserve(m + (m>>2u)); // 25% as  extra storage for VMADs
 		rawData.resize(m,0.f);
 		abAssigned.resize(num,false);
@@ -341,12 +341,12 @@ struct VColorChannel : public VMapEntry
 
 	//! need to overwrite this function - the alpha channel must
 	//! be initialized to 1.0 by default
-	virtual void Allocate(unsigned int num)
+	virtual void Allocate(size_t num)
 	{
 		if (!rawData.empty())
 			return; // return if already allocated
 
-		register unsigned int m = num*dims;
+		register size_t m = num*dims;
 		rawData.reserve(m + (m>>2u)); // 25% as  extra storage for VMADs
 		rawData.resize(m);
 
@@ -619,14 +619,14 @@ typedef std::vector	<	aiVector3D		>	PointList;
 typedef std::vector	<	LWO::Face		>	FaceList;
 typedef std::vector	<	LWO::Surface	>	SurfaceList;
 typedef std::vector	<	std::string		>	TagList;
-typedef std::vector	<	unsigned int	>	TagMappingTable;
-typedef std::vector	<	unsigned int	>	ReferrerList;
+typedef std::vector	<	size_t	>	TagMappingTable;
+typedef std::vector	<	size_t	>	ReferrerList;
 typedef std::vector	<	WeightChannel	>	WeightChannelList;
 typedef std::vector	<	VColorChannel	>	VColorChannelList;
 typedef std::vector	<	UVChannel		>	UVChannelList;
 typedef std::vector	<	Clip			>	ClipList;
 typedef std::vector	<	Envelope		>	EnvelopeList;
-typedef std::vector <   unsigned int    >   SortedRep;
+typedef std::vector <   size_t    >   SortedRep;
 
 // ---------------------------------------------------------------------------
 /** \brief Represents a layer in the file

@@ -519,7 +519,7 @@ void LWOImporter::FindVCChannels(const LWO::Surface& surf, LWO::SortedRep& sorte
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2ImageMap(unsigned int size, LWO::Texture& tex )
+void LWOImporter::LoadLWO2ImageMap(size_t size, LWO::Texture& tex )
 {
 	LE_NCONST uint8_t* const end = mFileBuffer + size;
 	while (true)
@@ -561,7 +561,7 @@ void LWOImporter::LoadLWO2ImageMap(unsigned int size, LWO::Texture& tex )
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2Procedural(unsigned int /*size*/, LWO::Texture& tex )
+void LWOImporter::LoadLWO2Procedural(size_t /*size*/, LWO::Texture& tex )
 {
 	// --- not supported at the moment
 	DefaultLogger::get()->error("LWO2: Found procedural texture, this is not supported");
@@ -569,7 +569,7 @@ void LWOImporter::LoadLWO2Procedural(unsigned int /*size*/, LWO::Texture& tex )
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2Gradient(unsigned int /*size*/, LWO::Texture& tex  )
+void LWOImporter::LoadLWO2Gradient(size_t /*size*/, LWO::Texture& tex  )
 {
 	// --- not supported at the moment
 	DefaultLogger::get()->error("LWO2: Found gradient texture, this is not supported");
@@ -577,7 +577,7 @@ void LWOImporter::LoadLWO2Gradient(unsigned int /*size*/, LWO::Texture& tex  )
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2TextureHeader(unsigned int size, LWO::Texture& tex )
+void LWOImporter::LoadLWO2TextureHeader(size_t size, LWO::Texture& tex )
 {
 	LE_NCONST uint8_t* const end = mFileBuffer + size;
 
@@ -617,7 +617,7 @@ void LWOImporter::LoadLWO2TextureHeader(unsigned int size, LWO::Texture& tex )
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2TextureBlock(LE_NCONST IFF::SubChunkHeader* head, unsigned int size )
+void LWOImporter::LoadLWO2TextureBlock(LE_NCONST IFF::SubChunkHeader* head, size_t size )
 {
 	ai_assert(!mSurfaces->empty());
 	LWO::Surface& surf = mSurfaces->back();
@@ -674,7 +674,7 @@ void LWOImporter::LoadLWO2TextureBlock(LE_NCONST IFF::SubChunkHeader* head, unsi
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2ShaderBlock(LE_NCONST IFF::SubChunkHeader* /*head*/, unsigned int size )
+void LWOImporter::LoadLWO2ShaderBlock(LE_NCONST IFF::SubChunkHeader* /*head*/, size_t size )
 {
 	LE_NCONST uint8_t* const end = mFileBuffer + size;
 
@@ -725,7 +725,7 @@ void LWOImporter::LoadLWO2ShaderBlock(LE_NCONST IFF::SubChunkHeader* /*head*/, u
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2Surface(unsigned int size)
+void LWOImporter::LoadLWO2Surface(size_t size)
 {
 	LE_NCONST uint8_t* const end = mFileBuffer + size;
 

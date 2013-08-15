@@ -105,7 +105,7 @@ void LWOImporter::LoadLWOBFile()
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWOBPolygons(unsigned int length)
+void LWOImporter::LoadLWOBPolygons(size_t length)
 {
 	// first find out how many faces and vertices we'll finally need
 	LE_NCONST uint16_t* const end	= (LE_NCONST uint16_t*)(mFileBuffer+length);
@@ -117,7 +117,7 @@ void LWOImporter::LoadLWOBPolygons(unsigned int length)
 	cursor = (LE_NCONST uint16_t*)mFileBuffer;
 #endif
 
-	unsigned int iNumFaces = 0,iNumVertices = 0;
+	size_t iNumFaces = 0,iNumVertices = 0;
 	CountVertsAndFacesLWOB(iNumVertices,iNumFaces,cursor,end);
 
 	// allocate the output array and copy face indices
@@ -132,8 +132,8 @@ void LWOImporter::LoadLWOBPolygons(unsigned int length)
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::CountVertsAndFacesLWOB(unsigned int& verts, unsigned int& faces,
-	LE_NCONST uint16_t*& cursor, const uint16_t* const end, unsigned int max)
+void LWOImporter::CountVertsAndFacesLWOB(size_t& verts, size_t& faces,
+	LE_NCONST uint16_t*& cursor, const uint16_t* const end, size_t max)
 {
 	while (cursor < end && max--)
 	{
@@ -154,7 +154,7 @@ void LWOImporter::CountVertsAndFacesLWOB(unsigned int& verts, unsigned int& face
 void LWOImporter::CopyFaceIndicesLWOB(FaceList::iterator& it,
 	LE_NCONST uint16_t*& cursor, 
 	const uint16_t* const end,
-	unsigned int max)
+	size_t max)
 {
 	while (cursor < end && max--)
 	{
@@ -188,7 +188,7 @@ void LWOImporter::CopyFaceIndicesLWOB(FaceList::iterator& it,
 }
 
 // ------------------------------------------------------------------------------------------------
-LWO::Texture* LWOImporter::SetupNewTextureLWOB(LWO::TextureList& list,unsigned int size)
+LWO::Texture* LWOImporter::SetupNewTextureLWOB(LWO::TextureList& list,size_t size)
 {
 	list.push_back(LWO::Texture());
 	LWO::Texture* tex = &list.back();
@@ -221,7 +221,7 @@ LWO::Texture* LWOImporter::SetupNewTextureLWOB(LWO::TextureList& list,unsigned i
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWOBSurface(unsigned int size)
+void LWOImporter::LoadLWOBSurface(size_t size)
 {
 	LE_NCONST uint8_t* const end = mFileBuffer + size;
 

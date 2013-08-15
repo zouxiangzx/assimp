@@ -128,13 +128,13 @@ private:
 	/** Loads a surface chunk from an LWOB file
 	 *  @param size Maximum size to be read, in bytes.  
 	 */
-	void LoadLWOBSurface(unsigned int size);
+	void LoadLWOBSurface(size_t size);
 
 	// -------------------------------------------------------------------
 	/** Loads a surface chunk from an LWO2 file
 	 *  @param size Maximum size to be read, in bytes.  
 	 */
-	void LoadLWO2Surface(unsigned int size);
+	void LoadLWO2Surface(size_t size);
 
 	// -------------------------------------------------------------------
 	/** Loads a texture block from a LWO2 file.
@@ -142,7 +142,7 @@ private:
 	 *  @param head Header of the SUF.BLOK header
 	 */
 	void LoadLWO2TextureBlock(LE_NCONST IFF::SubChunkHeader* head,
-		unsigned int size );
+		size_t size );
 
 	// -------------------------------------------------------------------
 	/** Loads a shader block from a LWO2 file.
@@ -150,78 +150,78 @@ private:
 	 *  @param head Header of the SUF.BLOK header
 	 */
 	void LoadLWO2ShaderBlock(LE_NCONST IFF::SubChunkHeader* head,
-		unsigned int size );
+		size_t size );
 
 	// -------------------------------------------------------------------
 	/** Loads an image map from a LWO2 file
 	 *  @param size Maximum size to be read, in bytes.  
 	 *  @param tex Texture object to be filled
 	 */
-	void LoadLWO2ImageMap(unsigned int size, LWO::Texture& tex );
-	void LoadLWO2Gradient(unsigned int size, LWO::Texture& tex );
-	void LoadLWO2Procedural(unsigned int size, LWO::Texture& tex );
+	void LoadLWO2ImageMap(size_t size, LWO::Texture& tex );
+	void LoadLWO2Gradient(size_t size, LWO::Texture& tex );
+	void LoadLWO2Procedural(size_t size, LWO::Texture& tex );
 
 	// loads the header - used by thethree functions above
-	void LoadLWO2TextureHeader(unsigned int size, LWO::Texture& tex );
+	void LoadLWO2TextureHeader(size_t size, LWO::Texture& tex );
 
 	// -------------------------------------------------------------------
 	/** Loads the LWO tag list from the file
 	 *  @param size Maximum size to be read, in bytes.  
 	 */
-	void LoadLWOTags(unsigned int size);
+	void LoadLWOTags(size_t size);
 
 	// -------------------------------------------------------------------
 	/** Load polygons from a POLS chunk
 	 *  @param length Size of the chunk
 	*/
-	void LoadLWO2Polygons(unsigned int length);
-	void LoadLWOBPolygons(unsigned int length);
+	void LoadLWO2Polygons(size_t length);
+	void LoadLWOBPolygons(size_t length);
 
 	// -------------------------------------------------------------------
 	/** Load polygon tags from a PTAG chunk
 	 *  @param length Size of the chunk
 	*/
-	void LoadLWO2PolygonTags(unsigned int length);
+	void LoadLWO2PolygonTags(size_t length);
 
 	// -------------------------------------------------------------------
 	/** Load a vertex map from a VMAP/VMAD chunk
 	 *  @param length Size of the chunk
 	 *  @param perPoly Operate on per-polygon base?
 	*/
-	void LoadLWO2VertexMap(unsigned int length, bool perPoly);
+	void LoadLWO2VertexMap(size_t length, bool perPoly);
 
 	// -------------------------------------------------------------------
 	/** Load polygons from a PNTS chunk
 	 *  @param length Size of the chunk
 	*/
-	void LoadLWOPoints(unsigned int length);
+	void LoadLWOPoints(size_t length);
 
 	// -------------------------------------------------------------------
 	/** Load a clip from a CLIP chunk
 	 *  @param length Size of the chunk
 	*/
-	void LoadLWO2Clip(unsigned int length);
+	void LoadLWO2Clip(size_t length);
 
 	// -------------------------------------------------------------------
 	/** Load an envelope from an EVL chunk
 	 *  @param length Size of the chunk
 	*/
-	void LoadLWO2Envelope(unsigned int length);
+	void LoadLWO2Envelope(size_t length);
 
 	// -------------------------------------------------------------------
 	/** Count vertices and faces in a LWOB/LWO2 file
 	*/
-	void CountVertsAndFacesLWO2(unsigned int& verts, 
-		unsigned int& faces,
+	void CountVertsAndFacesLWO2(size_t& verts,
+		size_t& faces,
 		uint16_t*& cursor, 
 		const uint16_t* const end,
-		unsigned int max = UINT_MAX);
+		size_t max = UINT_MAX);
 
-	void CountVertsAndFacesLWOB(unsigned int& verts, 
-		unsigned int& faces,
+	void CountVertsAndFacesLWOB(size_t& verts,
+		size_t& faces,
 		LE_NCONST uint16_t*& cursor, 
 		const uint16_t* const end,
-		unsigned int max = UINT_MAX);
+		size_t max = UINT_MAX);
 
 	// -------------------------------------------------------------------
 	/** Read vertices and faces in a LWOB/LWO2 file
@@ -234,7 +234,7 @@ private:
 	void CopyFaceIndicesLWOB(LWO::FaceList::iterator& it,
 		LE_NCONST uint16_t*& cursor, 
 		const uint16_t* const end, 
-		unsigned int max = UINT_MAX);
+		size_t max = UINT_MAX);
 
 	// -------------------------------------------------------------------
 	/** Resolve the tag and surface lists that have been loaded.
@@ -324,7 +324,7 @@ private:
 	 *    floats from this array.
 	*/
 	void DoRecursiveVMAPAssignment(VMapEntry* base, const size_t numRead,
-		unsigned int idx, float* data);
+		size_t idx, float* data);
 
 	// -------------------------------------------------------------------
 	/** Compute normal vectors for a mesh
@@ -332,7 +332,7 @@ private:
 	 *  @param smoothingGroups Smoothing-groups-per-face array
 	 *  @param surface Surface for the mesh 
 	*/
-	void ComputeNormals(aiMesh* mesh, const std::vector<unsigned int>& smoothingGroups,
+	void ComputeNormals(aiMesh* mesh, const std::vector<size_t>& smoothingGroups,
 		const LWO::Surface& surface);
 
 
@@ -344,7 +344,7 @@ private:
 	 *  @return Pointer to new texture
 	*/
 	LWO::Texture* SetupNewTextureLWOB(LWO::TextureList& list,
-		unsigned int size);
+		size_t size);
 
 protected:
 

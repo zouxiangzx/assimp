@@ -331,13 +331,13 @@ void LWOImporter::InternReadFile( const std::string& pFile,
 				}
 
 				// we would not need this extra array, but the code is much cleaner if we use it
-				std::vector<unsigned int>& smoothingGroups = layer.mPointReferrers;
+				std::vector<size_t>& smoothingGroups = layer.mPointReferrers;
 				smoothingGroups.erase (smoothingGroups.begin(),smoothingGroups.end());
 				smoothingGroups.resize(mesh->mNumFaces,0);
 
 				// now convert all faces
-				unsigned int vert = 0;
-				std::vector<unsigned int>::iterator outIt = smoothingGroups.begin();
+				size_t vert = 0;
+				std::vector<size_t>::iterator outIt = smoothingGroups.begin();
 				for (it = sorted.begin(); it != end;++it,++outIt)	{
 					const LWO::Face& face = layer.mFaces[*it];
 					*outIt = face.smoothGroup;
@@ -445,7 +445,7 @@ void LWOImporter::InternReadFile( const std::string& pFile,
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::ComputeNormals(aiMesh* mesh, const std::vector<unsigned int>& smoothingGroups,
+void LWOImporter::ComputeNormals(aiMesh* mesh, const std::vector<size_t>& smoothingGroups,
 	const LWO::Surface& surface)
 {
 	// Allocate output storage
@@ -485,7 +485,7 @@ void LWOImporter::ComputeNormals(aiMesh* mesh, const std::vector<unsigned int>& 
 	
 	// Now generate the spatial sort tree
 	SGSpatialSort sSort;
-	std::vector<unsigned int>::const_iterator it = smoothingGroups.begin();
+	std::vector<size_t>::const_iterator it = smoothingGroups.begin();
 	for( begin =  mesh->mFaces; begin != end; ++begin, ++it)
 	{
 		aiFace& face = *begin;
@@ -703,7 +703,7 @@ void LWOImporter::AdjustTexturePath(std::string& out)
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWOTags(unsigned int size)
+void LWOImporter::LoadLWOTags(size_t size)
 {
 	// --- this function is used for both LWO2 and LWOB
 
@@ -725,12 +725,12 @@ void LWOImporter::LoadLWOTags(unsigned int size)
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWOPoints(unsigned int length)
+void LWOImporter::LoadLWOPoints(size_t length)
 {
 	// --- this function is used for both LWO2 and LWOB but for
 	// LWO2 we need to allocate 25% more storage - it could be we'll 
 	// need to duplicate some points later.
-	register unsigned int regularSize = (unsigned int)mCurLayer->mTempPoints.size() + length / 12;
+	register size_t regularSize = mCurLayer->mTempPoints.size() + length / 12;
 	if (mIsLWO2)
 	{
 		mCurLayer->mTempPoints.reserve	( regularSize + (regularSize>>2u) );
@@ -744,14 +744,14 @@ void LWOImporter::LoadLWOPoints(unsigned int length)
 
 	// perform endianess conversions
 #ifndef AI_BUILD_BIG_ENDIAN
-	for (unsigned int i = 0; i < length>>2;++i)
+	for (size_t i = 0; i < length>>2;++i)
 		ByteSwap::Swap4( mFileBuffer + (i << 2));
 #endif
 	::memcpy(&mCurLayer->mTempPoints[0],mFileBuffer,length);
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2Polygons(unsigned int length)
+void LWOImporter::LoadLWO2Polygons(size_t length)
 {
 	LE_NCONST uint16_t* const end	= (LE_NCONST uint16_t*)(mFileBuffer+length);
 	const uint32_t type = GetU4();
@@ -783,7 +783,7 @@ void LWOImporter::LoadLWO2Polygons(unsigned int length)
 	// first find out how many faces and vertices we'll finally need
 	uint16_t* cursor= (uint16_t*)mFileBuffer;
 
-	unsigned int iNumFaces = 0,iNumVertices = 0;
+	size_t iNumFaces = 0,iNumVertices = 0;
 	CountVertsAndFacesLWO2(iNumVertices,iNumFaces,cursor,end);
 
 	// allocate the output array and copy face indices
@@ -797,8 +797,8 @@ void LWOImporter::LoadLWO2Polygons(unsigned int length)
 }
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::CountVertsAndFacesLWO2(unsigned int& verts, unsigned int& faces,
-	uint16_t*& cursor, const uint16_t* const end, unsigned int max)
+void LWOImporter::CountVertsAndFacesLWO2(size_t& verts, size_t& faces,
+	uint16_t*& cursor, const uint16_t* const end, size_t max)
 {
 	while (cursor < end && max--)
 	{
@@ -838,7 +838,7 @@ void LWOImporter::CopyFaceIndicesLWO2(FaceList::iterator& it,
 
 
 // ------------------------------------------------------------------------------------------------
-void LWOImporter::LoadLWO2PolygonTags(unsigned int length)
+void LWOImporter::LoadLWO2PolygonTags(size_t length)
 {
 	LE_NCONST uint8_t* const end = mFileBuffer+length;
 
@@ -913,11 +913,11 @@ inline void CreateNewEntry(std::vector< T >& list, unsigned int srcIdx)
 
 // ------------------------------------------------------------------------------------------------
 inline void LWOImporter::DoRecursiveVMAPAssignment(VMapEntry* base, const size_t numRead,
-	unsigned int idx, float* data)
+	size_t idx, float* data)
 {
 	ai_assert(NULL != data);
 	LWO::ReferrerList& refList	= mCurLayer->mPointReferrers;
-	unsigned int i;
+	size_t i;
 
 	base->abAssigned[idx] = true;
 	for (i = 0; i < numRead;++i) {
@@ -930,7 +930,7 @@ inline void LWOImporter::DoRecursiveVMAPAssignment(VMapEntry* base, const size_t
 }
 
 // ------------------------------------------------------------------------------------------------
-inline void AddToSingleLinkedList(ReferrerList& refList, unsigned int srcIdx, unsigned int destIdx)
+inline void AddToSingleLinkedList(ReferrerList& refList, size_t srcIdx, size_t destIdx)
 {
 	if(UINT_MAX == refList[srcIdx])	{
 		refList[srcIdx] = destIdx;
@@ -941,7 +941,7 @@ inline void AddToSingleLinkedList(ReferrerList& refList, unsigned int srcIdx, un
 
 // ------------------------------------------------------------------------------------------------
 // Load LWO2 vertex map
-void LWOImporter::LoadLWO2VertexMap(unsigned int length, bool perPoly)
+void LWOImporter::LoadLWO2VertexMap(size_t length, bool perPoly)
 {
 	LE_NCONST uint8_t* const end = mFileBuffer+length;
 
@@ -1011,7 +1011,7 @@ void LWOImporter::LoadLWO2VertexMap(unsigned int length, bool perPoly)
 		DefaultLogger::get()->warn("LWO2: Skipping unknown VMAP/VMAD channel \'" + name + "\'"); 
 		return;
 	};
-	base->Allocate((unsigned int)mCurLayer->mTempPoints.size());
+	base->Allocate(mCurLayer->mTempPoints.size());
 
 	// now read all entries in the map
 	type = std::min(dims,base->dims); 
@@ -1096,7 +1096,7 @@ void LWOImporter::LoadLWO2VertexMap(unsigned int length, bool perPoly)
 
 // ------------------------------------------------------------------------------------------------
 // Load LWO2 clip
-void LWOImporter::LoadLWO2Clip(unsigned int length)
+void LWOImporter::LoadLWO2Clip(size_t length)
 {
 	AI_LWO_VALIDATE_CHUNK_LENGTH(length,CLIP,10);
 
@@ -1167,7 +1167,7 @@ void LWOImporter::LoadLWO2Clip(unsigned int length)
 
 // ------------------------------------------------------------------------------------------------
 // Load envelope description
-void LWOImporter::LoadLWO2Envelope(unsigned int length)
+void LWOImporter::LoadLWO2Envelope(size_t length)
 {
 	LE_NCONST uint8_t* const end = mFileBuffer + length;
 	AI_LWO_VALIDATE_CHUNK_LENGTH(length,ENVL,4);
