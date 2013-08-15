@@ -268,7 +268,7 @@ unsigned int ProcessMaterials(const IFC::IfcRepresentationItem& item, Conversion
 // IFCGeometry.cpp
 IfcMatrix3 DerivePlaneCoordinateSpace(const TempMesh& curmesh, bool& ok, IfcVector3& norOut);
 bool ProcessRepresentationItem(const IfcRepresentationItem& item, std::vector<unsigned int>& mesh_indices, ConversionData& conv);
-void AssignAddedMeshes(std::vector<unsigned int>& mesh_indices,aiNode* nd,ConversionData& /*conv*/);
+void AssignAddedMeshes(std::vector<size_t>& mesh_indices,aiNode* nd,ConversionData& /*conv*/);
 
 void ProcessSweptAreaSolid(const IfcSweptAreaSolid& swept, TempMesh& meshout, 
 						   ConversionData& conv);
