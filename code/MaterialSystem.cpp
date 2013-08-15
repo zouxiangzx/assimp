@@ -88,9 +88,9 @@ aiReturn aiGetMaterialProperty(const aiMaterial* pMat,
 aiReturn aiGetMaterialFloatArray(const aiMaterial* pMat, 
 	const char* pKey,
 	unsigned int type,
-    unsigned int index,
+    size_t index,
 	float* pOut,
-	unsigned int* pMax)
+	size_t* pMax)
 {
 	ai_assert (pOut != NULL);
 	ai_assert (pMat != NULL);
@@ -102,7 +102,7 @@ aiReturn aiGetMaterialFloatArray(const aiMaterial* pMat,
 	}
 
 	// data is given in floats, simply copy it
-	unsigned int iWrite = 0;
+	size_t iWrite = 0;
 	if( aiPTI_Float == prop->mType || aiPTI_Buffer == prop->mType)	{
 		iWrite = prop->mDataLength / sizeof(float);
 		if (pMax) {
@@ -161,9 +161,9 @@ aiReturn aiGetMaterialFloatArray(const aiMaterial* pMat,
 aiReturn aiGetMaterialIntegerArray(const aiMaterial* pMat, 
 	const char* pKey,
 	unsigned int type,
-    unsigned int index,
+    size_t index,
 	int* pOut,
-	unsigned int* pMax)
+	size_t* pMax)
 {
 	ai_assert (pOut != NULL);
 	ai_assert (pMat != NULL);
@@ -175,7 +175,7 @@ aiReturn aiGetMaterialIntegerArray(const aiMaterial* pMat,
 	}
 
 	// data is given in ints, simply copy it
-	unsigned int iWrite = 0;
+	size_t iWrite = 0;
 	if( aiPTI_Integer == prop->mType || aiPTI_Buffer == prop->mType)	{
 		iWrite = prop->mDataLength / sizeof(int32_t);
 		if (pMax) {
@@ -233,10 +233,10 @@ aiReturn aiGetMaterialIntegerArray(const aiMaterial* pMat,
 aiReturn aiGetMaterialColor(const aiMaterial* pMat, 
 	const char* pKey,
 	unsigned int type,
-	unsigned int index,
+	size_t index,
 	aiColor4D* pOut)
 {
-	unsigned int iMax = 4;
+	size_t iMax = 4;
 	const aiReturn eRet = aiGetMaterialFloatArray(pMat,pKey,type,index,(float*)pOut,&iMax);
 
 	// if no alpha channel is defined: set it to 1.0
