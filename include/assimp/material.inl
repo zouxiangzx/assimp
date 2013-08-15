@@ -62,7 +62,7 @@ inline aiReturn aiMaterial::GetTexture( aiTextureType type,
 }
 
 // ---------------------------------------------------------------------------
-inline unsigned int aiMaterial::GetTextureCount(aiTextureType type) const
+inline size_t aiMaterial::GetTextureCount(aiTextureType type) const
 {
 	return ::aiGetMaterialTextureCount(this,type);
 }

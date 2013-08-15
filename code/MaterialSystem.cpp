@@ -283,14 +283,14 @@ aiReturn aiGetMaterialString(const aiMaterial* pMat,
 
 // ------------------------------------------------------------------------------------------------
 // Get the number of textures on a particular texture stack
-ASSIMP_API unsigned int aiGetMaterialTextureCount(const C_STRUCT aiMaterial* pMat,  
+ASSIMP_API size_t aiGetMaterialTextureCount(const C_STRUCT aiMaterial* pMat,
 	C_ENUM aiTextureType type)
 {
 	ai_assert (pMat != NULL);
 
 	/* Textures are always stored with ascending indices (ValidateDS provides a check, so we don't need to do it again) */
-	unsigned int max = 0;
-	for (unsigned int i = 0; i < pMat->mNumProperties;++i) {
+	size_t max = 0;
+	for (size_t i = 0; i < pMat->mNumProperties;++i) {
 		aiMaterialProperty* prop = pMat->mProperties[i];
 
 		if (prop /* just a sanity check ... */ 
@@ -542,7 +542,7 @@ void aiMaterial::CopyPropertyList(aiMaterial* pcDest,
 	ai_assert(NULL != pcDest);
 	ai_assert(NULL != pcSrc);
 
-	unsigned int iOldNum = pcDest->mNumProperties;
+	size_t iOldNum = pcDest->mNumProperties;
 	pcDest->mNumAllocated += pcSrc->mNumAllocated;
 	pcDest->mNumProperties += pcSrc->mNumProperties;
 
@@ -550,18 +550,18 @@ void aiMaterial::CopyPropertyList(aiMaterial* pcDest,
 	pcDest->mProperties = new aiMaterialProperty*[pcDest->mNumAllocated];
 
 	if (iOldNum && pcOld)	{
-		for (unsigned int i = 0; i < iOldNum;++i) {
+		for (size_t i = 0; i < iOldNum;++i) {
 			pcDest->mProperties[i] = pcOld[i];
 		}
 
 		delete[] pcOld;
 	}
-	for (unsigned int i = iOldNum; i< pcDest->mNumProperties;++i)	{
+	for (size_t i = iOldNum; i< pcDest->mNumProperties;++i)	{
 		aiMaterialProperty* propSrc = pcSrc->mProperties[i];
 
 		// search whether we have already a property with this name -> if yes, overwrite it
 		aiMaterialProperty* prop;
-		for (unsigned int q = 0; q < iOldNum;++q) {
+		for (size_t q = 0; q < iOldNum;++q) {
 			prop = pcDest->mProperties[q];
 			if (prop /* just for safety */ && prop->mKey == propSrc->mKey && prop->mSemantic == propSrc->mSemantic
 				&& prop->mIndex == propSrc->mIndex)	{

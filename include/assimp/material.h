@@ -710,7 +710,7 @@ public:
 	 *  @param type Texture type to check for
 	 *  @return Number of textures for this type.
 	 *  @note A texture can be easily queried using #GetTexture() */
-	unsigned int GetTextureCount(aiTextureType type) const;
+	size_t GetTextureCount(aiTextureType type) const;
 
 	// -------------------------------------------------------------------
 	/** Helper function to get all parameters pertaining to a 
@@ -1430,7 +1430,7 @@ ASSIMP_API C_ENUM aiReturn aiGetMaterialString(const C_STRUCT aiMaterial* pMat,
  *  @return Number of textures for this type.
  *  @note A texture can be easily queried using #aiGetMaterialTexture() */
 // ---------------------------------------------------------------------------
-ASSIMP_API unsigned int aiGetMaterialTextureCount(const C_STRUCT aiMaterial* pMat,  
+ASSIMP_API size_t aiGetMaterialTextureCount(const C_STRUCT aiMaterial* pMat,
 	C_ENUM aiTextureType type);
 
 // ---------------------------------------------------------------------------
