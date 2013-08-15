@@ -164,7 +164,7 @@ template <> struct MinMaxChooser<unsigned int> {
 template <> struct MinMaxChooser<size_t> {
     void operator ()(size_t& min,size_t& max) {
         max = 0;
-        min = SIZE_T_MAX;
+        min = (size_t(1)<<(sizeof(size_t)*8-1));
     }};
 
 template <typename T> struct MinMaxChooser< aiVector3t<T> > {
