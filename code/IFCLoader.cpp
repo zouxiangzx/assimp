@@ -961,7 +961,7 @@ void MakeTreeRelative(aiNode* start, const aiMatrix4x4& combined)
 	}
 
 	// All nodes store absolute transformations right now, so we need to make them relative
-	for (unsigned int i = 0; i < start->mNumChildren; ++i) {
+	for (size_t i = 0; i < start->mNumChildren; ++i) {
 		MakeTreeRelative(start->mChildren[i],old);
 	}
 }
