@@ -180,8 +180,8 @@ inline bool IsCCW(T* in, size_t npoints) {
  *  @note The data arrays must have storage for at least num+2 elements. Using
  *  this method is much faster than the 'other' NewellNormal()
  */
-template <int ofs_x, int ofs_y, int ofs_z, typename TReal>
-inline void NewellNormal (aiVector3t<TReal>& out, int num, TReal* x, TReal* y, TReal* z)
+template <int ofs_x, int ofs_y, int ofs_z, typename TReal, typename SizeType>
+inline void NewellNormal (aiVector3t<TReal>& out, SizeType num, TReal* x, TReal* y, TReal* z)
 {
 	// Duplicate the first two vertices at the end
 	x[(num+0)*ofs_x] = x[0]; 
@@ -199,7 +199,7 @@ inline void NewellNormal (aiVector3t<TReal>& out, int num, TReal* x, TReal* y, T
 	TReal *yptr = y +ofs_y, *ylow = y, *yhigh = y + ofs_y*2;
 	TReal *zptr = z +ofs_z, *zlow = z, *zhigh = z + ofs_z*2;
 
-	for (int tmp=0; tmp < num; tmp++) {
+	for (SizeType tmp=0; tmp < num; tmp++) {
 		sum_xy += (*xptr) * ( (*yhigh) - (*ylow) );
 		sum_yz += (*yptr) * ( (*zhigh) - (*zlow) );
 		sum_zx += (*zptr) * ( (*xhigh) - (*xlow) );
