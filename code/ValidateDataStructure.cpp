@@ -111,7 +111,7 @@ void ValidateDSProcess::ReportWarning(const char* msg,...)
 inline int HasNameMatch(const aiString& in, aiNode* node)
 {
 	int result = (node->mName == in ? 1 : 0 );
-	for (unsigned int i = 0; i < node->mNumChildren;++i)	{
+	for (size_t i = 0; i < node->mNumChildren;++i)	{
 		result += HasNameMatch(in,node->mChildren[i]);
 	}
 	return result;
@@ -320,7 +320,7 @@ void ValidateDSProcess::Validate( const aiMesh* pMesh)
 
 	Validate(&pMesh->mName);
 
-	for (unsigned int i = 0; i < pMesh->mNumFaces; ++i)
+	for (size_t i = 0; i < pMesh->mNumFaces; ++i)
 	{
 		aiFace& face = pMesh->mFaces[i];
 
@@ -391,14 +391,14 @@ void ValidateDSProcess::Validate( const aiMesh* pMesh)
 	// unique vertices, pseudo-indexed.
 	std::vector<bool> abRefList;
 	abRefList.resize(pMesh->mNumVertices,false);
-	for (unsigned int i = 0; i < pMesh->mNumFaces;++i)
+	for (size_t i = 0; i < pMesh->mNumFaces;++i)
 	{
 		aiFace& face = pMesh->mFaces[i];
 		if (face.mNumIndices > AI_MAX_FACE_INDICES) {
 			ReportError("Face %u has too many faces: %u, but the limit is %u",i,face.mNumIndices,AI_MAX_FACE_INDICES);
 		}
 
-		for (unsigned int a = 0; a < face.mNumIndices;++a)
+		for (size_t a = 0; a < face.mNumIndices;++a)
 		{
 			if (face.mIndices[a] >= pMesh->mNumVertices)	{
 				ReportError("aiMesh::mFaces[%i]::mIndices[%i] is out of range",i,a);
@@ -417,7 +417,7 @@ void ValidateDSProcess::Validate( const aiMesh* pMesh)
 
 	// check whether there are vertices that aren't referenced by a face
 	bool b = false;
-	for (unsigned int i = 0; i < pMesh->mNumVertices;++i)	{
+	for (size_t i = 0; i < pMesh->mNumVertices;++i)	{
 		if (!abRefList[i])b = true;
 	}
 	abRefList.clear();
@@ -465,12 +465,12 @@ void ValidateDSProcess::Validate( const aiMesh* pMesh)
 		if (pMesh->mNumVertices)
 		{
 			afSum.reset(new float[pMesh->mNumVertices]);
-			for (unsigned int i = 0; i < pMesh->mNumVertices;++i)
+			for (size_t i = 0; i < pMesh->mNumVertices;++i)
 				afSum[i] = 0.0f;
 		}
 
 		// check whether there are duplicate bone names
-		for (unsigned int i = 0; i < pMesh->mNumBones;++i)
+		for (size_t i = 0; i < pMesh->mNumBones;++i)
 		{
 			const aiBone* bone = pMesh->mBones[i];
 			if (bone->mNumWeights > AI_MAX_BONE_WEIGHTS) {
@@ -494,7 +494,7 @@ void ValidateDSProcess::Validate( const aiMesh* pMesh)
 			}
 		}
 		// check whether all bone weights for a vertex sum to 1.0 ...
-		for (unsigned int i = 0; i < pMesh->mNumVertices;++i)
+		for (size_t i = 0; i < pMesh->mNumVertices;++i)
 		{
 			if (afSum[i] && (afSum[i] <= 0.94 || afSum[i] >= 1.05))	{
 				ReportWarning("aiMesh::mVertices[%i]: bone weight sum != 1.0 (sum is %f)",i,afSum[i]);
@@ -518,7 +518,7 @@ void ValidateDSProcess::Validate( const aiMesh* pMesh,
 	}
 
 	// check whether all vertices affected by this bone are valid
-	for (unsigned int i = 0; i < pBone->mNumWeights;++i)
+	for (size_t i = 0; i < pBone->mNumWeights;++i)
 	{
 		if (pBone->mWeights[i].mVertexId >= pMesh->mNumVertices)	{
 			ReportError("aiBone::mWeights[%i].mVertexId is out of range",i);
@@ -542,7 +542,7 @@ void ValidateDSProcess::Validate( const aiAnimation* pAnimation)
 			ReportError("aiAnimation::mChannels is NULL (aiAnimation::mNumChannels is %i)",
 				pAnimation->mNumChannels);
 		}
-		for (unsigned int i = 0; i < pAnimation->mNumChannels;++i)
+		for (size_t i = 0; i < pAnimation->mNumChannels;++i)
 		{
 			if (!pAnimation->mChannels[i])
 			{
@@ -572,7 +572,7 @@ void ValidateDSProcess::SearchForInvalidTextures(const aiMaterial* pMaterial,
 
 	int iNumIndices = 0;
 	int iIndex = -1;
-	for (unsigned int i = 0; i < pMaterial->mNumProperties;++i)
+	for (size_t i = 0; i < pMaterial->mNumProperties;++i)
 	{
 		aiMaterialProperty* prop = pMaterial->mProperties[i];
 		if (!::strcmp(prop->mKey.data,"$tex.file") && prop->mSemantic == type)	{
@@ -592,7 +592,7 @@ void ValidateDSProcess::SearchForInvalidTextures(const aiMaterial* pMaterial,
 
 	// Now check whether all UV indices are valid ...
 	bool bNoSpecified = true;
-	for (unsigned int i = 0; i < pMaterial->mNumProperties;++i)
+	for (size_t i = 0; i < pMaterial->mNumProperties;++i)
 	{
 		aiMaterialProperty* prop = pMaterial->mProperties[i];
 		if (prop->mSemantic != type)continue;
@@ -654,7 +654,7 @@ void ValidateDSProcess::SearchForInvalidTextures(const aiMaterial* pMaterial,
 	if (bNoSpecified)
 	{
 		// Assume that all textures are using the first UV channel
-		for (unsigned int a = 0; a < mScene->mNumMeshes;++a)
+		for (size_t a = 0; a < mScene->mNumMeshes;++a)
 		{
 			aiMesh* mesh = mScene->mMeshes[a];
 			if(mesh->mMaterialIndex == (unsigned int)iIndex && mappings[0] == aiTextureMapping_UV)
@@ -674,7 +674,7 @@ void ValidateDSProcess::SearchForInvalidTextures(const aiMaterial* pMaterial,
 void ValidateDSProcess::Validate( const aiMaterial* pMaterial)
 {
 	// check whether there are material keys that are obviously not legal
-	for (unsigned int i = 0; i < pMaterial->mNumProperties;++i)
+	for (size_t i = 0; i < pMaterial->mNumProperties;++i)
 	{
 		const aiMaterialProperty* prop = pMaterial->mProperties[i];
 		if (!prop)	{
@@ -813,7 +813,7 @@ void ValidateDSProcess::Validate( const aiAnimation* pAnimation,
 				pNodeAnim->mNumPositionKeys);
 		}
 		double dLast = -10e10;
-		for (unsigned int i = 0; i < pNodeAnim->mNumPositionKeys;++i)
+		for (size_t i = 0; i < pNodeAnim->mNumPositionKeys;++i)
 		{
 			// ScenePreprocessor will compute the duration if still the default value
 			// (Aramis) Add small epsilon, comparison tended to fail if max_time == duration,
@@ -844,7 +844,7 @@ void ValidateDSProcess::Validate( const aiAnimation* pAnimation,
 				pNodeAnim->mNumRotationKeys);
 		}
 		double dLast = -10e10;
-		for (unsigned int i = 0; i < pNodeAnim->mNumRotationKeys;++i)
+		for (size_t i = 0; i < pNodeAnim->mNumRotationKeys;++i)
 		{
 			if (pAnimation->mDuration > 0. && pNodeAnim->mRotationKeys[i].mTime > pAnimation->mDuration+0.001)
 			{
@@ -871,7 +871,7 @@ void ValidateDSProcess::Validate( const aiAnimation* pAnimation,
 				pNodeAnim->mNumScalingKeys);
 		}
 		double dLast = -10e10;
-		for (unsigned int i = 0; i < pNodeAnim->mNumScalingKeys;++i)
+		for (size_t i = 0; i < pNodeAnim->mNumScalingKeys;++i)
 		{
 			if (pAnimation->mDuration > 0. && pNodeAnim->mScalingKeys[i].mTime > pAnimation->mDuration+0.001)
 			{
@@ -917,7 +917,7 @@ void ValidateDSProcess::Validate( const aiNode* pNode)
 		}
 		std::vector<bool> abHadMesh;
 		abHadMesh.resize(mScene->mNumMeshes,false);
-		for (unsigned int i = 0; i < pNode->mNumMeshes;++i)
+		for (size_t i = 0; i < pNode->mNumMeshes;++i)
 		{
 			if (pNode->mMeshes[i] >= mScene->mNumMeshes)
 			{
@@ -938,7 +938,7 @@ void ValidateDSProcess::Validate( const aiNode* pNode)
 			ReportError("aiNode::mChildren is NULL (aiNode::mNumChildren is %i)",
 				pNode->mNumChildren);
 		}
-		for (unsigned int i = 0; i < pNode->mNumChildren;++i)	{
+		for (size_t i = 0; i < pNode->mNumChildren;++i)	{
 			Validate(pNode->mChildren[i]);
 		}
 	}
