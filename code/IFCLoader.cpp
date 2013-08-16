@@ -451,7 +451,7 @@ bool ProcessMappedItem(const IfcMappedItem& mapped, aiNode* nd_src, std::vector<
 
 	msrc = m*msrc;
 
-	std::vector<unsigned int> meshes;
+	std::vector<size_t> meshes;
 	const size_t old_openings = conv.collect_openings ? conv.collect_openings->size() : 0;
 	if (conv.apply_openings) {
 		IfcMatrix4 minv = msrc;
@@ -567,7 +567,7 @@ void ProcessProductRepresentation(const IfcProduct& el, aiNode* nd, std::vector<
 	}
 
 
-	std::vector<unsigned int> meshes;
+	std::vector<size_t> meshes;
 	
 	// we want only one representation type, so bring them in a suitable order (i.e try those
 	// that look as if we could read them quickly at first). This way of reading
