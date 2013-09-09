@@ -267,7 +267,7 @@ void FindInstancesProcess::Execute( aiScene* pScene)
 			if (!DefaultLogger::isNullLogger()) {
 			
 				char buffer[512];
-				::sprintf(buffer,"FindInstancesProcess finished. Found "SIZE_T_FORMAT_SPECIFIER" instances",pScene->mNumMeshes-numMeshesOut);
+				::sprintf(buffer,"FindInstancesProcess finished. Found " SIZE_T_FORMAT_SPECIFIER " instances",pScene->mNumMeshes-numMeshesOut);
 				DefaultLogger::get()->info(buffer); 
 			}
 			pScene->mNumMeshes = numMeshesOut;

@@ -127,14 +127,14 @@ inline void ValidateDSProcess::DoValidation(T** parray, const size_t size,
 	{
 		if (!parray)
 		{
-			ReportError("aiScene::%s is NULL (aiScene::%s is "SIZE_T_FORMAT_SPECIFIER")",
+			ReportError("aiScene::%s is NULL (aiScene::%s is " SIZE_T_FORMAT_SPECIFIER ")",
 				firstName, secondName, size);
 		}
 		for (size_t i = 0; i < size;++i)
 		{
 			if (!parray[i])
 			{
-				ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"] is NULL (aiScene::%s is "SIZE_T_FORMAT_SPECIFIER")",
+				ReportError("aiScene::%s[" SIZE_T_FORMAT_SPECIFIER "] is NULL (aiScene::%s is " SIZE_T_FORMAT_SPECIFIER ")",
 					firstName,i,secondName,size);
 			}
 			Validate(parray[i]);
@@ -151,14 +151,14 @@ inline void ValidateDSProcess::DoValidationEx(T** parray, const size_t size,
 	if (size)
 	{
 		if (!parray)	{
-			ReportError("aiScene::%s is NULL (aiScene::%s is "SIZE_T_FORMAT_SPECIFIER")",
+			ReportError("aiScene::%s is NULL (aiScene::%s is " SIZE_T_FORMAT_SPECIFIER ")",
 				firstName, secondName, size);
 		}
 		for (size_t i = 0; i < size;++i)
 		{
 			if (!parray[i])
 			{
-				ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"] is NULL (aiScene::%s is "SIZE_T_FORMAT_SPECIFIER")",
+				ReportError("aiScene::%s[" SIZE_T_FORMAT_SPECIFIER "] is NULL (aiScene::%s is " SIZE_T_FORMAT_SPECIFIER ")",
 					firstName,i,secondName,size);
 			}
 			Validate(parray[i]);
@@ -168,8 +168,8 @@ inline void ValidateDSProcess::DoValidationEx(T** parray, const size_t size,
 			{
 				if (parray[i]->mName == parray[a]->mName)
 				{
-					this->ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"] has the same name as "
-						"aiScene::%s["SIZE_T_FORMAT_SPECIFIER"]",firstName, i,secondName, a);
+					this->ReportError("aiScene::%s[" SIZE_T_FORMAT_SPECIFIER "] has the same name as "
+						"aiScene::%s[" SIZE_T_FORMAT_SPECIFIER "]",firstName, i,secondName, a);
 				}
 			}
 		}
@@ -189,11 +189,11 @@ inline void ValidateDSProcess::DoValidationWithNameCheck(T** array,
 	{
 		int res = HasNameMatch(array[i]->mName,mScene->mRootNode);
 		if (!res)	{
-			ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"] has no corresponding node in the scene graph (%s)",
+			ReportError("aiScene::%s[" SIZE_T_FORMAT_SPECIFIER "] has no corresponding node in the scene graph (%s)",
 				firstName,i,array[i]->mName.data);
 		}
 		else if (1 != res)	{
-			ReportError("aiScene::%s["SIZE_T_FORMAT_SPECIFIER"]: there are more than one nodes with %s as name",
+			ReportError("aiScene::%s[" SIZE_T_FORMAT_SPECIFIER "]: there are more than one nodes with %s as name",
 				firstName,i,array[i]->mName.data);
 		}
 	}

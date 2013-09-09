@@ -140,7 +140,7 @@ void OptimizeMeshesProcess::Execute( aiScene* pScene)
 
 	if (output.size() != num_old) {
 		char tmp[512];
-		::sprintf(tmp,"OptimizeMeshesProcess finished. Input meshes: "SIZE_T_FORMAT_SPECIFIER", Output meshes: "SIZE_T_FORMAT_SPECIFIER,num_old,pScene->mNumMeshes);
+		::sprintf(tmp,"OptimizeMeshesProcess finished. Input meshes: " SIZE_T_FORMAT_SPECIFIER ", Output meshes: " SIZE_T_FORMAT_SPECIFIER,num_old,pScene->mNumMeshes);
 		DefaultLogger::get()->info(tmp);
 	}
 	else DefaultLogger::get()->debug("OptimizeMeshesProcess finished");

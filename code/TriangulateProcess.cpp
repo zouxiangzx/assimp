@@ -249,7 +249,7 @@ bool TriangulateProcess::TriangulateMesh( aiMesh* pMesh)
 				}
 			}
 
-			const unsigned int temp[] = {face.mIndices[0], face.mIndices[1], face.mIndices[2], face.mIndices[3]};
+			const size_t temp[] = {face.mIndices[0], face.mIndices[1], face.mIndices[2], face.mIndices[3]};
 	
 			aiFace& nface = *curOut++;
 			nface.mNumIndices = 3;
