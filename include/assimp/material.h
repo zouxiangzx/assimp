@@ -713,22 +713,22 @@ public:
 
 
 	aiReturn Get(const char* pKey,unsigned int type,
-		unsigned int idx, int& pOut) const;
+		size_t idx, int& pOut) const;
 
 	aiReturn Get(const char* pKey,unsigned int type,
-		unsigned int idx, float& pOut) const;
+		size_t idx, float& pOut) const;
 
 	aiReturn Get(const char* pKey,unsigned int type,
-		unsigned int idx, aiString& pOut) const;
+		size_t idx, aiString& pOut) const;
 
 	aiReturn Get(const char* pKey,unsigned int type,
-		unsigned int idx, aiColor3D& pOut) const;
+		size_t idx, aiColor3D& pOut) const;
 
 	aiReturn Get(const char* pKey,unsigned int type,
-		unsigned int idx, aiColor4D& pOut) const;
+		size_t idx, aiColor4D& pOut) const;
 
 	aiReturn Get(const char* pKey,unsigned int type,
-		unsigned int idx, aiUVTransform& pOut) const;
+		size_t idx, aiUVTransform& pOut) const;
 
 	// -------------------------------------------------------------------
 	/** Get the number of textures for a particular texture type.
