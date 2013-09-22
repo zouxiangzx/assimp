@@ -168,8 +168,7 @@ inline aiReturn aiMaterial::Get<aiColor3D>(const char* pKey,unsigned int type,
 	return ret;
 }
 // ---------------------------------------------------------------------------
-template <>
-inline aiReturn aiMaterial::Get<aiString>(const char* pKey,unsigned int type,
+inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
 	size_t idx,aiString& pOut) const
 {
 	return aiGetMaterialString(this,pKey,type,idx,&pOut);
