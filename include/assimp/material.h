@@ -826,37 +826,37 @@ public:
 		unsigned int pNumValues,
 		const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	aiReturn AddProperty (const aiColor3D* pInput,
 		unsigned int pNumValues,
 		const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	aiReturn AddProperty (const aiColor4D* pInput,
 		unsigned int pNumValues,
 		const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	aiReturn AddProperty (const int* pInput,
 		unsigned int pNumValues,
 		const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	aiReturn AddProperty (const float* pInput,
 		unsigned int pNumValues,
 		const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	aiReturn AddProperty (const aiUVTransform* pInput,
 		unsigned int pNumValues,
 		const char* pKey,
 		unsigned int type  = 0,
-		unsigned int index = 0);
+		size_t index = 0);
 
 	// ------------------------------------------------------------------------------
 	/** @brief Remove a given key from the list.

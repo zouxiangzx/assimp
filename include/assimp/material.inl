@@ -190,7 +190,6 @@ aiReturn aiMaterial::AddProperty (const TYPE* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
 inline aiReturn aiMaterial::AddProperty(const float* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
@@ -203,7 +202,6 @@ inline aiReturn aiMaterial::AddProperty(const float* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
 inline aiReturn aiMaterial::AddProperty(const aiUVTransform* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
@@ -216,7 +214,6 @@ inline aiReturn aiMaterial::AddProperty(const aiUVTransform* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
 inline aiReturn aiMaterial::AddProperty(const aiColor4D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
@@ -229,7 +226,6 @@ inline aiReturn aiMaterial::AddProperty(const aiColor4D* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
 inline aiReturn aiMaterial::AddProperty(const aiColor3D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
@@ -242,7 +238,6 @@ inline aiReturn aiMaterial::AddProperty(const aiColor3D* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
 inline aiReturn aiMaterial::AddProperty(const aiVector3D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
@@ -255,7 +250,6 @@ inline aiReturn aiMaterial::AddProperty(const aiVector3D* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
 inline aiReturn aiMaterial::AddProperty(const int* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
