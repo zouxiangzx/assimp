@@ -89,7 +89,7 @@ inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
 		}
 
 		iNum = std::min((size_t)iNum,prop->mDataLength / sizeof(Type));
-		memcpy(pOut,prop->mData,iNum * sizeof(Type));
+		::memcpy(pOut,prop->mData,iNum * sizeof(Type));
 		if (pMax) {
 			*pMax = iNum;
 		}
@@ -115,7 +115,7 @@ inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
 			return AI_FAILURE;
 		}
 
-		memcpy(&pOut,prop->mData,sizeof(Type));
+		::memcpy(&pOut,prop->mData,sizeof(Type));
 	}
 	return ret;
 }
@@ -190,8 +190,7 @@ aiReturn aiMaterial::AddProperty (const TYPE* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
-inline aiReturn aiMaterial::AddProperty<float> (const float* pInput,
+inline aiReturn aiMaterial::AddProperty(const float* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
@@ -203,8 +202,7 @@ inline aiReturn aiMaterial::AddProperty<float> (const float* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
-inline aiReturn aiMaterial::AddProperty<aiUVTransform> (const aiUVTransform* pInput,
+inline aiReturn aiMaterial::AddProperty(const aiUVTransform* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
@@ -216,8 +214,7 @@ inline aiReturn aiMaterial::AddProperty<aiUVTransform> (const aiUVTransform* pIn
 }
 
 // ---------------------------------------------------------------------------
-template<>
-inline aiReturn aiMaterial::AddProperty<aiColor4D> (const aiColor4D* pInput,
+inline aiReturn aiMaterial::AddProperty(const aiColor4D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
@@ -229,8 +226,7 @@ inline aiReturn aiMaterial::AddProperty<aiColor4D> (const aiColor4D* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
-inline aiReturn aiMaterial::AddProperty<aiColor3D> (const aiColor3D* pInput,
+inline aiReturn aiMaterial::AddProperty(const aiColor3D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
@@ -242,8 +238,7 @@ inline aiReturn aiMaterial::AddProperty<aiColor3D> (const aiColor3D* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
-inline aiReturn aiMaterial::AddProperty<aiVector3D> (const aiVector3D* pInput,
+inline aiReturn aiMaterial::AddProperty(const aiVector3D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
@@ -255,8 +250,7 @@ inline aiReturn aiMaterial::AddProperty<aiVector3D> (const aiVector3D* pInput,
 }
 
 // ---------------------------------------------------------------------------
-template<>
-inline aiReturn aiMaterial::AddProperty<int> (const int* pInput,
+inline aiReturn aiMaterial::AddProperty(const int* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,

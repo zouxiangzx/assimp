@@ -691,6 +691,12 @@ public:
     aiReturn Get(const char* pKey,unsigned int type,
 		size_t idx, Type* pOut, size_t* pMax) const;
 
+	aiReturn Get(const char* pKey,unsigned int type,
+		unsigned int idx, int* pOut, unsigned int* pMax) const;
+
+	aiReturn Get(const char* pKey,unsigned int type,
+		unsigned int idx, float* pOut, unsigned int* pMax) const;
+
     // -------------------------------------------------------------------
     /** @brief Retrieve a Type value with a specific key 
      *  from the material
@@ -704,6 +710,25 @@ public:
 	template <typename Type>
 	aiReturn Get(const char* pKey,unsigned int type,
 		size_t idx,Type& pOut) const;
+
+
+	aiReturn Get(const char* pKey,unsigned int type,
+		unsigned int idx, int& pOut) const;
+
+	aiReturn Get(const char* pKey,unsigned int type,
+		unsigned int idx, float& pOut) const;
+
+	aiReturn Get(const char* pKey,unsigned int type,
+		unsigned int idx, aiString& pOut) const;
+
+	aiReturn Get(const char* pKey,unsigned int type,
+		unsigned int idx, aiColor3D& pOut) const;
+
+	aiReturn Get(const char* pKey,unsigned int type,
+		unsigned int idx, aiColor4D& pOut) const;
+
+	aiReturn Get(const char* pKey,unsigned int type,
+		unsigned int idx, aiUVTransform& pOut) const;
 
 	// -------------------------------------------------------------------
 	/** Get the number of textures for a particular texture type.
@@ -796,6 +821,42 @@ public:
 		const char* pKey,
 		unsigned int type  = 0,
 		size_t index = 0);
+
+	aiReturn AddProperty (const aiVector3D* pInput,
+		unsigned int pNumValues,
+		const char* pKey,
+		unsigned int type  = 0,
+		unsigned int index = 0);
+
+	aiReturn AddProperty (const aiColor3D* pInput,
+		unsigned int pNumValues,
+		const char* pKey,
+		unsigned int type  = 0,
+		unsigned int index = 0);
+
+	aiReturn AddProperty (const aiColor4D* pInput,
+		unsigned int pNumValues,
+		const char* pKey,
+		unsigned int type  = 0,
+		unsigned int index = 0);
+
+	aiReturn AddProperty (const int* pInput,
+		unsigned int pNumValues,
+		const char* pKey,
+		unsigned int type  = 0,
+		unsigned int index = 0);
+
+	aiReturn AddProperty (const float* pInput,
+		unsigned int pNumValues,
+		const char* pKey,
+		unsigned int type  = 0,
+		unsigned int index = 0);
+
+	aiReturn AddProperty (const aiUVTransform* pInput,
+		unsigned int pNumValues,
+		const char* pKey,
+		unsigned int type  = 0,
+		unsigned int index = 0);
 
 	// ------------------------------------------------------------------------------
 	/** @brief Remove a given key from the list.
