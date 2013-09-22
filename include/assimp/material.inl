@@ -137,29 +137,25 @@ inline aiReturn aiMaterial::Get<int>(const char* pKey,unsigned int type,
 	return ::aiGetMaterialIntegerArray(this,pKey,type,idx,pOut,pMax);
 }
 // ---------------------------------------------------------------------------
-template <>
-inline aiReturn aiMaterial::Get<float>(const char* pKey,unsigned int type,
+inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
 	size_t idx,float& pOut) const
 {
 	return aiGetMaterialFloat(this,pKey,type,idx,&pOut);
 }
 // ---------------------------------------------------------------------------
-template <>
-inline aiReturn aiMaterial::Get<int>(const char* pKey,unsigned int type,
+inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
 	size_t idx,int& pOut) const
 {
 	return aiGetMaterialInteger(this,pKey,type,idx,&pOut);
 }
 // ---------------------------------------------------------------------------
-template <>
-inline aiReturn aiMaterial::Get<aiColor4D>(const char* pKey,unsigned int type,
+inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
 	size_t idx,aiColor4D& pOut) const
 {
 	return aiGetMaterialColor(this,pKey,type,idx,&pOut);
 }
 // ---------------------------------------------------------------------------
-template <>
-inline aiReturn aiMaterial::Get<aiColor3D>(const char* pKey,unsigned int type,
+inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
 	size_t idx,aiColor3D& pOut) const
 {
 	aiColor4D c;
