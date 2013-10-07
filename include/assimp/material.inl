@@ -269,7 +269,7 @@ inline aiReturn aiMaterial::AddProperty<float>(const float* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
-	unsigned int index)
+	size_t index)
 {
 	return AddBinaryProperty((const void*)pInput,
 		pNumValues * sizeof(float),
@@ -282,7 +282,7 @@ inline aiReturn aiMaterial::AddProperty<aiUVTransform>(const aiUVTransform* pInp
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
-	unsigned int index)
+	size_t index)
 {
 	return AddBinaryProperty((const void*)pInput,
 		pNumValues * sizeof(aiUVTransform),
@@ -295,7 +295,7 @@ inline aiReturn aiMaterial::AddProperty<aiColor4D>(const aiColor4D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
-	unsigned int index)
+	size_t index)
 {
 	return AddBinaryProperty((const void*)pInput,
 		pNumValues * sizeof(aiColor4D),
@@ -308,7 +308,7 @@ inline aiReturn aiMaterial::AddProperty<aiColor3D>(const aiColor3D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
-	unsigned int index)
+	size_t index)
 {
 	return AddBinaryProperty((const void*)pInput,
 		pNumValues * sizeof(aiColor3D),
@@ -321,7 +321,7 @@ inline aiReturn aiMaterial::AddProperty<aiVector3D>(const aiVector3D* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
-	unsigned int index)
+	size_t index)
 {
 	return AddBinaryProperty((const void*)pInput,
 		pNumValues * sizeof(aiVector3D),
@@ -334,7 +334,7 @@ inline aiReturn aiMaterial::AddProperty<int>(const int* pInput,
 	const unsigned int pNumValues,
 	const char* pKey,
 	unsigned int type,
-	unsigned int index)
+	size_t index)
 {
 	return AddBinaryProperty((const void*)pInput,
 		pNumValues * sizeof(int),
