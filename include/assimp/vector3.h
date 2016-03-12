@@ -51,6 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #include "./Compiler/pushpack1.h"
+#include "defs.h"
 
 #ifdef __cplusplus
 
@@ -134,16 +135,16 @@ public:
 } PACK_STRUCT;
 
 
-typedef aiVector3t<float> aiVector3D;
+typedef aiVector3t<ai_real> aiVector3D;
 
 #else
 
 struct aiVector3D {
     union {
         struct {
-            float x, y, z;
+            ai_real x, y, z;
         };
-        float v[ 3 ];
+        ai_real v[ 3 ];
     };
 } PACK_STRUCT;
 

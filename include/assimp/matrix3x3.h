@@ -172,19 +172,19 @@ public:
     };
 } PACK_STRUCT;
 
-typedef aiMatrix3x3t<float> aiMatrix3x3;
+typedef aiMatrix3x3t<ai_real> aiMatrix3x3;
 
 #else
 
 struct aiMatrix3x3 {
     union {
         struct {
-            float a1, a2, a3;
-            float b1, b2, b3;
-            float c1, c2, c3;
+            ai_real a1, a2, a3;
+            ai_real b1, b2, b3;
+            ai_real c1, c2, c3;
         };
-        float m[ 3 ][ 3 ];
-        float mData[ 9 ];
+        ai_real m[ 3 ][ 3 ];
+        ai_real mData[ 9 ];
     };
 } PACK_STRUCT;
 

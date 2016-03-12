@@ -45,6 +45,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define AI_COLOR4D_H_INC
 
 #include "./Compiler/pushpack1.h"
+#include "defs.h"
 
 #ifdef __cplusplus
 
@@ -94,16 +95,16 @@ public:
     };
 } PACK_STRUCT;  // !struct aiColor4D
 
-typedef aiColor4t<float> aiColor4D;
+typedef aiColor4t<ai_real> aiColor4D;
 
 #else
 
 struct aiColor4D {
     union {
         struct {
-            float r, g, b, a;
+            ai_real r, g, b, a;
         };
-        float c[ 4 ];
+        ai_real c[ 4 ];
     };
 } PACK_STRUCT;
 

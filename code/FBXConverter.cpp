@@ -75,7 +75,9 @@ using namespace Util;
     // XXX vc9's debugger won't step into anonymous namespaces
 //namespace {
 
-/** Dummy class to encapsulate the conversion process */
+/**
+ *  Dummy class to encapsulate the conversion process 
+ */
 class Converter
 {
 public:
@@ -108,6 +110,9 @@ public:
         , out(out)
         , doc(doc)
     {
+        const double origUnitScaleFactor = doc.GlobalSettings().OriginalUnitScaleFactor();
+        const double unitScaleFactor = doc.GlobalSettings().UnitScaleFactor();
+        
         // animations need to be converted first since this will
         // populate the node_anim_chain_bits map, which is needed
         // to determine which nodes need to be generated.
@@ -196,7 +201,7 @@ private:
                 const Model* const model = dynamic_cast<const Model*>(object);
 
                 if(model) {
-                    nodes_chain.clear();
+                    nodes_chain.resize( 0 );
 
                     aiMatrix4x4 new_abs_transform = parent_transform;
 

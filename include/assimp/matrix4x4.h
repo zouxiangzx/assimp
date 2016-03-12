@@ -234,20 +234,20 @@ public:
     };
 } PACK_STRUCT;
 
-typedef aiMatrix4x4t<float> aiMatrix4x4;
+typedef aiMatrix4x4t<ai_real> aiMatrix4x4;
 
 #else
 
 struct aiMatrix4x4 {
     union {
         struct {
-            float a1, a2, a3, a4;
-            float b1, b2, b3, b4;
-            float c1, c2, c3, c4;
-            float d1, d2, d3, d4;
+            ai_real a1, a2, a3, a4;
+            ai_real b1, b2, b3, b4;
+            ai_real c1, c2, c3, c4;
+            ai_real d1, d2, d3, d4;
         };
-        float m[ 4 ][ 4 ];
-        float mData[ 16 ];
+        ai_real m[ 4 ][ 4 ];
+        ai_real mData[ 16 ];
     };
 } PACK_STRUCT;
 
