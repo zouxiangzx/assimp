@@ -279,14 +279,14 @@ inline void Buffer::Read(Value& obj, Asset& r)
             this->mData.reset(data);
 
             if (statedLength > 0 && this->byteLength != statedLength) {
-                throw DeadlyImportError("GLTF: buffer \"" + id + "\", expected " + std::to_string(statedLength) +
-                    " bytes, but found " + std::to_string(dataURI.dataLength));
+                throw DeadlyImportError("GLTF: buffer \"" + id + "\", expected " + ai_to_string(statedLength) +
+                    " bytes, but found " + ai_to_string(dataURI.dataLength));
             }
         }
         else { // assume raw data
             if (statedLength != dataURI.dataLength) {
-                throw DeadlyImportError("GLTF: buffer \"" + id + "\", expected " + std::to_string(statedLength) +
-                                        " bytes, but found " + std::to_string(dataURI.dataLength));
+                throw DeadlyImportError("GLTF: buffer \"" + id + "\", expected " + ai_to_string(statedLength) +
+                                        " bytes, but found " + ai_to_string(dataURI.dataLength));
             }
 
             this->mData.reset(new uint8_t[dataURI.dataLength]);

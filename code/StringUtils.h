@@ -84,7 +84,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 template <typename T>
 inline
-std::string to_string( T value ) {
+std::string ai_to_string( T value ) {
     std::ostringstream os;
     os << value;
     return os.str();
