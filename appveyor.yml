@@ -12,13 +12,13 @@ branches:
 
 platform:
     - x86
-    - x64
+    #- x64
 
 configuration:
   - 14 2015
   - 12 2013
+  - 10 2010 # only works for x86
   #- MinGW
-  #- 10 2010 # only works for x86
 
 init:
 - if "%platform%" EQU "x64" ( for %%a in (2008 2010 MinGW) do ( if "%Configuration%"=="%%a" (echo "Skipping unsupported configuration" && exit /b 1 ) ) )
@@ -30,7 +30,7 @@ install:
 build_script:
  - cd c:\projects\assimp
  - cmake CMakeLists.txt -G "Visual Studio %Configuration%"
- - msbuild /m /p:Configuration=Release /p:Platform="Win32" Assimp.sln
+ - msbuild /m /p:Configuration=Release /p:Platform="Win32" Assimp.sln -DASSIMP_USE_CPP11=OFF
 
 after_build:
   - 7z a assimp.7z c:\projects\assimp\bin\release\* c:\projects\assimp\lib\release\*

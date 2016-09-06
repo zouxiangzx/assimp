@@ -44,6 +44,10 @@ OPTION( BUILD_SHARED_LIBS
   "Build package with shared libraries." 
   ON
 )
+OPTION( ASSIMP_USE_CPP11
+  "Enables C++11 support. Only disable this for older compilers without any C++11-support."
+  ON
+)
 OPTION( ASSIMP_DOUBLE_PRECISION
   "Set to ON to enable double precision processing"
   OFF
