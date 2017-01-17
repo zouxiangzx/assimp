@@ -96,13 +96,13 @@ static const aiImporterDesc blenderDesc = {
 // ------------------------------------------------------------------------------------------------
 // Constructor to be privately used by Importer
 BlenderImporter::BlenderImporter()
-: modifier_cache(new BlenderModifierShowcase())
-{}
+: modifier_cache(new BlenderModifierShowcase()) {
+    // empty
+}
 
 // ------------------------------------------------------------------------------------------------
 // Destructor, private as well
-BlenderImporter::~BlenderImporter()
-{
+BlenderImporter::~BlenderImporter() {
     delete modifier_cache;
 }
 
@@ -157,8 +157,7 @@ struct free_it
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void BlenderImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void BlenderImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
 {
 #ifndef ASSIMP_BUILD_NO_COMPRESSED_BLEND
     Bytef* dest = NULL;
@@ -336,9 +335,33 @@ void BlenderImporter::ExtractScene(Scene& out, const FileDatabase& file)
 }
 
 // ------------------------------------------------------------------------------------------------
-void BlenderImporter::ConvertBlendFile(aiScene* out, const Scene& in,const FileDatabase& file)
-{
+void BlenderImporter::buildObjNameMap(const std::shared_ptr<ElemBase> &first, ObjNameMap &objNameMap ) {
+    unsigned int idx( 0 );
+    for ( std::shared_ptr<Base> cur = std::static_pointer_cast< Base > ( first ); cur; cur = cur->next ) {
+        idx++;
+        std::string name( cur->object->id.name );
+        objNameMap[ name ] = idx;
+    }
+}
+
+// ------------------------------------------------------------------------------------------------
+bool BlenderImporter::checkForParent( const std::string &parentName, ObjNameMap &objNameMap ) {
+    if ( parentName.empty() ) {
+        return false;
+    }
+    bool found( false );
+    ObjNameMap::const_iterator it( objNameMap.find( parentName ) );
+    if ( objNameMap.end() != it ) {
+        found = true;
+    }
+
+    return found;
+}
+
+// ------------------------------------------------------------------------------------------------
+void BlenderImporter::ConvertBlendFile(aiScene* out, const Scene& in,const FileDatabase& file) {
     ConversionData conv(file);
+    buildObjNameMap( in.base.first, m_objNames );
 
     // FIXME it must be possible to take the hierarchy directly from
     // the file. This is terrible. Here, we're first looking for
@@ -349,20 +372,41 @@ void BlenderImporter::ConvertBlendFile(aiScene* out, const Scene& in,const FileD
             if(!cur->object->parent) {
                 no_parents.push_back(cur->object.get());
             } else {
-                conv.objects.insert( cur->object.get() );
-            }
-        }
-    }
-    for (std::shared_ptr<Base> cur = in.basact; cur; cur = cur->next) {
-        if (cur->object) {
-            if(cur->object->parent) {
-                conv.objects.insert(cur->object.get());
+                // validate, if the parent described by its name is part of the blender scene
+                std::string parentName( cur->object->parent->id.name );
+                if ( checkForParent( parentName, m_objNames ) ) {
+                    // valid parent name, this is a child
+                    conv.objects.insert( cur->object.get() );
+                } else {
+                    // no object with assigned parent name, so this is a root element
+                    no_parents.push_back( cur->object.get() );
+                }
             }
         }
     }
 
-    if (no_parents.empty()) {
-        ThrowException("Expected at least one object with no parent");
+    m_objNames.clear();
+    buildObjNameMap( in.basact, m_objNames );
+    for (std::shared_ptr<Base> cur = in.basact; cur; cur = cur->next) {
+        if (cur->object) {
+            if(cur->object->parent) {
+                std::string parentName( cur->object->parent->id.name );
+                if ( checkForParent( parentName, m_objNames ) ) {
+                    conv.objects.insert( cur->object.get() );
+                } else {
+                    no_parents.push_back( cur->object.get() );
+                }
+            } else {
+                no_parents.push_back( cur->object.get() );
+            }
+        }
+    }
+    
+    // it is not allowed to have elements without a valid parent
+    if ( !conv.objects.empty() ) {
+        if ( no_parents.empty() ) {
+            ThrowException( "Expected at least one object with no parent" );
+        }
     }
 
     aiNode* root = out->mRootNode = new aiNode("<BlenderRoot>");

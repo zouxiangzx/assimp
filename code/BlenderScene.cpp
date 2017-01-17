@@ -52,11 +52,8 @@ using namespace Assimp;
 using namespace Assimp::Blender;
 
 //--------------------------------------------------------------------------------
-template <> void Structure :: Convert<Object> (
-    Object& dest,
-    const FileDatabase& db
-    ) const
-{
+template<>
+void Structure::Convert<Object>( Object& dest, const FileDatabase& db ) const {
 
     ReadField<ErrorPolicy_Fail>(dest.id,"id",db);
     ReadField<ErrorPolicy_Fail>((int&)dest.type,"type",db);
@@ -513,12 +510,8 @@ template <> void Structure :: Convert<MLoopCol> (
 }
 
 //--------------------------------------------------------------------------------
-template <> void Structure :: Convert<MVert> (
-    MVert& dest,
-    const FileDatabase& db
-    ) const
-{
-
+template<> 
+void Structure::Convert<MVert>( MVert& dest, const FileDatabase& db ) const {
     ReadFieldArray<ErrorPolicy_Fail>(dest.co,"co",db);
     ReadFieldArray<ErrorPolicy_Fail>(dest.no,"no",db);
     ReadField<ErrorPolicy_Igno>(dest.flag,"flag",db);
@@ -529,12 +522,8 @@ template <> void Structure :: Convert<MVert> (
 }
 
 //--------------------------------------------------------------------------------
-template <> void Structure :: Convert<MEdge> (
-    MEdge& dest,
-    const FileDatabase& db
-    ) const
-{
-
+template<>
+void Structure::Convert<MEdge>( MEdge& dest, const FileDatabase& db ) const {
     ReadField<ErrorPolicy_Fail>(dest.v1,"v1",db);
     ReadField<ErrorPolicy_Fail>(dest.v2,"v2",db);
     ReadField<ErrorPolicy_Igno>(dest.crease,"crease",db);
