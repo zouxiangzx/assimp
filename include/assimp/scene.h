@@ -276,6 +276,8 @@ struct aiNode
  */
 #define AI_SCENE_FLAGS_TERRAIN 0x10
 
+#define AI_SCENE_FLAGS_ALLOW_SHARED 0x20
+
 
 // -------------------------------------------------------------------------------
 /** The root structure of the imported data.
