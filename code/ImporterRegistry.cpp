@@ -46,6 +46,8 @@ directly (unless you are adding new loaders), instead use the
 corresponding preprocessor flag to selectively disable formats.
 */
 
+#include "exclude.h"
+
 // ------------------------------------------------------------------------------------------------
 // Importers
 // (include_new_importers_here)

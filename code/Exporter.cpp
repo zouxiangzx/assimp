@@ -63,6 +63,7 @@ Here we implement only the C++ interface (Assimp::Exporter).
 #include "ConvertToLHProcess.h"
 #include "Exceptional.h"
 #include "ScenePrivate.h"
+#include "exclude.h"
 #include <memory>
 #include <assimp/Exporter.hpp>
 #include <assimp/mesh.h>
